@@ -145,7 +145,7 @@ public class AtmoControl : MonoBehaviour {
 	
 	//checks if a given coordinate -
 	bool isInGrid(int y, int x) {
-		if(y > 0 && y < 10 && x > 0 && x < 10) {
+		if(y > 0 && y < size && x > 0 && x < size) {
 			return true;
 		} else {
 			return false;
