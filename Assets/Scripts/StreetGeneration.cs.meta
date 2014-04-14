@@ -2,7 +2,10 @@ fileFormatVersion: 2
 guid: e9c5d28fac6ad47a5bb8056de4c8c795
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - streetMakerPrefab: {instanceID: 0}
+  - streetTile: {instanceID: 0}
+  - builder: {fileID: 11400002, guid: b2e713c6f3c2a456fb95f3c91de6d481, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

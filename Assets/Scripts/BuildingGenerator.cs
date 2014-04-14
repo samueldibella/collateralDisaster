@@ -14,14 +14,14 @@ public class BuildingGenerator : MonoBehaviour {
 	public Transform buildingSphere3; 
 	
 	int buildingDistance = 10; 
-	
+	bool streetsDone = false; 
 	// Use this for initialization
 	void Start () { 
 	
-		float currentX = 455; 
-		float currentZ = 455;
+		float currentX = 100; 
+		float currentZ = 100;
 		
-		if(StreetGeneration.streetsDone == true) {
+		if(streetsDone == true) {
 			for(int i = 0; i < 10; i++) {
 				for(int j = 0; j < 10; j++) {
 					int randomBuildingNumber = Random.Range (0,3);

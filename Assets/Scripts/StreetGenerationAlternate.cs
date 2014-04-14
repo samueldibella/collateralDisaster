@@ -1,24 +1,24 @@
 ﻿using UnityEngine;
-using System.Collections; 
+using System.Collections;
 
-public class StreetGeneration : MonoBehaviour {
+public class StreetGenerationAlternate : MonoBehaviour {
 	
 	//prefabs
 	public Transform streetMakerPrefab;
 	public Transform streetTilePreFab;
-	public Transform streetPlanePreFab; 
 	public Transform wallPreFab; 
 	public BuildingGenerator2 builder; 
 	
 	//array for building street
-	public static int[,] streetMap = new int[601, 601];
+	public static int[,] streetMap = new int[1000, 1000];
 	//int nothing = 0; 
 	int street = 1; 
-	int wall = 3; 
+	int constantStreets = 3; 
 	
-	int streetLength = 12; 
-	int streetWidth = 4; 
+	int streetLength = 10; 
+	int streetWidth = 2; 
 	
+	int cityLength = 100; 
 	
 	//counters
 	int currentStreets = 0; 
@@ -27,7 +27,7 @@ public class StreetGeneration : MonoBehaviour {
 	static int currentStreetMakers = 1;
 	static int madeStreetMakers = 1; 
 	static int endedStreetMakers = 0;
-	static int maxStreetMakers = 128;
+	static int maxStreetMakers = 64;
 	
 	int currentXMin; 
 	int currentZMin; 
@@ -35,53 +35,46 @@ public class StreetGeneration : MonoBehaviour {
 	int currentXMax; 
 	int currentZMax;  
 	
-	static int lowerBoundX = 110-12; 
-	static int middleBoundX = 206+12; 
-	static int upperBoundX = 326+12; 
-	
-	static int lowerBoundZ = 160-12; 
-	static int middleBoundZ = 196+12; 
-	static int upperBoundZ = 256+12; 
-	
-	public static int gridLengthX = upperBoundX - lowerBoundX; 
-	public static int gridLengthZ = upperBoundZ - lowerBoundZ; 
+	int lowerBound = 150; 
+	int middleBound = 200; 
+	int upperBound = 250; 
 	
 	// Use this for initialization
 	void Start () {
 		//intial x and z 
-		int currentX = (int)transform.position.x; 
-		int currentZ = (int)transform.position.z;
+		int currentX = (int)transform.position.x*2; 
+		int currentZ = (int)transform.position.z*2;
 		
 		int quadrant = getQuadrant(currentX,currentZ); 
 		if( quadrant == 1) {
-			currentXMin = lowerBoundX; 
-			currentZMin = middleBoundZ; 
+			currentXMin = lowerBound*2; 
+			currentZMin = middleBound*2; 
 			
-			currentXMax = middleBoundX; 
-			currentZMax = upperBoundZ; 
+			currentXMax = middleBound*2; 
+			currentZMax = upperBound*2; 
 		}
 		if(quadrant == 2) {
-			currentXMin = middleBoundX; 
-			currentZMin = middleBoundZ; 
+			currentXMin = middleBound*2; 
+			currentZMin = middleBound*2; 
 			
-			currentXMax = upperBoundX; 
-			currentZMax = upperBoundZ; 
+			currentXMax = upperBound*2; 
+			currentZMax = upperBound*2; 
 		}
 		if(quadrant == 3) {
-			currentXMin = lowerBoundX; 
-			currentZMin = lowerBoundZ; 
+			currentXMin = lowerBound*2; 
+			currentZMin = lowerBound*2; 
 			
-			currentXMax = middleBoundX; 
-			currentZMax = middleBoundZ; 
+			currentXMax = middleBound*2; 
+			currentZMax = middleBound*2; 
 		}
 		if(quadrant == 4) {
-			currentXMin = middleBoundX; 
-			currentZMin = lowerBoundZ; 
+			currentXMin = middleBound*2; 
+			currentZMin = lowerBound*2; 
 			
-			currentXMax = upperBoundX; 
-			currentZMax = middleBoundZ; 
+			currentXMax = upperBound*2; 
+			currentZMax = middleBound*2; 
 		}
-		MapFill(middleBoundX, middleBoundZ, 0); 
+		MapFill(middleBound, middleBound, 0); 
 		while(currentStreets < maxStreets) { 
 			int randomStreetNumber = Random.Range (0,101);
 			//north
@@ -117,6 +110,7 @@ public class StreetGeneration : MonoBehaviour {
 			Destroy(gameObject);
 		}	
 		if(currentStreets == maxStreets && endedStreetMakers == maxStreetMakers) { 
+			print ("df"); 
 			MakeMap(); 
 			builder.buildingGenerator();  
 			Destroy(gameObject); 			
@@ -133,119 +127,94 @@ public class StreetGeneration : MonoBehaviour {
 		case(0): 
 			//vertical preset streets
 			for(int x = 0; x < streetWidth; x++) {
-				for(int z = 0; z < gridLengthZ; z++) {
-					streetMap[(lowerBoundX+x),(lowerBoundZ+z)] = street; 
+				for(int z = 0; z < cityLength; z++) {
+					streetMap[lowerBound+x,lowerBound+z] = constantStreets; 
 				}
 			}
 			for(int x = 0; x < streetWidth; x++) {
-				for(int z = 0; z < gridLengthZ; z++) {
-					streetMap[(middleBoundX+x),(lowerBoundZ+z)] = street; 
+				for(int z = 0; z < cityLength; z++) {
+					streetMap[middleBound+x,lowerBound+z] = constantStreets; 
 				}
 			}	
 			for(int x = 0; x < streetWidth; x++) {
-				for(int z = 0; z < gridLengthZ; z++) {
-					streetMap[(upperBoundX+x),(lowerBoundZ+z)] = street; 
+				for(int z = 0; z < cityLength; z++) {
+					streetMap[upperBound+x,lowerBound+z] = constantStreets; 
 				}
 			}		
 			//horizontal preset streets
-			for(int x = 0; x < gridLengthX; x++) {
+			for(int x = 0; x < cityLength; x++) {
 				for(int z = 0; z < streetWidth; z++) {
-					streetMap[(lowerBoundX+x),(lowerBoundZ+z)] = street;  
+					streetMap[lowerBound+x,lowerBound+z] = constantStreets;  
 				}
 			}		
-			for(int x = 0; x < gridLengthX; x++) {
+			for(int x = 0; x < cityLength; x++) {
 				for(int z = 0; z < streetWidth; z++) {
-					streetMap[(lowerBoundX+x),(middleBoundZ+z)] = street;  
+					streetMap[lowerBound+x,middleBound+z] = constantStreets;  
 				}
 			}		
-			for(int x = 0; x < gridLengthX; x++) {
+			for(int x = 0; x < cityLength; x++) {
 				for(int z = 0; z < streetWidth; z++) {
-					streetMap[(lowerBoundX+x),(upperBoundZ+z)] = street;  
+					streetMap[lowerBound+x,upperBound+z] = constantStreets;  
 				}
 			}				
 			break;	
-		//north
 		case(1): 
 			for(int x = 0; x < streetWidth; x++) {
 				for(int z = 0; z < streetLength; z++) {
-					streetMap[(xCoordinate+x),(zCoordinate+z)] = street; 
+					streetMap[xCoordinate+x,zCoordinate+z] = street; 
 				}
 			}		
 			break;
-		//south
 		case(2): 
 			for(int x = 0; x < streetWidth; x++) {
 				for(int z = 0; z < streetLength; z++) {
-					streetMap[(xCoordinate+x),(zCoordinate-z)] = street;  
+					streetMap[xCoordinate+x,zCoordinate-z] = street;  
 				}
 			}	
 			break;
-		//west
 		case(3): 
 			for(int x = 0; x < streetLength; x++) {
 				for(int z = 0; z < streetWidth; z++) {
-					streetMap[(xCoordinate-x),(zCoordinate+z)] = street;  
+					streetMap[xCoordinate-x,zCoordinate+z] = street;  
 				}
 			}	
 			break;
-		//east
 		case(4): 
 			for(int x = 0; x < streetLength; x++) {
 				for(int z = 0; z < streetWidth; z++) {
-					streetMap[(xCoordinate+x),(zCoordinate+z)] = street;  
+					streetMap[xCoordinate+x,zCoordinate+z] = street;  
 				}
 			}	
 			break;
 		}
 	}
 	void MakeMap() {
-		Instantiate (streetPlanePreFab, new Vector3(220f, 1f, 210f), Quaternion.identity);
-//		for(int z = 0; z < 400; z++) {
-//			for(int x = 0; x < 400; x++) {
-//				if(streetMap[x, z] == street) {
-//					Instantiate (streetTilePreFab, new Vector3(((float)x+.5f), 1f, ((float)z)+.5f), Quaternion.identity);
-//				}
-//			}
-//			
-//		}
+		for(int z = 0; z < 1000; z++) {
+			for(int x = 0; x < 1000; x++) {
+				if(streetMap[x, z] == street) {
+					Instantiate (streetTilePreFab, new Vector3((float)x/2, 1f, (float)z/2), Quaternion.identity);
+				}
+				if(streetMap[x, z] == constantStreets) {
+					Instantiate (streetTilePreFab, new Vector3((float)x*2, 1f, (float)z*2), Quaternion.identity);
+				}
+			}
+			
+		}
 	}
 	int getQuadrant(int x, int z) {
-		if( x < middleBoundX && z > middleBoundZ) {
+		if( x < middleBound && z > middleBound) {
 			return 1; 
 		}
-		if( x > middleBoundX && z > middleBoundZ) {
+		if( x > middleBound && z > middleBound) {
 			return 2;
 		}
-		if( x < middleBoundX && z < middleBoundZ) {
+		if( x < middleBound && z < middleBound) {
 			return 3;
 		}
-		if( x > middleBoundX && z < middleBoundZ) {
+		if( x > middleBound && z < middleBound) {
 			return 4;
 		}	
 		return 0; 
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
