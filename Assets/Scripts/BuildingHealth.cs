@@ -21,6 +21,10 @@ public class BuildingHealth : MonoBehaviour {
 	public float fireIntensity; 
 	public float fireDamage; 
 	
+	//water stuff
+	bool waterLogged; 
+	public float waterDamage; 
+	
 	// Use this for initialization
 	void Start () {
 		//building values 
@@ -33,6 +37,10 @@ public class BuildingHealth : MonoBehaviour {
 		onFire = false; 		
 		fireIntensity = 0; 
 		fireDamage = 0; 
+		
+		//water stuff
+		waterLogged = false; 
+		waterDamage = 0; 
 	}
 	
 	// Update is called once per frame
@@ -62,6 +70,19 @@ public class BuildingHealth : MonoBehaviour {
 					i++;
 				}
 			}	
+		}
+		Collider[] hitCollidersWater = Physics.OverlapSphere(transform.position, 6f); 
+		int j = 0; 
+		while (j < hitCollidersWater.Length) {
+			if(hitCollidersWater[j].tag.Equals("Water") == true) {	
+				waterLogged = true; 	
+				waterDamage += .01f; 
+				health = health - waterDamage; 
+			}
+			j++;
+		}
+		if(waterLogged == true){
+			onFire = false; 
 		}
 		//if it stopes being on fire it resets fire Intensity and stops the corutines from runnning. 
 		if(onFire == false) {
@@ -102,6 +123,12 @@ public class BuildingHealth : MonoBehaviour {
 	IEnumerator fireDamageIncreaser() {		
 		while(true) {
 			fireDamage += (.05f * fireIntensity); 
+			yield return new WaitForSeconds(1);
+		}
+	}
+	IEnumerator waterDamageIncreaser() {		
+		while(true) {
+			waterDamage += 2; 
 			yield return new WaitForSeconds(1);
 		}
 	}

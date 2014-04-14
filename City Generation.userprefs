@@ -2,9 +2,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BuildingHealth.cs">
     <Files>
-      <File FileName="Assets/Scripts/BuildingGenerator2.cs" Line="12" Column="8" />
-      <File FileName="Assets/Scripts/StreetGeneration.cs" Line="214" Column="41" />
-      <File FileName="Assets/Scripts/BuildingHealth.cs" Line="76" Column="37" />
+      <File FileName="Assets/Scripts/BuildingGenerator2.cs" Line="14" Column="39" />
+      <File FileName="Assets/Scripts/StreetGeneration.cs" Line="119" Column="78" />
+      <File FileName="Assets/Scripts/BuildingHealth.cs" Line="75" Column="3" />
       <File FileName="Assets/Scripts/ScoreDisplay.cs" Line="15" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
