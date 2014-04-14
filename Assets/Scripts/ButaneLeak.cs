@@ -26,6 +26,5 @@ public class ButaneLeak : MonoBehaviour {
 		
 		atmosphere.GetComponent<gasQualities>().isButaneGen = false;
 		
-		
 	}
 }

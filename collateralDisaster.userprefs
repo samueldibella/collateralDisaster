@@ -1,9 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ButaneLeak.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PedestrianAI.cs">
     <Files>
-      <File FileName="Assets\Scripts\ButaneLeak.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\OxygenGenerator.cs" Line="31" Column="33" />
+      <File FileName="Assets\Scripts\ButaneLeak.cs" Line="14" Column="30" />
+      <File FileName="Assets\Scripts\OxygenGenerator.cs" Line="23" Column="3" />
+      <File FileName="Assets\Scripts\PowerGenerator.cs" Line="27" Column="33" />
+      <File FileName="Assets\Scripts\disasterGeneration.cs" Line="75" Column="30" />
+      <File FileName="Assets\Scripts\AtmoControl.cs" Line="7" Column="49" />
+      <File FileName="Assets\Scripts\PedestrianAI.cs" Line="16" Column="81" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

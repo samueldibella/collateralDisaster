@@ -11,7 +11,8 @@ public class disasterGeneration : MonoBehaviour {
 	//prefabs for disaster placement
 	public GameObject floodMaker;
 
-	public float disasterRate = 30f;
+	public float disasterRate = 20f;
+	
 	bool gameStart = false;
 	float gameTime = 0;
 	int randomHolder;
@@ -57,15 +58,32 @@ public class disasterGeneration : MonoBehaviour {
 					break;
 				}
 			}	
-				
+			
+		//when game has paused, waiting for player to place a disaster
 		} else if ( Time.timeScale == 0 && gameStart == true ) {
-			if( Input.GetKeyDown(KeyCode.Mouse0) ) {
-				//raycast to location, must be a street, then generate disaster there
+			if( Input.GetKeyDown(KeyCode.Mouse0)) {
+
 				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-				
-				if(Physics.Raycast(ray, out rayHit) && rayHit.transform.tag == "Road") {
-					Instantiate(floodMaker, rayHit.point, Quaternion.identity);
-					Time.timeScale = 1;
+
+				if(Physics.Raycast(ray, out rayHit)) {
+					switch(currentDisaster) {
+					case Disaster.Fire:
+					case Disaster.Gas:
+						if(rayHit.transform.tag == "Building" ) {
+							//code to apply current disaster to clicked building
+							//when possible add to if statement so that you can't
+							//reapply burning/leak to a burning or wet building
+							
+						}
+						break;
+					case Disaster.Flood:
+						if(rayHit.transform.tag == "Road") {
+							Instantiate(floodMaker, rayHit.point, Quaternion.identity);
+							Time.timeScale = 1;						
+						}
+						break;
+					}
+
 				}
 				
 			}

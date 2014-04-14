@@ -12,6 +12,7 @@ public class OxygenGenerator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		isFunctioning = true;
+		isOn = true;
 	}
 	
 	// Update is called once per frame
@@ -26,6 +27,7 @@ public class OxygenGenerator : MonoBehaviour {
 		*/
 	}
 	
+	//need to find a way to call this before update runs
 	void OnTriggerEnter(Collider other) {
 		if(other.tag == "Gas") {
 			atmosphere = other.gameObject;

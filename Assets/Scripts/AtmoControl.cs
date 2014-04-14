@@ -2,6 +2,9 @@
 using System.Collections;
 
 public class AtmoControl : MonoBehaviour {
+	//TODO Once new city generator is merged, tie gas sectors
+	//to city blocks, to allow for easier alteration of atmosphere
+	//based on code of buildings (disaster scripts)
 
 	//assign in inspector
 	public GameObject gas;
