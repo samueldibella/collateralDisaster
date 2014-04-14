@@ -7,18 +7,18 @@ public class AtmoControl : MonoBehaviour {
 	public GameObject gas;
 
 	//size of array
-	public int size = 15;
+	public static int size = 15;
 	
 	//scale of cubes, set to match
 	public int scale = 5;
 	
 	//array of gasSectors
-	GameObject[,] zones; 
+	public static GameObject[,] zones; 
 	
 	//iteratorRate is for AtmoSpread coroutine
 	//diffusion rate is how quickly, per step, gas spreads, check individualDelta function
-	public float iteratorSeconds = .5f;
-	public float diffusionRate = .1f;
+	public float iteratorSeconds = .1f;
+	public float diffusionRate = .12f;
 
 	// Use this for initialization
 	void Start () {
@@ -80,7 +80,7 @@ public class AtmoControl : MonoBehaviour {
 						zones[j, i].GetComponent<gasQualities>().butane = 0;
 					} 
 					
-					if (zones[j, i].GetComponent<gasQualities>().oxygen > 1) {
+					if (zones[j, i].GetComponent<gasQualities>().butane > 1) {
 						zones[j, i].GetComponent<gasQualities>().butane = 1;
 					}	
 				}
