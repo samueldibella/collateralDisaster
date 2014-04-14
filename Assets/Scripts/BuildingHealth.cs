@@ -21,6 +21,9 @@ public class BuildingHealth : MonoBehaviour {
 	public float fireIntensity; 
 	public float fireDamage; 
 	
+	//gas
+	public bool gasLeak;
+	
 	// Use this for initialization
 	void Start () {
 		//building values 
@@ -33,6 +36,9 @@ public class BuildingHealth : MonoBehaviour {
 		onFire = false; 		
 		fireIntensity = 0; 
 		fireDamage = 0; 
+		
+		//gas
+		gasLeak = false;
 	}
 	
 	// Update is called once per frame
@@ -70,6 +76,11 @@ public class BuildingHealth : MonoBehaviour {
 			StopCoroutine("fireDamageIncreaser"); 
 			StopCoroutine("fireSpread"); 
 			fireIntensity = 0;	 		
+		}
+		
+		if(gasLeak == true) {
+			StartCoroutine( Leak() );
+			gasLeak = false;
 		}
 	
 	}
@@ -120,7 +131,17 @@ public class BuildingHealth : MonoBehaviour {
 			yield return new WaitForSeconds(1);
 		}
 	}
+
+	IEnumerator Leak() {
+		//atmosphere.GetComponent<gasQualities>().isButaneGen = true;
+		
+		yield return new WaitForSeconds(20);
+		
+		//atmosphere.GetComponent<gasQualities>().isButaneGen = false;
+		
+	}
 }
+
 
 
 

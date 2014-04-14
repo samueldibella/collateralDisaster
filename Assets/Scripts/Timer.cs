@@ -15,7 +15,7 @@ public class Timer : MonoBehaviour {
 		mesh.text = string.Format("{0:0.0}", Time.time);
 		
 		if(Time.time == 0) {
-			mesh.text += "\nPress Space to Start, \nThen Click For Disaster";
+			mesh.text += "\nClick For Disaster";
 		}
 	}
 }
