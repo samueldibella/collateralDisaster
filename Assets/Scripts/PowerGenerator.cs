@@ -6,13 +6,14 @@ public class PowerGenerator : MonoBehaviour {
 	public bool isFunctioning;
 	public bool isOn;
 	
-	GameObject generators;
+	GameObject[] generators = new GameObject[10];
+	GameObject generator;
 	
 	// Use this for initialization
 	void Start () {
 		isFunctioning = true;
 		isOn = true;
-	
+		
 		generators = GameObject.FindGameObjectsWithTag("OxyGenerators");
 	}
 	
