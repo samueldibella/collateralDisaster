@@ -103,11 +103,6 @@ public class AtmoControl : MonoBehaviour {
 		//alters delta based on 8 adjacent cell gas levels
 		for(int j = -1; j < 2; j ++) {
 			for(int i = -1; i < 2; i++) {
-				/*
-				if(j == -1 && i == -1 && y == 5 && x == 5) {
-					zones[y, x].GetComponent<Renderer>().renderer.material.color = Color.blue;
-					zones[y + j, x + i].GetComponent<Renderer>().renderer.material.color = Color.red	;
-				}*/
 				
 				//doesn't call on itself or non-existent squares
 				if(!(i == 0 && j == 0) && isInGrid(y + j, x + i)) {
@@ -120,7 +115,6 @@ public class AtmoControl : MonoBehaviour {
 						|| (i == 1 && j == -1) && (i == 1 && j == 1)) {
 							deltaTemp *= .75f;
 						}
-						//delta = zones[y + j, x + i].GetComponent<gasQualities>().oxygen - oAmount;
 
 					} else {
 						deltaTemp = zones[y + j, x + i].GetComponent<gasQualities>().butane - bAmount;

@@ -1,8 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AtmoControl.cs">
     <Files>
-      <File FileName="Assets\Scripts\AtmoControl.cs" Line="148" Column="44" />
+      <File FileName="Assets\Scripts\disasterGeneration.cs" Line="78" Column="1" />
+      <File FileName="Assets\Scripts\AtmoControl.cs" Line="118" Column="1" />
+      <File FileName="Assets\Scripts\disasterGeneration.cs" Line="69" Column="25" />
+      <File FileName="Assets\Scripts\StreetGeneration.cs" Line="221" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

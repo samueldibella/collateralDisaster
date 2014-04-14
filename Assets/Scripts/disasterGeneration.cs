@@ -5,13 +5,19 @@ public class disasterGeneration : MonoBehaviour {
 
 	public enum Disaster {Flood, Fire, Gas}
 
-	public float disasterRate = 60f;
+	//next disaster to appear
+	public Disaster currentDisaster;
+	
+	//prefabs for disaster placement
+	public GameObject floodMaker;
+
+	public float disasterRate = 30f;
 	bool gameStart = false;
 	float gameTime = 0;
 	int randomHolder;
-	
-	//next disaster to appear
-	public Disaster currentDisaster;
+
+	RaycastHit rayHit;
+	Ray ray;
 	
 	// Use this for initialization
 	void Start () {
@@ -22,16 +28,15 @@ public class disasterGeneration : MonoBehaviour {
 	void Update () {
 		
 		//game starts paused
-		if(Input.GetKeyDown(KeyCode.Space) && Time.timeScale == 0) {
+		if( Input.GetKeyDown(KeyCode.Space) && Time.timeScale == 0 ) {
 			Time.timeScale = 1;
 			gameStart = true;
 		}
 		
-		//if 
 		if(Time.timeScale == 1) {
 			gameTime += Time.deltaTime;
 			
-			if(gameTime % 60 < .03 && gameTime % 60 > 59.85) {
+			if( gameTime % disasterRate < .01 || gameTime % disasterRate > disasterRate - .01f ) {
 				//pause game
 				Time.timeScale = 0;
 				
@@ -53,9 +58,16 @@ public class disasterGeneration : MonoBehaviour {
 				}
 			}	
 				
-		} else if (Time.timeScale == 0 && gameStart == true) {
-			if(Input.GetKeyDown(KeyCode.Mouse0)) {
-				//raycast to location, and must be a street, then generate disaster there
+		} else if ( Time.timeScale == 0 && gameStart == true ) {
+			if( Input.GetKeyDown(KeyCode.Mouse0) ) {
+				//raycast to location, must be a street, then generate disaster there
+				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				
+				if(Physics.Raycast(ray, out rayHit) && rayHit.transform.tag == "Road") {
+					Instantiate(floodMaker, rayHit.point, Quaternion.identity);
+					Time.timeScale = 1;
+				}
+				
 			}
 		
 		}

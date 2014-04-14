@@ -103,7 +103,6 @@ public class StreetGeneration : MonoBehaviour {
 			Destroy(gameObject);
 			}	
 		if(currentStreets == maxStreets && endedStreetMakers == maxStreetMakers) { 
-			print ("df"); 
 			MakeMap(); 
 			streetsDone = true; 
 			Destroy(gameObject); 			
