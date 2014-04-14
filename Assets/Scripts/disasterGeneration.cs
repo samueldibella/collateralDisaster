@@ -11,7 +11,7 @@ public class disasterGeneration : MonoBehaviour {
 	//prefabs for disaster placement
 	public GameObject floodMaker;
 
-	public float disasterRate = 60f;
+	public float disasterRate = 30f;
 	bool gameStart = false;
 	float gameTime = 0;
 	int randomHolder;
@@ -33,11 +33,10 @@ public class disasterGeneration : MonoBehaviour {
 			gameStart = true;
 		}
 		
-		//if 
 		if(Time.timeScale == 1) {
 			gameTime += Time.deltaTime;
 			
-			if( gameTime % 60 < .03 && gameTime % 60 > 59.85 ) {
+			if( gameTime % disasterRate < .01 || gameTime % disasterRate > disasterRate - .01f ) {
 				//pause game
 				Time.timeScale = 0;
 				
@@ -65,7 +64,7 @@ public class disasterGeneration : MonoBehaviour {
 				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				
 				if(Physics.Raycast(ray, out rayHit) && rayHit.transform.tag == "Road") {
-					Instantiate(floodMaker,transform.position, Quaternion.identity);
+					Instantiate(floodMaker, rayHit.point, Quaternion.identity);
 					Time.timeScale = 1;
 				}
 				
