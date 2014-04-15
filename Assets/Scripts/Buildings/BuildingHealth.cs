@@ -119,7 +119,7 @@ public class BuildingHealth : MonoBehaviour {
 	IEnumerator fireSpreadIncreaser() {		
 		print ("df"); 
 		while(true) {
-			print ("df");
+
 			Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10f); 
 			int i = 0;
 			while (i < hitColliders.Length) {

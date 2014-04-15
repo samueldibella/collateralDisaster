@@ -12,7 +12,8 @@ public class Timer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		mesh.text = string.Format("{0:0.0}", Time.time);
+		mesh.text = string.Format("{0:0.0}\n", Time.time);
+		mesh.text += Camera.main.GetComponent<disasterGeneration>().currentDisaster;
 		
 		if(Time.time == 0) {
 			mesh.text += "\nClick For Disaster";

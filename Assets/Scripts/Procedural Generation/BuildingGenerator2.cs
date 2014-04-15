@@ -14,8 +14,8 @@ public class BuildingGenerator2 : MonoBehaviour {
 	   public void buildingGenerator() {  
 		for(int i = 0; i < StreetGeneration.gridLengthZ; i++) {
 			for(int j = 0; j < StreetGeneration.gridLengthX; j++) {
-				if(MapCheck(coordinateXx+j,coordinateZx+i) == true) {
-					Mapfill(coordinateXx+j,coordinateZx+i); 
+				if(MapCheck(coordinateXx + j,coordinateZx + i) == true) {
+					Mapfill(coordinateXx + j,coordinateZx + i); 
 					StreetGeneration.streetMap[coordinateXx+j,coordinateZx+i] = building;
 				}
 			}
