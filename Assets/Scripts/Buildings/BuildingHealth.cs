@@ -5,8 +5,6 @@ public class BuildingHealth : MonoBehaviour {
 
 	//relevant game object 
 	public GameObject building; 
-	public Material buildingGreen;
-	public Material fireRed;
 	
 	//total score
 	public static float totalScore;
