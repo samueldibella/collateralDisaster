@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//place barricade and water markers to show where prefab will be generated when player
+//clicks on that location
 public class FloodStreetMarker : MonoBehaviour {
 	//attach to street prefab
 
@@ -23,6 +25,7 @@ public class FloodStreetMarker : MonoBehaviour {
 	}
 	
 	void OnMouseOver() {
+		//there's a slight bug when switching from play to pause, where the barricade will stay for a short period of time
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 	
 		Physics.Raycast(ray, out hit);

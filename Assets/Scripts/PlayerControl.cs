@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class PlayerControl : MonoBehaviour {
+// actual player placement of barricades
 
 	Ray ray;
 	RaycastHit hit;

@@ -62,13 +62,14 @@ public class BuildingHealth : MonoBehaviour {
 			totalScore -= monetaryValue;
 			Destroy(gameObject); 		
 		}
+		
 		//fire methods  
 		if(fireStarted == true) {
-			renderer.material.color = Color.red;
 			burning(); 
 			onFire = true; 
 			fireStarted = false; 
 		}
+		
 		//updates health if on fire and spread fire
 		if(onFire == true) {
 			//this will spread fire 	
@@ -83,9 +84,9 @@ public class BuildingHealth : MonoBehaviour {
 				}
 			}	
 		}
+		
 		//if it stopes being on fire it resets fire Intensity and stops the corutines from runnning. 
 		if(onFire == false) {
-			renderer.material.color = Color.green;
 			StopCoroutine("fireIntensityIncreaser"); 
 			StopCoroutine("fireDamageIncreaser"); 
 			StopCoroutine("fireSpread"); 
@@ -109,23 +110,27 @@ public class BuildingHealth : MonoBehaviour {
 			}
 			j++;
 		}
+		
 		//water controls
 		if(floodStarted == true){
 			waterLogged = true; 
 			flooding(); 
 			floodStarted = false;  
 		}
+		
 		if(waterLogged == true) {
 			//will put our fires if water logged
 			if(waterLoggedPercent >= 30) {
 				onFire = false;
 			}
 		}
+		
 		if(waterLogged == false) {
 			StartCoroutine("waterIntensityDecreaser"); 
 			StopCoroutine("waterIntensityIncreaser"); 
 			StopCoroutine("waterDamageIncreaser"); 
 		}
+		
 		//health update 
 		health = 100 - (waterDamage + fireDamage); 
 	}
@@ -173,6 +178,7 @@ public class BuildingHealth : MonoBehaviour {
 			yield return new WaitForSeconds(1);
 		}
 	}
+	
 	//water logged percent increase 
 	IEnumerator waterIntensityIncreaser() {		
 		while(true) {
@@ -184,6 +190,7 @@ public class BuildingHealth : MonoBehaviour {
 			}
 		}
 	}
+	
 	IEnumerator waterIntensityDecreaser() {		
 		while(true) {
 			if( waterLoggedPercent <= 0) {
@@ -194,6 +201,7 @@ public class BuildingHealth : MonoBehaviour {
 			}
 		}
 	}
+	
 	//water corutine that increase water damage based on water logged percent 
 	IEnumerator waterDamageIncreaser() {		
 		while(true) {
@@ -219,6 +227,7 @@ public class BuildingHealth : MonoBehaviour {
 			buildingKey = keyIncrementer; 
 		}
 	}
+	
 	//not using this now but to optimize I might need to use this so Im keeping it around for now 
 //	IEnumerator fireSpreadIncreaser() {		
 //		print ("df"); 

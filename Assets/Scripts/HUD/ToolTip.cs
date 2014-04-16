@@ -5,17 +5,29 @@ public class ToolTip : MonoBehaviour {
 	
 	Ray ray;
 	RaycastHit hit;
+
+	Vector3 location;
+	Vector3 storage;
 	
-	// Update is called once per frame
+	void Start() {
+	//	storage = new Vector3()
+	}
+	
 	void Update () {
-		if(Input.GetMouseButtonDown(0) && Time.timeScale == 1) {
-			ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			
-			if(Physics.Raycast(ray, out hit)) {
-				if(hit.transform.tag == "Road") {
+		if(Physics.Raycast(ray, out hit)) {
+			if(hit.transform.tag == "Building") {
+				location = hit.point;
+				location.y += 20;
 					
-				}
+				transform.position = location;
+				GetComponent<TextMesh>().text = hit.transform.GetComponent<BuildingDisplay>().Info();
+			} else {
+				//transform.position = new Vec
 			}
-		}
+		} 
 	}
 }
+
