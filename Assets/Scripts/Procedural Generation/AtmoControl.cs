@@ -10,11 +10,11 @@ public class AtmoControl : MonoBehaviour {
 	public GameObject gas;
 
 	//size of array
-	public static int xSize = 30;
-	public static int zSize = 15;
+	public static int xSize = 15;
+	public static int zSize = 8;
 	
 	//scale of cubes, set to match
-	public int scale = 4;
+	public int scale = 8;
 	
 	//array of gasSectors
 	public static GameObject[,] zones; 

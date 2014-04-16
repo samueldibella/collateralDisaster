@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{989C324C-D568-0D3A-EEEC-693476CD786E}</ProjectGuid>
+	<ProjectGuid>{B7FD3C63-8910-3C85-9556-7662FF37F55D}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -50,16 +50,15 @@
      <Compile Include="Assets\Scripts\Buildings\BuildingDisplay.cs" />
      <Compile Include="Assets\Scripts\Buildings\BuildingHealth.cs" />
      <Compile Include="Assets\Scripts\Buildings\OxygenGenerator.cs" />
+     <Compile Include="Assets\Scripts\Buildings\PersonalAtmo.cs" />
      <Compile Include="Assets\Scripts\Buildings\PowerGenerator.cs" />
      <Compile Include="Assets\Scripts\Disasters\BoxSpread.cs" />
-     <Compile Include="Assets\Scripts\Disasters\FloodStreetMarker.cs" />
      <Compile Include="Assets\Scripts\Disasters\RandomSlide.cs" />
-     <Compile Include="Assets\Scripts\Disasters\WaterDousing.cs" />
      <Compile Include="Assets\Scripts\Disasters\disasterGeneration.cs" />
+     <Compile Include="Assets\Scripts\HUD\FloodStreetMarker.cs" />
      <Compile Include="Assets\Scripts\HUD\ScoreDisplay.cs" />
      <Compile Include="Assets\Scripts\HUD\Timer.cs" />
      <Compile Include="Assets\Scripts\HUD\ToolTip.cs" />
-     <Compile Include="Assets\Scripts\PedestrianAI.cs" />
      <Compile Include="Assets\Scripts\PlayerControl.cs" />
      <Compile Include="Assets\Scripts\Procedural Generation\AtmoControl.cs" />
      <Compile Include="Assets\Scripts\Procedural Generation\BuildingGenerator2.cs" />
