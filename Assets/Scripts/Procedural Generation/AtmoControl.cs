@@ -10,11 +10,11 @@ public class AtmoControl : MonoBehaviour {
 	public GameObject gas;
 
 	//size of array
-	public static int xSize = 23;
-	public static int ySize = 11;
+	public static int xSize = 30;
+	public static int zSize = 15;
 	
 	//scale of cubes, set to match
-	public int scale = 5;
+	public int scale = 4;
 	
 	//array of gasSectors
 	public static GameObject[,] zones; 
@@ -26,9 +26,9 @@ public class AtmoControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		zones = new GameObject[ySize, xSize];
+		zones = new GameObject[zSize, xSize];
 	
-		for(int j = 0; j < ySize; j++) {
+		for(int j = 0; j < zSize; j++) {
 			for(int i = 0; i < xSize; i++) {
 				Vector3 generation = new Vector3(transform.position.x + (i * scale * 2), transform.position.y, transform.position.z + (j * scale * 2));
 
@@ -42,20 +42,20 @@ public class AtmoControl : MonoBehaviour {
 	
 	IEnumerator AtmoSpread() {
 		//to store shifting gas
-		float[,] oDeltaHolder = new float[ySize, xSize];
-		float[,] bDeltaHolder = new float[ySize, xSize];
+		float[,] oDeltaHolder = new float[zSize, xSize];
+		float[,] bDeltaHolder = new float[zSize, xSize];
 		
 		while(true) {
 			
 			//stores new value change in temp array to prevent changing values from altering midstep
-			for(int j = 0; j < ySize; j++) {
+			for(int j = 0; j < zSize; j++) {
 				for(int i = 0; i < xSize; i++) {
 					oDeltaHolder[j, i] = individualDelta(j, i, true);
 					bDeltaHolder[j, i] = individualDelta(j, i, false);
 				}
 			}
 			
-			for(int j = 0; j < ySize; j++) {
+			for(int j = 0; j < zSize; j++) {
 				for(int i = 0; i < xSize; i++) {
 					//alter gas levels
 					zones[j, i].GetComponent<gasQualities>().oxygen += oDeltaHolder[j, i];
@@ -143,7 +143,7 @@ public class AtmoControl : MonoBehaviour {
 	
 	//checks if a given coordinate -
 	bool isInGrid(int y, int x) {
-		if(y > 0 && y < ySize && x > 0 && x < xSize) {
+		if(y > 0 && y < zSize && x > 0 && x < xSize) {
 			return true;
 		} else {
 			return false;
