@@ -116,15 +116,12 @@ public class StreetGeneration : MonoBehaviour {
 			currentStreetMakers--; 
 			Destroy(gameObject);
 		}	
+		
 		if(currentStreets == maxStreets && endedStreetMakers == maxStreetMakers) { 
 			MakeMap(); 
 			builder.buildingGenerator();  
 			Destroy(gameObject); 			
 		}						
-	}
-	// Update is called once per frame
-	void Update () {
-		
 	}
 	
 	void MapFill (int xCoordinate, int zCoordinate, int k) {

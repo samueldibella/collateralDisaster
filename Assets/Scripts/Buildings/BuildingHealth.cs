@@ -14,6 +14,7 @@ public class BuildingHealth : MonoBehaviour {
 	//building values
 	float monetaryValue; 
 	public float health; 
+	Color initialColor;
 	
 	//fire stuff
 	public bool fireStarted; 
@@ -30,6 +31,7 @@ public class BuildingHealth : MonoBehaviour {
 		health = 100; 
 		monetaryValue = 100; 
 		totalScore += monetaryValue;
+		initialColor = renderer.material.color;
 		
 		//fire stuff 
 		fireStarted = false;
@@ -48,13 +50,15 @@ public class BuildingHealth : MonoBehaviour {
 			totalScore -= monetaryValue;
 			Destroy(gameObject); 		
 		}
+		
 		//fire methods  
 		if(fireStarted == true) {
-			renderer.material.color = Color.red;
+			renderer.material.color = Color.red; //Color.Lerp(initialColor, Color.red, (fireIntensity / 100) + .2f);
 			burning(); 
 			onFire = true; 
 			fireStarted = false; 
 		}
+		
 		//updates health if on fire 
 		if(onFire == true) {
 			health = 100 - fireDamage;	
@@ -65,10 +69,17 @@ public class BuildingHealth : MonoBehaviour {
 					if(hitColliders[i].tag.Equals("Building") == true && hitColliders[i].GetComponent<BuildingHealth>().onFire == false) {
 						hitColliders[i].GetComponent<BuildingHealth>().fireStarted = true;
 					}
+					
 					i++;
 				}
 			}	
+			
+			
+			if(fireIntensity <= 0) {
+				onFire = false;
+			}
 		}
+		
 		//if it stopes being on fire it resets fire Intensity and stops the corutines from runnning. 
 		if(onFire == false) {
 			renderer.material.color = Color.green;
@@ -84,6 +95,7 @@ public class BuildingHealth : MonoBehaviour {
 		}
 	
 	}
+	
 	//burning method controls the rate of burning and fire intensity 
 	void burning() {
 		if(fireIntensity < 100) {
@@ -98,6 +110,7 @@ public class BuildingHealth : MonoBehaviour {
 		StartCoroutine("fireSpread"); 
 	
 	}
+	
 	//coroutine that increase fireintesity until it gets to 100 
 	IEnumerator fireIntensityIncreaser() {		
 		while(true) {
@@ -109,6 +122,7 @@ public class BuildingHealth : MonoBehaviour {
 			}
 		}
 	}
+	
 	//coroutine that increase the damage the fire is doing based on the intensity of the fire. 
 	IEnumerator fireDamageIncreaser() {		
 		while(true) {
@@ -116,8 +130,9 @@ public class BuildingHealth : MonoBehaviour {
 			yield return new WaitForSeconds(1);
 		}
 	}
+	
 	IEnumerator fireSpreadIncreaser() {		
-		print ("df"); 
+
 		while(true) {
 
 			Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10f); 

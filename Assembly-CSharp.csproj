@@ -46,14 +46,17 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Buildings\BuildingDisplay.cs" />
      <Compile Include="Assets\Scripts\Buildings\BuildingHealth.cs" />
      <Compile Include="Assets\Scripts\Buildings\OxygenGenerator.cs" />
      <Compile Include="Assets\Scripts\Buildings\PowerGenerator.cs" />
      <Compile Include="Assets\Scripts\Disasters\BoxSpread.cs" />
      <Compile Include="Assets\Scripts\Disasters\RandomSlide.cs" />
+     <Compile Include="Assets\Scripts\Disasters\WaterDousing.cs" />
      <Compile Include="Assets\Scripts\Disasters\disasterGeneration.cs" />
      <Compile Include="Assets\Scripts\HUD\ScoreDisplay.cs" />
      <Compile Include="Assets\Scripts\HUD\Timer.cs" />
+     <Compile Include="Assets\Scripts\HUD\ToolTip.cs" />
      <Compile Include="Assets\Scripts\PedestrianAI.cs" />
      <Compile Include="Assets\Scripts\PlayerControl.cs" />
      <Compile Include="Assets\Scripts\Procedural Generation\AtmoControl.cs" />

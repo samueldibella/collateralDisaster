@@ -13,8 +13,6 @@ public class disasterGeneration : MonoBehaviour {
 
 	public float disasterRate = 20f;
 	
-	bool gameStart = false;
-	float gameTime = 0;
 	int randomHolder;
 
 	RaycastHit rayHit;
