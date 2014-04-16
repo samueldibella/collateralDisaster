@@ -14,7 +14,6 @@ public class BuildingHealth : MonoBehaviour {
 	//building values
 	float monetaryValue; 
 	public float health; 
-	Color initialColor;
 	
 	//fire stuff
 	public bool fireStarted; 
@@ -31,7 +30,6 @@ public class BuildingHealth : MonoBehaviour {
 		health = 100; 
 		monetaryValue = 100; 
 		totalScore += monetaryValue;
-		initialColor = renderer.material.color;
 		
 		//fire stuff 
 		fireStarted = false;
@@ -45,6 +43,7 @@ public class BuildingHealth : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+	
 		//building destroy when health = 0 and subtracts score 
 		if(health <= 0) {
 			totalScore -= monetaryValue;
@@ -53,7 +52,6 @@ public class BuildingHealth : MonoBehaviour {
 		
 		//fire methods  
 		if(fireStarted == true) {
-			renderer.material.color = Color.red; //Color.Lerp(initialColor, Color.red, (fireIntensity / 100) + .2f);
 			burning(); 
 			onFire = true; 
 			fireStarted = false; 
@@ -82,7 +80,6 @@ public class BuildingHealth : MonoBehaviour {
 		
 		//if it stopes being on fire it resets fire Intensity and stops the corutines from runnning. 
 		if(onFire == false) {
-			renderer.material.color = Color.green;
 			StopCoroutine("fireIntensityIncreaser"); 
 			StopCoroutine("fireDamageIncreaser"); 
 			StopCoroutine("fireSpread"); 

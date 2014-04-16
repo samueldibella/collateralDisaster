@@ -6,7 +6,7 @@ public class disasterGeneration : MonoBehaviour {
 	public enum Disaster {Flood, Fire, Gas}
 
 	//next disaster to appear
-	public Disaster currentDisaster;
+	public static Disaster currentDisaster;
 	
 	//prefabs for disaster placement
 	public GameObject floodMaker;
