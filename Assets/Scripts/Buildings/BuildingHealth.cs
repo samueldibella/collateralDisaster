@@ -94,6 +94,24 @@ public class BuildingHealth : MonoBehaviour {
 			fireIncreasing = false;
 		} 
 		
+		//detects for water
+		Collider[] hitCollidersWater = Physics.OverlapSphere(transform.position, 5f); 
+		int j = 0; 
+		while (j < hitCollidersWater.Length) {
+			if(hitCollidersWater[j].tag.Equals("Water") == true && firstFlood == false ) {	
+				firstFlood = true;
+				floodStarted = true; 	
+			} if(hitCollidersWater[j].tag.Equals("Building") == true && hitCollidersWater[j].GetComponent<BuildingHealth>().waterLogged == true 
+			     && hitCollidersWater[j].GetComponent<BuildingHealth>().waterLoggedPercent >= 30 && firstFlood == false) {
+				firstFlood = true;
+				floodStarted = true;
+			}
+			else {
+				//waterLogged = false; 
+			}
+			j++;
+		}
+		
 		//water controls
 		if(floodStarted == true){
 			waterLogged = true; 
