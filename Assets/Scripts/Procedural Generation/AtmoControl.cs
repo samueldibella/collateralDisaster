@@ -2,9 +2,6 @@
 using System.Collections;
 
 public class AtmoControl : MonoBehaviour {
-	//TODO Once new city generator is merged, tie gas sectors
-	//to city blocks, to allow for easier alteration of atmosphere
-	//based on code of buildings (disaster scripts)
 
 	//assign in inspector
 	public GameObject gas;
@@ -21,9 +18,10 @@ public class AtmoControl : MonoBehaviour {
 	
 	//iteratorRate is for AtmoSpread coroutine
 	//diffusion rate is how quickly, per step, gas spreads, check individualDelta function
-	public float iteratorSeconds = .1f;
+	public float iteratorSeconds = 1f;
 	public float diffusionRate = .12f;
-
+	public int depleteRate = 5;
+	
 	// Use this for initialization
 	void Start () {
 		zones = new GameObject[zSize, xSize];
@@ -34,10 +32,12 @@ public class AtmoControl : MonoBehaviour {
 
 				zones[j, i] = Instantiate(gas, generation, Quaternion.identity) as GameObject;
 				zones[j, i].transform.Rotate(new Vector3(90, 0, 0));
+				zones[j, i].transform.parent = gameObject.transform;
 			}
 		}
 
 		StartCoroutine( AtmoSpread() );
+		StartCoroutine( Deplete() );
 	}
 	
 	IEnumerator AtmoSpread() {
@@ -139,6 +139,26 @@ public class AtmoControl : MonoBehaviour {
 		delta *= diffusionRate;
 		
 		return delta;
+	}
+	
+	
+	IEnumerator Deplete() {
+		while(true) {
+			for( int z = 0; z < zSize; z++) {
+				for( int x = 0; x < xSize; x++) {
+					if(zones[z, x].GetComponent<gasQualities>().oxygen > 0.05f) {
+						zones[z, x].GetComponent<gasQualities>().oxygen -= .05f;
+					}
+				
+					if(zones[z, x].GetComponent<gasQualities>().butane > 0.05f) {
+						zones[z, x].GetComponent<gasQualities>().butane -= .05f;
+					}
+					
+				}
+			}
+			
+			yield return new WaitForSeconds(depleteRate);
+		}
 	}
 	
 	//checks if a given coordinate -

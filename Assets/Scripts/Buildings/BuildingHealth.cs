@@ -18,6 +18,7 @@ public class BuildingHealth : MonoBehaviour {
 	public bool onFire; 
 	public float fireIntensity; 
 	public float fireDamage; 
+	bool fireIncreasing;
 	
 	//water stuff
 	public bool firstFlood; 
@@ -43,6 +44,7 @@ public class BuildingHealth : MonoBehaviour {
 		onFire = false; 		
 		fireIntensity = 0; 
 		fireDamage = 0; 
+		fireIncreasing = false;
 		
 		//water stuff
 		firstFlood = false; 
@@ -83,33 +85,14 @@ public class BuildingHealth : MonoBehaviour {
 					i++;
 				}
 			}	
-		}
-		
-		//if it stopes being on fire it resets fire Intensity and stops the corutines from runnning. 
-		if(onFire == false) {
+		} else if (onFire == false && fireIncreasing == true) {
+			//if it stopes being on fire it resets fire Intensity and stops the corutines from runnning. 
 			StopCoroutine("fireIntensityIncreaser"); 
 			StopCoroutine("fireDamageIncreaser"); 
 			StopCoroutine("fireSpread"); 
-			fireIntensity = 0;	 		
-		}
-		
-		//detects for water
-		Collider[] hitCollidersWater = Physics.OverlapSphere(transform.position, 5f); 
-		int j = 0; 
-		while (j < hitCollidersWater.Length) {
-			if(hitCollidersWater[j].tag.Equals("Water") == true && firstFlood == false ) {	
-				firstFlood = true;
-				floodStarted = true; 	
-			} if(hitCollidersWater[j].tag.Equals("Building") == true && hitCollidersWater[j].GetComponent<BuildingHealth>().waterLogged == true 
-			     && hitCollidersWater[j].GetComponent<BuildingHealth>().waterLoggedPercent >= 30 && firstFlood == false) {
-				firstFlood = true;
-				floodStarted = true;
-			}
-				else {
-				//waterLogged = false; 
-			}
-			j++;
-		}
+			fireIntensity = 0;
+			fireIncreasing = false;
+		} 
 		
 		//water controls
 		if(floodStarted == true){
@@ -123,9 +106,7 @@ public class BuildingHealth : MonoBehaviour {
 			if(waterLoggedPercent >= 30) {
 				onFire = false;
 			}
-		}
-		
-		if(waterLogged == false) {
+		} else if(waterLoggedPercent > 0 && waterLogged == false) {
 			StartCoroutine("waterIntensityDecreaser"); 
 			StopCoroutine("waterIntensityIncreaser"); 
 			StopCoroutine("waterDamageIncreaser"); 
@@ -142,26 +123,32 @@ public class BuildingHealth : MonoBehaviour {
 		if(fireIntensity < 100) {
 			StartCoroutine( "fireIntensityIncreaser");
 		}
+		
 		if(fireIntensity >= 50) {
 			StartCoroutine("fireSpread"); 
 		}	
+		
 		StartCoroutine( "fireDamageIncreaser" );		
 	}
 	//firespread method 
 	void fireSpread() {
 		StartCoroutine("fireSpread"); 	
 	}
+	
 	//flooding method that conrols the corutines that conrtol flooding 
 	void flooding(){
 		if(waterLoggedPercent < 100) {
 			StartCoroutine( "waterIntensityIncreaser");
-		}	
+		}
+			
 		StartCoroutine( "waterDamageIncreaser" );		
 	}
 	
 	//Couroutines
 	//coroutine that increase fireintesity until it gets to 100 
 	IEnumerator fireIntensityIncreaser() {		
+		fireIncreasing = true;
+		
 		while(true) {
 			if( fireIntensity >= 100) {
 				yield break; 
@@ -171,8 +158,10 @@ public class BuildingHealth : MonoBehaviour {
 			}
 		}
 	}
+	
 	//coroutine that increase the damage the fire is doing based on the intensity of the fire. 
 	IEnumerator fireDamageIncreaser() {		
+		
 		while(true) {
 			fireDamage += (.05f * fireIntensity); 
 			yield return new WaitForSeconds(1);
@@ -244,12 +233,3 @@ public class BuildingHealth : MonoBehaviour {
 //		}
 //	}
 }
-
-
-
-
-
-
-
-
-

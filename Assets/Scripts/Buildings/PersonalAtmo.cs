@@ -16,7 +16,7 @@ public class PersonalAtmo : MonoBehaviour {
 		StartCoroutine( Generator() );
 	}
 	
-	
+	//compares all sectors to see which is closest
 	GameObject GetClosestSector() {
 		GameObject[] sectors = GameObject.FindGameObjectsWithTag("Gas");
 		GameObject currentClosest;
@@ -42,4 +42,3 @@ public class PersonalAtmo : MonoBehaviour {
 		}
 	}
 }
-
