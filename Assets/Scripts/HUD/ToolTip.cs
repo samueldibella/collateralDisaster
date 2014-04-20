@@ -12,7 +12,9 @@ public class ToolTip : MonoBehaviour {
 			
 		if(Physics.Raycast(ray, out hit)) {
 			if(hit.transform.tag == "Building") {
+			
 				GetComponent<TextMesh>().text = hit.transform.GetComponent<BuildingDisplay>().Info();
+			
 			}
 		} 
 	}
