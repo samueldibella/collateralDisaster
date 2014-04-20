@@ -4,10 +4,11 @@ using System.Collections;
 public class BuildingDisplay : MonoBehaviour {
 //script for building color and appearance, and building tool tip
 
-	Color initialColor;
+	public Color initialColor;
 	
 	//after accounting for fire and water presence
 	Color intermediateColor;
+//	Color importantColor;
 	
 	bool mouseOver = false;
 
@@ -18,6 +19,7 @@ public class BuildingDisplay : MonoBehaviour {
 	void Start() {
 		initialShader = renderer.material.shader;
 		initialColor = renderer.material.color;
+		//importantColor = Color(166, 11, 183);
 		
 		litShader = Shader.Find("Self-Illumin/Diffuse");
 		

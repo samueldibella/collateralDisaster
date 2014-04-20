@@ -10,7 +10,7 @@ public class BuildingHealth : MonoBehaviour {
 	public static float totalScore;
 	
 	//building values
-	float monetaryValue; 
+	public int infrastructureValue; 
 	public float health; 
 	
 	//fire stuff
@@ -36,8 +36,8 @@ public class BuildingHealth : MonoBehaviour {
 	void Start () {
 		//building values 
 		health = 100; 
-		monetaryValue = 100; 
-		totalScore += monetaryValue;
+		infrastructureValue = 0; 
+		totalScore += infrastructureValue;
 		
 		//fire stuff 
 		fireStarted = false;
@@ -61,7 +61,7 @@ public class BuildingHealth : MonoBehaviour {
 	void Update () {
 		//building destroy when health = 0 and subtracts score 
 		if(health <= 0) {
-			totalScore -= monetaryValue;
+			Camera.main.GetComponent<Infrastructure>().totalStructure -= infrastructureValue;
 			Destroy(gameObject); 		
 		}
 		

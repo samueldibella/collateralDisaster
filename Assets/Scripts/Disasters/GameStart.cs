@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GameStart : MonoBehaviour {
 
-	public enum Disaster {Flood, Fire, Gas}
+	public enum Disaster {Flood, Fire, Gas, None}
 	
 	//next disaster to appear
 	public static Disaster currentDisaster;
@@ -13,6 +13,9 @@ public class GameStart : MonoBehaviour {
 	
 	public float disasterRate = 20f;
 	
+	Color secondaryColor;
+	Color primaryColor;
+	
 	RaycastHit rayHit;
 	Ray ray;
 	
@@ -20,13 +23,52 @@ public class GameStart : MonoBehaviour {
 	void Start () {
 		Time.timeScale = 0;
 		
-		StartCoroutine( DisasterManager() );
+		secondaryColor = new Color(170, 17, 186);
+		primaryColor = new Color(96, 8, 105);
+		
+		StartCoroutine( Beginning() );
 	}
 	
-	IEnumerator DisasterManager() {
+	IEnumerator Beginning() {
 		bool fireStarted = false;
 		bool floodStarted = false;
+		int secondaryImports = 0;
+		int primaryImports = 0;
 		
+		while(secondaryImports < 5) {
+			if( Input.GetKeyDown(KeyCode.Mouse0)) {
+				
+				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				
+				if(Physics.Raycast(ray, out rayHit) && rayHit.transform.tag == "Building") {
+					rayHit.transform.GetComponent<BuildingHealth>().infrastructureValue = 5;
+					rayHit.transform.GetComponent<BuildingDisplay>().initialColor = Color.cyan;
+					
+					secondaryImports++;
+				}			
+			}
+			
+			yield return 0;
+		}
+		
+		while(primaryImports < 1) {
+			if( Input.GetKeyDown(KeyCode.Mouse0)) {
+				
+				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				
+				if(Physics.Raycast(ray, out rayHit) && rayHit.transform.tag == "Building") {
+					rayHit.transform.GetComponent<BuildingHealth>().infrastructureValue = 10;
+					rayHit.transform.GetComponent<BuildingDisplay>().initialColor = Color.blue;
+					
+					primaryImports++;
+				}			
+			}
+			
+			yield return 0;
+		}
+		
+		
+		//initial disaster placements
 		currentDisaster = Disaster.Fire;
 		while(!fireStarted) {
 			if( Input.GetKeyDown(KeyCode.Mouse0)) {
@@ -60,6 +102,7 @@ public class GameStart : MonoBehaviour {
 			yield return 0;
 		}
 		
+		currentDisaster = Disaster.None;
 		Time.timeScale = 1;
 	}
 }
