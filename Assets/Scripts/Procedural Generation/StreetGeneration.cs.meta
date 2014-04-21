@@ -4,7 +4,9 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - streetMakerPrefab: {instanceID: 0}
-  - streetTile: {instanceID: 0}
+  - streetTilePreFab: {fileID: 400000, guid: 7b8acd31bfc6a4a479b27dcd0e111e6d, type: 2}
+  - streetPlanePreFab: {instanceID: 0}
+  - wallPreFab: {instanceID: 0}
   - builder: {fileID: 11400002, guid: b2e713c6f3c2a456fb95f3c91de6d481, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
