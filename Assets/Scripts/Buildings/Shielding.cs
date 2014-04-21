@@ -27,7 +27,7 @@ public class Shielding : MonoBehaviour {
 				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				
 				if(Physics.Raycast(ray, out hit)) {
-					if(hit.transform.tag = "Building") {
+					if(hit.transform.tag == "Building") {
 						hit.transform.GetComponent<BuildingHealth>().isShielded = true;
 						selected = true;
 						isOn = false;
