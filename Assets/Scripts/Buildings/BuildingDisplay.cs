@@ -19,7 +19,6 @@ public class BuildingDisplay : MonoBehaviour {
 	void Start() {
 		initialShader = renderer.material.shader;
 		initialColor = renderer.material.color;
-		//importantColor = Color(166, 11, 183);
 		
 		litShader = Shader.Find("Self-Illumin/Diffuse");
 		

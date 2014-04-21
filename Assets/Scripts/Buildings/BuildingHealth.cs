@@ -12,6 +12,7 @@ public class BuildingHealth : MonoBehaviour {
 	//building values
 	public int infrastructureValue; 
 	public float health; 
+	public bool isShielded;
 	
 	//fire stuff
 	public bool fireStarted; 
@@ -37,7 +38,7 @@ public class BuildingHealth : MonoBehaviour {
 		//building values 
 		health = 100; 
 		infrastructureValue = 0; 
-		totalScore += infrastructureValue;
+		isShielded = false;
 		
 		//fire stuff 
 		fireStarted = false;
@@ -66,10 +67,12 @@ public class BuildingHealth : MonoBehaviour {
 		}
 		
 		//fire methods  
-		if(fireStarted == true) {
+		if(fireStarted == true && !isShielded) {
 			burning(); 
 			onFire = true; 
 			fireStarted = false; 
+		} else if(isShielded) {
+			fireStarted = false;
 		}
 		
 		//updates health if on fire and spread fire
@@ -113,10 +116,12 @@ public class BuildingHealth : MonoBehaviour {
 		}
 		
 		//water controls
-		if(floodStarted == true){
+		if(floodStarted == true && !isShielded){
 			waterLogged = true; 
 			flooding(); 
 			floodStarted = false;  
+		} else if (isShielded){
+			floodStarted = false;
 		}
 		
 		if(waterLogged == true) {

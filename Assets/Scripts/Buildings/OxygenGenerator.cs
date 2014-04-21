@@ -6,31 +6,35 @@ public class OxygenGenerator : MonoBehaviour {
 	public bool isFunctioning;
 	public bool isOn;
 	
-	//corresponding gas cube
-	GameObject atmosphere;
 
 	// Use this for initialization
 	void Start () {
 		isFunctioning = true;
 		isOn = true;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if(isFunctioning && isOn) {
-			atmosphere.GetComponent<gasQualities>().isOxygenGen = true;
-		}
 		
-		/*if(building health or power generator is down) {
-			isFunctioning = false;
-		}
-		*/
+		StartCoroutine( Generator() );
 	}
 	
-	//need to find a way to call this before update runs
-	void OnTriggerEnter(Collider other) {
-		if(other.tag == "Gas") {
-			atmosphere = other.gameObject;
+	IEnumerator Generator() {
+		while(true) {
+			if(isFunctioning && isOn) {
+				GetComponent<PersonalAtmo>().personalAtmo.GetComponent<gasQualities>().isOxygenGen = true;
+			} else {
+				GetComponent<PersonalAtmo>().personalAtmo.GetComponent<gasQualities>().isOxygenGen = false;
+			}
+			
+			yield return new WaitForSeconds(1);
+		}
+	}
+	
+	//turn generator on or off
+	void OnMouseOver() {
+		if(Input.GetMouseButtonDown(0)) {
+			if(isOn) {
+				isOn = false;
+			} else {
+				isOn = true;
+			}
 		}
 	}
 }

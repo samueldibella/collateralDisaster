@@ -4,16 +4,12 @@ using System.Collections;
 public class PersonalAtmo : MonoBehaviour {
 	//attaches a building to closest gas sector
 	
-	GameObject personalAtmo;
-	
-	public bool oxyGenerator;
+	public GameObject personalAtmo;
 	
 	// Use this for initialization
 	void Start () {
 		personalAtmo = GetClosestSector();
-		oxyGenerator = false;
-		
-		StartCoroutine( Generator() );
+
 	}
 	
 	//compares all sectors to see which is closest
@@ -32,13 +28,5 @@ public class PersonalAtmo : MonoBehaviour {
 		return currentClosest;
 	}
 	
-	IEnumerator Generator() {
-		while(true) {
-			if(oxyGenerator == true) {
-				personalAtmo.GetComponent<gasQualities>().isOxygenGen = true;
-			}
-			
-			yield return new WaitForSeconds(1);
-		}
-	}
+
 }

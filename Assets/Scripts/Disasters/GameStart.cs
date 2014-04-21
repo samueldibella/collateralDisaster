@@ -13,9 +13,6 @@ public class GameStart : MonoBehaviour {
 	
 	public float disasterRate = 20f;
 	
-	Color secondaryColor;
-	Color primaryColor;
-	
 	RaycastHit rayHit;
 	Ray ray;
 	
@@ -23,8 +20,8 @@ public class GameStart : MonoBehaviour {
 	void Start () {
 		Time.timeScale = 0;
 		
-		secondaryColor = new Color(170, 17, 186);
-		primaryColor = new Color(96, 8, 105);
+		//secondaryColor = new Color(170, 17, 186);
+		//primaryColor = new Color(96, 8, 105);
 		
 		StartCoroutine( Beginning() );
 	}
