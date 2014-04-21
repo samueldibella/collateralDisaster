@@ -4,32 +4,42 @@ using System.Collections;
 public class BuildingDisplay : MonoBehaviour {
 //script for building color and appearance, and building tool tip
 
-	Color initialColor;
+	public Color initialColor;
 	
 	//after accounting for fire and water presence
 	Color intermediateColor;
+//	Color importantColor;
 	
 	bool mouseOver = false;
 
+	Shader initialShader;
+	public Shader litShader; 
+
 	// Use this for initialization
 	void Start() {
-
+		initialShader = renderer.material.shader;
 		initialColor = renderer.material.color;
+		
+		litShader = Shader.Find("Self-Illumin/Diffuse");
 		
 	}
 	
 	void OnMouseOver() {
 		mouseOver = true;
 		
-		if(Time.timeScale == 0 && disasterGeneration.currentDisaster == disasterGeneration.Disaster.Fire) {
+		if(Time.timeScale == 0 && GameStart.currentDisaster == GameStart.Disaster.Fire) {
 			renderer.material.color = Color.red;
-		}		
-		 
+		} else {
+			renderer.material.shader = litShader;
+		}
+
 	}
 	
 	void OnMouseExit() {
 		mouseOver = false;
+		renderer.material.shader = initialShader;
 		renderer.material.color = initialColor;
+		
 		
 	}
 	

@@ -30,7 +30,7 @@ public class FloodStreetMarker : MonoBehaviour {
 	
 		Physics.Raycast(ray, out hit);
 	
-		if(Time.timeScale == 0 && disasterGeneration.currentDisaster == disasterGeneration.Disaster.Flood) {
+		if(Time.timeScale == 0 && GameStart.currentDisaster == GameStart.Disaster.Flood) {
 			waterInstance.transform.position = hit.point;
 		} else if (Time.timeScale == 1 ) {
 			barricadeInstance.transform.position = hit.point;

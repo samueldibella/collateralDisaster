@@ -10,8 +10,9 @@ public class BuildingHealth : MonoBehaviour {
 	public static float totalScore;
 	
 	//building values
-	float monetaryValue; 
+	public int infrastructureValue; 
 	public float health; 
+	public bool isShielded;
 	
 	//fire stuff
 	public bool fireStarted; 
@@ -36,8 +37,8 @@ public class BuildingHealth : MonoBehaviour {
 	void Start () {
 		//building values 
 		health = 100; 
-		monetaryValue = 100; 
-		totalScore += monetaryValue;
+		infrastructureValue = 0; 
+		isShielded = false;
 		
 		//fire stuff 
 		fireStarted = false;
@@ -61,15 +62,17 @@ public class BuildingHealth : MonoBehaviour {
 	void Update () {
 		//building destroy when health = 0 and subtracts score 
 		if(health <= 0) {
-			totalScore -= monetaryValue;
+			Camera.main.GetComponent<Infrastructure>().totalStructure -= infrastructureValue;
 			Destroy(gameObject); 		
 		}
 		
 		//fire methods  
-		if(fireStarted == true) {
+		if(fireStarted == true && !isShielded) {
 			burning(); 
 			onFire = true; 
 			fireStarted = false; 
+		} else if(isShielded) {
+			fireStarted = false;
 		}
 		
 		//updates health if on fire and spread fire
@@ -113,10 +116,12 @@ public class BuildingHealth : MonoBehaviour {
 		}
 		
 		//water controls
-		if(floodStarted == true){
+		if(floodStarted == true && !isShielded){
 			waterLogged = true; 
 			flooding(); 
 			floodStarted = false;  
+		} else if (isShielded){
+			floodStarted = false;
 		}
 		
 		if(waterLogged == true) {
