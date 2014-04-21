@@ -11,49 +11,45 @@ public class BoxSpread : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		dimensions = gameObject.GetComponent<BoxCollider> ().bounds;
+		dimensions = gameObject.GetComponent<BoxCollider>().bounds;
 		lastSpread = Time.time;
 	
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (Time.time > lastSpread + spreadDelay && gen<genMax) {
+		if (Time.time > lastSpread + spreadDelay && gen < genMax) {
 
 			lastSpread = Time.time;
 			switch(Random.Range(0,4)){
 				case 0:{
-				if(Physics.OverlapSphere(transform.position + new Vector3(dimensions.size.x,0,0),0.01f).Length == 0) {
-						newCube = Instantiate(gameObject,transform.position + new Vector3(dimensions.size.x,0,0), Quaternion.identity) as GameObject;
-						MasterArray.cityArray[(int)(transform.position.x + dimensions.size.x), (int)transform.position.z] = 6;
-				    }
+				if(Physics.OverlapSphere(transform.position + new Vector3(dimensions.size.x,0,0),0.01f).Length == 0)
+						newCube = Instantiate(gameObject, transform.position + new Vector3(dimensions.size.x,0,0), Quaternion.identity) as GameObject;
 					break;
 				}
+				
 				case 1:{
-				if(Physics.OverlapSphere(transform.position - new Vector3(dimensions.size.x,0,0),0.01f).Length == 0) {
-						newCube = Instantiate(gameObject,transform.position - new Vector3(dimensions.size.x,0,0), Quaternion.identity) as GameObject;
-						MasterArray.cityArray[(int)(transform.position.x - dimensions.size.x), (int)transform.position.z] = 6;
-						}
+				if(Physics.OverlapSphere(transform.position - new Vector3(dimensions.size.x,0,0),0.01f).Length == 0)
+						newCube = Instantiate(gameObject, transform.position - new Vector3(dimensions.size.x,0,0), Quaternion.identity) as GameObject;
 					break;
 				}
+				
 				case 2:{
-				if(Physics.OverlapSphere(transform.position + new Vector3(0,0,dimensions.size.z),0.01f).Length == 0) {
-						newCube = Instantiate(gameObject,transform.position + new Vector3(0,0,dimensions.size.z), Quaternion.identity) as GameObject;
-						MasterArray.cityArray[(int)transform.position.x, (int)(transform.position.z + dimensions.size.z)] = 6;
-						}
+				if(Physics.OverlapSphere(transform.position + new Vector3(0,0,dimensions.size.z),0.01f).Length == 0)
+						newCube = Instantiate(gameObject, transform.position + new Vector3(0,0,dimensions.size.z), Quaternion.identity) as GameObject;
 					break;
 				}
+				
 				case 3:{
-				if(Physics.OverlapSphere(transform.position - new Vector3(0,0,dimensions.size.z),0.01f).Length == 0) {
-						newCube = Instantiate(gameObject,transform.position - new Vector3(0,0,dimensions.size.z), Quaternion.identity) as GameObject;
-						MasterArray.cityArray[(int)transform.position.x, (int)(transform.position.z - dimensions.size.z)] = 6;
-						}
+				if(Physics.OverlapSphere(transform.position - new Vector3(0,0,dimensions.size.z),0.01f).Length == 0)
+						newCube = Instantiate(gameObject, transform.position - new Vector3(0,0,dimensions.size.z), Quaternion.identity) as GameObject;
 					break;
 				}
 
 			
 			}
-			if (newCube!=null){
+			
+			if (newCube != null){
 				newCube.GetComponent<BoxSpread>().gen = gen+1;
 			}
 			

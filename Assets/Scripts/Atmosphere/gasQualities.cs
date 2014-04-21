@@ -9,8 +9,6 @@ public class gasQualities : MonoBehaviour {
 	public bool isOxygenGen;
 	public bool isButaneGen;
 	
-	public float depleteRate = 3;
-	
 	Color standard = Color.white;
 	public Color butaneFull;// = Color.yellow;
 	public Color oxyFull;// = Color.blue;
@@ -22,8 +20,6 @@ public class gasQualities : MonoBehaviour {
 		
 		isOxygenGen = false;
 		isButaneGen = false;
-		
-		StartCoroutine( Deplete() );
 	}
 	
 	
@@ -38,19 +34,5 @@ public class gasQualities : MonoBehaviour {
 		
 		renderer.material.color = color;
 	}
-	
-	
-	IEnumerator Deplete() {
-		while(true) {
-			if(oxygen > 0.05f) {
-				oxygen -= .05f;
-			}
-			
-			if(butane > 0.05f) {
-				butane -= .05f;
-			}
-			
-			yield return new WaitForSeconds(depleteRate);
-		}
-	}
+
 }
