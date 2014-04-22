@@ -7,15 +7,10 @@ public class ScoreDisplay : MonoBehaviour {
 	//building
 	public GameObject building;
 	
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		score = "";
-		score += BuildingHealth.totalScore;
+		score += Infrastructure.totalStructure;
 		GetComponent<TextMesh>().text = score;
 	}
 }

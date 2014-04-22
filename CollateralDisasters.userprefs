@@ -1,13 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Buildings\Factory.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Buildings\BuildingHealth.cs">
     <Files>
-      <File FileName="Assets\Scripts\Procedural Generation\StreetGeneration.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Procedural Generation\BuildingGenerator2.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Procedural Generation\BuildingConsolidater.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Buildings\OxygenGenerator.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Buildings\PowerGenerator.cs" Line="17" Column="67" />
-      <File FileName="Assets\Scripts\Buildings\Factory.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Buildings\Shielding.cs" Line="25" Column="81" />
+      <File FileName="Assets\Scripts\Buildings\OxygenGenerator.cs" Line="30" Column="28" />
+      <File FileName="Assets\Scripts\Buildings\PowerGenerator.cs" Line="6" Column="28" />
+      <File FileName="Assets\Scripts\Buildings\Factory.cs" Line="12" Column="1" />
+      <File FileName="Assets\Scripts\PlayerControl.cs" Line="11" Column="30" />
+      <File FileName="Assets\Scripts\Buildings\BuildingHealth.cs" Line="101" Column="77" />
+      <File FileName="Assets\Scripts\Buildings\PersonalAtmo.cs" Line="7" Column="33" />
+      <File FileName="Assets\Scripts\Infrastructure.cs" Line="6" Column="16" />
+      <File FileName="Assets\Scripts\HUD\ScoreDisplay.cs" Line="10" Column="36" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

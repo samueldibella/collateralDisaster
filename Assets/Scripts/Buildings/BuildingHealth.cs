@@ -62,7 +62,7 @@ public class BuildingHealth : MonoBehaviour {
 	void Update () {
 		//building destroy when health = 0 and subtracts score 
 		if(health <= 0) {
-			Camera.main.GetComponent<Infrastructure>().totalStructure -= infrastructureValue;
+			Infrastructure.totalStructure -= infrastructureValue;
 			Destroy(gameObject); 		
 		}
 		
@@ -98,7 +98,7 @@ public class BuildingHealth : MonoBehaviour {
 		} 
 		
 		//detects for water
-		Collider[] hitCollidersWater = Physics.OverlapSphere(transform.position, 5f); 
+		Collider[] hitCollidersWater = Physics.OverlapSphere(transform.position, 4f); 
 		int j = 0; 
 		while (j < hitCollidersWater.Length) {
 			if(hitCollidersWater[j].tag.Equals("Water") == true && firstFlood == false ) {	

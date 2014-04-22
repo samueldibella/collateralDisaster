@@ -9,9 +9,5 @@ public class Factory : MonoBehaviour {
 	void Start () {
 		isFunctioning = true;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }
