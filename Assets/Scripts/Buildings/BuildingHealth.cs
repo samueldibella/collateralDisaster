@@ -56,6 +56,10 @@ public class BuildingHealth : MonoBehaviour {
 		
 		//assign buiding key 
 		assignBuildingKey(); 
+		buildingKeyFixer();
+		
+		//Corutines 
+		StartCoroutine("waterCheck"); 
 	}
 	
 	// Update is called once per frame
@@ -213,7 +217,25 @@ public class BuildingHealth : MonoBehaviour {
 			}
 		}
 	}
-	
+	IEnumerator waterCheck() {		
+		Collider[] hitCollidersWater = Physics.OverlapSphere(transform.position, 4f); 
+		int j = 0; 
+		while (j < hitCollidersWater.Length) {
+			if(hitCollidersWater[j].tag.Equals("Water") == true && firstFlood == false ) {	
+				firstFlood = true;
+				floodStarted = true; 	
+			} if(hitCollidersWater[j].tag.Equals("Building") == true && hitCollidersWater[j].GetComponent<BuildingHealth>().waterLogged == true 
+			     && hitCollidersWater[j].GetComponent<BuildingHealth>().waterLoggedPercent >= 30 && firstFlood == false) {
+				firstFlood = true;
+				floodStarted = true;
+			}
+			else {
+				waterLogged = false; 
+			}
+			j++;
+		}
+		yield return new WaitForSeconds(1);	
+	}
 	//water corutine that increase water damage based on water logged percent 
 	IEnumerator waterDamageIncreaser() {		
 		while(true) {
@@ -239,20 +261,18 @@ public class BuildingHealth : MonoBehaviour {
 			buildingKey = keyIncrementer; 
 		}
 	}
-	
-	//not using this now but to optimize I might need to use this so Im keeping it around for now 
-//	IEnumerator fireSpreadIncreaser() {		
-//		print ("df"); 
-//		while(true) {
-//			Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10f); 
-//			int i = 0;
-//			while (i < hitColliders.Length) {
-//				if(hitColliders[i].tag.Equals("Building") == true && hitColliders[i].GetComponent<BuildingHealth>().onFire == false) {
-//					hitColliders[i].GetComponent<BuildingHealth>().fireStarted = true;
-//					i++;
-//				}
-//			}
-//			yield return new WaitForSeconds(1);
-//		}
-//	}
+	void buildingKeyFixer() {
+		Collider[] checkColliders2 = Physics.OverlapSphere(transform.position, 3f);
+		for(int j = 0; j < checkColliders2.Length; j++) {	
+			if(checkColliders2[j].tag.Equals("Building") == true && checkColliders2[j].transform.position != transform.position) {
+				if(checkColliders2[j].GetComponent<BuildingHealth>().buildingKey > buildingKey) {
+					buildingKey = checkColliders2[j].GetComponent<BuildingHealth>().buildingKey; 
+					//buildingKeyHeight = checkColliders2[j].GetComponent<BuildingHealth>().buildingKeyHeight; 
+				} 
+				if(checkColliders2[j].GetComponent<BuildingHealth>().buildingKey < buildingKey) {
+					checkColliders2[j].GetComponent<BuildingHealth>().buildingKeyFixer(); 
+				} 
+			}	
+		}	
+	}
 }

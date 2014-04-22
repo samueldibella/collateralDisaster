@@ -14,7 +14,6 @@ public class StreetGeneration : MonoBehaviour {
 	public static int[,] streetMap = new int[601, 601];
 	//int nothing = 0; 
 	int street = 1; 
-	int wall = 3; 
 	
 	int streetLength = 12; 
 	int streetWidth = 4; 
