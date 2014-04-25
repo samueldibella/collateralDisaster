@@ -60,7 +60,6 @@
      <Compile Include="Assets\Scripts\Disasters\BoxSpread.cs" />
      <Compile Include="Assets\Scripts\Disasters\GameStart.cs" />
      <Compile Include="Assets\Scripts\Disasters\RandomSlide.cs" />
-     <Compile Include="Assets\Scripts\HUD\FloodStreetMarker.cs" />
      <Compile Include="Assets\Scripts\HUD\ScoreDisplay.cs" />
      <Compile Include="Assets\Scripts\HUD\Timer.cs" />
      <Compile Include="Assets\Scripts\HUD\ToolTip.cs" />

@@ -20,6 +20,7 @@ public class GameStart : MonoBehaviour {
 	void Start () {
 		Time.timeScale = 0;
 		
+		currentDisaster = Disaster.None;
 		//secondaryColor = new Color(170, 17, 186);
 		//primaryColor = new Color(96, 8, 105);
 		
