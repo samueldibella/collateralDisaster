@@ -20,8 +20,6 @@ public class BuildingDisplay : MonoBehaviour {
 		initialShader = renderer.material.shader;
 		initialColor = renderer.material.color;
 		
-		litShader = Shader.Find("Self-Illumin/Diffuse");
-		
 	}
 	
 	void OnMouseOver() {
