@@ -21,7 +21,6 @@ public class FloodStreetMarker : MonoBehaviour {
 	void Start () {
 		storageLocation = new Vector3(-200, 0, -200);
 		waterInstance = Instantiate(waterMarker, storageLocation, Quaternion.identity) as GameObject;
-		barricadeInstance = Instantiate(barricadeMarker, storageLocation, Quaternion.identity) as GameObject;
 	}
 	
 	void OnMouseOver() {
@@ -32,13 +31,10 @@ public class FloodStreetMarker : MonoBehaviour {
 	
 		if(Time.timeScale == 0 && GameStart.currentDisaster == GameStart.Disaster.Flood) {
 			waterInstance.transform.position = hit.point;
-		} else if (Time.timeScale == 1 ) {
-			barricadeInstance.transform.position = hit.point;
-		}
+		} 
 	}
 	
 	void OnMouseExit() {
 		waterInstance.transform.position = storageLocation;
-		barricadeInstance.transform.position = storageLocation;
 	}
 }

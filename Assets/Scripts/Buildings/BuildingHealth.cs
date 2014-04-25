@@ -66,7 +66,7 @@ public class BuildingHealth : MonoBehaviour {
 	void Update () {
 		//building destroy when health = 0 and subtracts score 
 		if(health <= 0) {
-			Camera.main.GetComponent<Infrastructure>().totalStructure -= infrastructureValue;
+			Infrastructure.totalStructure -= infrastructureValue;
 			Destroy(gameObject); 		
 		}
 		
@@ -93,7 +93,7 @@ public class BuildingHealth : MonoBehaviour {
 				}
 			}	
 		} else if (onFire == false && fireIncreasing == true) {
-			//if it stopes being on fire it resets fire Intensity and stops the corutines from runnning. 
+			//if it stops being on fire it resets fire Intensity and stops the corutines from runnning. 
 			StopCoroutine("fireIntensityIncreaser"); 
 			StopCoroutine("fireDamageIncreaser"); 
 			StopCoroutine("fireSpread"); 
@@ -217,6 +217,7 @@ public class BuildingHealth : MonoBehaviour {
 			}
 		}
 	}
+	
 	IEnumerator waterCheck() {		
 		Collider[] hitCollidersWater = Physics.OverlapSphere(transform.position, 4f); 
 		int j = 0; 
@@ -234,8 +235,10 @@ public class BuildingHealth : MonoBehaviour {
 			}
 			j++;
 		}
+		
 		yield return new WaitForSeconds(1);	
 	}
+	
 	//water corutine that increase water damage based on water logged percent 
 	IEnumerator waterDamageIncreaser() {		
 		while(true) {
@@ -261,6 +264,7 @@ public class BuildingHealth : MonoBehaviour {
 			buildingKey = keyIncrementer; 
 		}
 	}
+	
 	void buildingKeyFixer() {
 		Collider[] checkColliders2 = Physics.OverlapSphere(transform.position, 3f);
 		for(int j = 0; j < checkColliders2.Length; j++) {	
