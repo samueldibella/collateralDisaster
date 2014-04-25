@@ -10,6 +10,8 @@ public class Barricade : MonoBehaviour {
 	Ray ray;
 	RaycastHit hit;
 	
+	GameObject[] sectors;
+	
 	void Start() {
 		startPosition = transform.position;
 	}
@@ -20,7 +22,7 @@ public class Barricade : MonoBehaviour {
 			ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			
 			if(Physics.Raycast(ray, out hit)) {
-				if(hit.transform.tag == "Gas") {
+				if(hit.transform.tag == "Building" || hit.transform.tag == "Road") {
 					transform.position = new Vector3(hit.transform.position.x, 10f, hit.transform.position.z);
 				} else {
 					transform.position = new Vector3(hit.point.x, 10f, hit.point.z);
@@ -34,7 +36,6 @@ public class Barricade : MonoBehaviour {
 		if(Input.GetMouseButtonUp(0) && isLifted) {
 			transform.GetComponent<Rigidbody>().useGravity = true;
 			isLifted = false;
-			AtmoControl.setIgnoreLayer();
 			
 			//switch from ignore raycast to default layer
 			this.gameObject.layer = 0;
@@ -50,7 +51,6 @@ public class Barricade : MonoBehaviour {
 		if(Input.GetMouseButtonDown(0) && Time.timeScale == 1) {
 			transform.GetComponent<Rigidbody>().useGravity = false;
 			isLifted = true;
-			AtmoControl.setDefaultLayer();
 			
 			//set to ignore raycast layer on barricade
 			this.gameObject.layer = 2;

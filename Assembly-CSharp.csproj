@@ -68,6 +68,8 @@
      <Compile Include="Assets\Scripts\Procedural Generation\BuildingConsolidater.cs" />
      <Compile Include="Assets\Scripts\Procedural Generation\BuildingGenerator2.cs" />
      <Compile Include="Assets\Scripts\Procedural Generation\StreetGeneration.cs" />
+     <Compile Include="Assets\Scripts\Procedural Generation\StreetTiles.cs" />
+     <Compile Include="Assets\Scripts\RoadDisplay.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

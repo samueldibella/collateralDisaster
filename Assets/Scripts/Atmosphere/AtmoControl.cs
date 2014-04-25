@@ -11,7 +11,7 @@ public class AtmoControl : MonoBehaviour {
 	public static int zSize = 30;
 	
 	//scale of cubes, set to match (x / 2)
-	public int scale = 2;
+	public int scale = 4;
 	
 	//array of gasSectors
 	public static GameObject[,] zones; 
@@ -27,7 +27,7 @@ public class AtmoControl : MonoBehaviour {
 	
 		for(int j = 0; j < zSize; j++) {
 			for(int i = 0; i < xSize; i++) {
-				Vector3 generation = new Vector3(transform.position.x + (i * scale * 2), transform.position.y, transform.position.z + (j * scale * 2));
+				Vector3 generation = new Vector3(transform.position.x + (i * scale), transform.position.y, transform.position.z + (j * scale));
 
 				zones[j, i] = Instantiate(gas, generation, Quaternion.identity) as GameObject;
 				zones[j, i].transform.Rotate(new Vector3(90, 0, 0));
@@ -138,25 +138,6 @@ public class AtmoControl : MonoBehaviour {
 				zones[z, x].GetComponent<gasQualities>().newColor();
 			}
 		}
-	}
-	
-	//used for barricade lift
-	public static void setIgnoreLayer() {
-		for(int z = 0; z < zSize; z++) {
-			for(int x = 0; x < xSize; x++) {
-				zones[z, x].layer = 2;
-			}
-		}
-	}
-	
-	public static void setDefaultLayer() {
-		for(int z = 0; z < zSize; z++) {
-			for(int x = 0; x < xSize; x++) {
-				zones[z, x].layer = 0;
-			}
-		}
-		
-		print("call");
 	}
 	
 	//checks if a given coordinate -
