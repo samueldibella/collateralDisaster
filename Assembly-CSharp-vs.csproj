@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Atmosphere\AtmoControl.cs" />
      <Compile Include="Assets\Scripts\Atmosphere\gasQualities.cs" />
+     <Compile Include="Assets\Scripts\Barricade.cs" />
      <Compile Include="Assets\Scripts\Buildings\BuildingDisplay.cs" />
      <Compile Include="Assets\Scripts\Buildings\BuildingHealth.cs" />
      <Compile Include="Assets\Scripts\Buildings\Factory.cs" />
@@ -63,7 +64,6 @@
      <Compile Include="Assets\Scripts\HUD\Timer.cs" />
      <Compile Include="Assets\Scripts\HUD\ToolTip.cs" />
      <Compile Include="Assets\Scripts\Infrastructure.cs" />
-     <Compile Include="Assets\Scripts\PlayerControl.cs" />
      <Compile Include="Assets\Scripts\Procedural Generation\BuildingConsolidater.cs" />
      <Compile Include="Assets\Scripts\Procedural Generation\BuildingGenerator2.cs" />
      <Compile Include="Assets\Scripts\Procedural Generation\StreetGeneration.cs" />
