@@ -7,6 +7,7 @@ public class BoxSpread : MonoBehaviour {
 	private GameObject newCube = null;
 	private int cubesMade=0;
 	private GameObject[] childCubes;
+	private float startTime;
 	public int spreadDelay;
 	public int gen;
 	public int genMax;
@@ -19,30 +20,37 @@ public class BoxSpread : MonoBehaviour {
 	void Start () {
 		dimensions = gameObject.GetComponent<BoxCollider>().bounds;
 		lastSpread = Time.time;
+		startTime = Time.time;
 	
 	}
 
 	// Update is called once per frame
 	void Update () {
 		StartCoroutine ("Spread");
+				
+
 
 
 	
 	}
 	IEnumerator Spread(){
-		yield return new WaitForSeconds (Random.Range (0f, 2f));
+		yield return new WaitForSeconds (Random.Range (0f, 4f));
 		while (true) {
-						if (up && down && left && right) {
-								spread = false;
-						}
+							if (Time.time >= startTime+ (genMax/2)) {
+								GameObject.Destroy(this.gameObject);
+							}
+							if (up && down && left && right) {
+									spread = false;
+							}
 		
-						if (gen < genMax && spread) {
-			
+							if (spread) {
+								
+				
 
 								switch (Random.Range (0, 4)) {
 								case 0:
 										{
-												if (Physics.Raycast (transform.position, transform.right, dimensions.size.x) == false)
+												if (!right && Physics.Raycast (transform.position, transform.right, dimensions.size.x) == false)
 														newCube = Instantiate (gameObject, transform.position + new Vector3 (dimensions.size.x, 0, 0), Quaternion.identity) as GameObject;
 												else
 														right = true;
@@ -51,7 +59,7 @@ public class BoxSpread : MonoBehaviour {
 				
 								case 1:
 										{
-												if (Physics.Raycast (transform.position, transform.right * -1, dimensions.size.x) == false)
+												if (!left && Physics.Raycast (transform.position, transform.right * -1, dimensions.size.x) == false)
 														newCube = Instantiate (gameObject, transform.position - new Vector3 (dimensions.size.x, 0, 0), Quaternion.identity) as GameObject;
 												else
 														left = true;
@@ -60,7 +68,7 @@ public class BoxSpread : MonoBehaviour {
 				
 								case 2:
 										{
-												if (Physics.Raycast (transform.position, transform.forward, dimensions.size.x) == false)
+												if (!up && Physics.Raycast (transform.position, transform.forward, dimensions.size.x) == false)
 														newCube = Instantiate (gameObject, transform.position + new Vector3 (0, 0, dimensions.size.z), Quaternion.identity) as GameObject;
 												else
 														up = true;
@@ -68,8 +76,8 @@ public class BoxSpread : MonoBehaviour {
 										}
 				
 								case 3:
-										{
-												if (Physics.Raycast (transform.position, transform.forward * -1, dimensions.size.x) == false)
+										{		
+												if (!down && Physics.Raycast (transform.position, transform.forward * -1, dimensions.size.x) == false)
 														newCube = Instantiate (gameObject, transform.position - new Vector3 (0, 0, dimensions.size.z), Quaternion.identity) as GameObject;
 												else
 														down = true;
@@ -84,7 +92,7 @@ public class BoxSpread : MonoBehaviour {
 								}
 			
 						}
-						yield return new WaitForSeconds (0.5f);
+						yield return new WaitForSeconds (2f);
 				}
 		
 	}
