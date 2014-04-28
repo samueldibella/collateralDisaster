@@ -23,7 +23,7 @@ public class Barricade : MonoBehaviour {
 			
 			if(Physics.Raycast(ray, out hit)) {
 				if(hit.transform.tag == "Building" || hit.transform.tag == "Road") {
-					transform.position = new Vector3(hit.transform.position.x, 5f, hit.transform.position.z);
+					transform.position = new Vector3(hit.transform.position.x, 4f, hit.transform.position.z);
 				} else {
 					transform.position = new Vector3(hit.point.x, 5f, hit.point.z);
 				}

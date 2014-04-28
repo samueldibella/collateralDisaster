@@ -20,6 +20,8 @@ public class BuildingDisplay : MonoBehaviour {
 		initialShader = renderer.material.shader;
 		initialColor = renderer.material.color;
 		
+		StartCoroutine( ColorUpdate() );
+		
 	}
 	
 	void OnMouseOver() {
@@ -41,11 +43,17 @@ public class BuildingDisplay : MonoBehaviour {
 		
 	}
 	
-	void Update() {
-		if(!mouseOver) {
-			intermediateColor = Color.Lerp(initialColor, Color.red, this.gameObject.GetComponent<BuildingHealth>().fireIntensity / 100);
-			renderer.material.color = Color.Lerp(intermediateColor, Color.grey, (100 - this.gameObject.GetComponent<BuildingHealth>().health) / 100);
+	
+	IEnumerator ColorUpdate() {
+		while(true) {
+			if(!mouseOver) {
+				intermediateColor = Color.Lerp(initialColor, Color.red, this.gameObject.GetComponent<BuildingHealth>().fireIntensity / 100);
+				renderer.material.color = Color.Lerp(intermediateColor, Color.grey, (100 - this.gameObject.GetComponent<BuildingHealth>().health) / 100);
+			}
+			
+			yield return new WaitForSeconds(1);
 		}
+
 	}
 	
 	//information for tool tip

@@ -65,24 +65,6 @@ public class GameStart : MonoBehaviour {
 			yield return 0;
 		}
 		
-		currentDisaster = Disaster.Flood;
-		while(!floodStarted) {
-			if( Input.GetKeyDown(KeyCode.Mouse0)) {
-				
-				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-				
-				if(Physics.Raycast(ray, out rayHit) && rayHit.transform.tag == "Road") {
-					Vector3 location = rayHit.point;
-					location.y += .5f;
-					
-					Instantiate(floodMaker, location, Quaternion.identity);
-					floodStarted = true;			
-				}
-			}
-			
-			yield return 0;
-		}
-		
 		currentDisaster = Disaster.None;
 		Time.timeScale = 1;
 	}
