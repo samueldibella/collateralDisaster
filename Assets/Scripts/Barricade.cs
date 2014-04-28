@@ -41,7 +41,7 @@ public class Barricade : MonoBehaviour {
 			this.gameObject.layer = 0;
 		}
 		
-		if(GetComponent<BuildingHealth>().health <= 0) {
+		if(GetComponent<BarricadeHealth>().health <= 0) {
 			GameObject.FindGameObjectWithTag("Factory").GetComponent<Factory>().BarricadeRefill(startPosition);
 			Destroy(this.gameObject);
 		}

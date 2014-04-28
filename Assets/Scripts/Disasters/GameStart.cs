@@ -33,22 +33,6 @@ public class GameStart : MonoBehaviour {
 		int secondaryImports = 0;
 		//int primaryImports = 0;
 		
-		while(secondaryImports < 1) {
-			if( Input.GetKeyDown(KeyCode.Mouse0)) {
-				
-				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-				
-				if(Physics.Raycast(ray, out rayHit) && rayHit.transform.tag == "Building") {
-					rayHit.transform.GetComponent<BuildingHealth>().infrastructureValue = 5;
-					rayHit.transform.GetComponent<BuildingDisplay>().initialColor = Color.cyan;
-					
-					secondaryImports++;
-				}			
-			}
-			
-			yield return 0;
-		}
-		
 		//initial disaster placements
 		currentDisaster = Disaster.Fire;
 		while(!fireStarted) {

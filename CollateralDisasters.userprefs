@@ -3,13 +3,13 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Buildings\BuildingDisplay.cs">
     <Files>
       <File FileName="Assets\Scripts\Barricade.cs" Line="26" Column="66" />
-      <File FileName="Assets\Scripts\Buildings\BuildingHealth.cs" Line="259" Column="2" />
+      <File FileName="Assets\Scripts\Buildings\BuildingHealth.cs" Line="61" Column="34" />
       <File FileName="Assets\Scripts\Atmosphere\gasQualities.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Buildings\PersonalAtmo.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Disasters\GameStart.cs" Line="66" Column="4" />
-      <File FileName="Assets\Scripts\Buildings\BuildingDisplay.cs" Line="54" Column="39" />
-      <File FileName="Assets\Scripts\BarricadeDisplay.cs" Line="27" Column="3" />
-      <File FileName="Assets\Scripts\HUD\ToolTip.cs" Line="16" Column="1" />
+      <File FileName="Assets\Scripts\Disasters\GameStart.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Buildings\BuildingDisplay.cs" Line="51" Column="66" />
+      <File FileName="Assets\Scripts\BarricadeDisplay.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\HUD\ToolTip.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

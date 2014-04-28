@@ -45,11 +45,22 @@ public class BuildingDisplay : MonoBehaviour {
 	
 	
 	IEnumerator ColorUpdate() {
+		if(GetComponent<BuildingHealth>().buildingKey == BuildingHealth.keyBuilding1 || 
+		   GetComponent<BuildingHealth>().buildingKey == BuildingHealth.keyBuilding2 || 
+		   GetComponent<BuildingHealth>().buildingKey == BuildingHealth.keyBuilding3 || 
+		   GetComponent<BuildingHealth>().buildingKey == BuildingHealth.keyBuilding4) {
+				initialColor = Color.cyan;
+				GetComponent<BuildingHealth>().infrastructureValue = 10; 
+		}
+		
 		while(true) {
 			if(!mouseOver) {
 				intermediateColor = Color.Lerp(initialColor, Color.red, this.gameObject.GetComponent<BuildingHealth>().fireIntensity / 100);
 				renderer.material.color = Color.Lerp(intermediateColor, Color.grey, (100 - this.gameObject.GetComponent<BuildingHealth>().health) / 100);
 			}
+			
+			//key buildings 
+			
 			
 			yield return new WaitForSeconds(1);
 		}

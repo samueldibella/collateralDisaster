@@ -21,13 +21,6 @@ public class BuildingHealth : MonoBehaviour {
 	public float fireDamage; 
 	public float fireRate;
 	
-	//water stuff
-	public bool firstFlood; 
-	public bool floodStarted; 
-	public bool waterLogged; 
-	public float waterLoggedPercent; 
-	public float waterDamage; 
-	
 	//bounds  
 	int middleBoundX; 
 	
@@ -50,15 +43,15 @@ public class BuildingHealth : MonoBehaviour {
 	public static int quadIterator3; 
 	public static int quadIterator4; 
 	
-	static bool keyBuilding1Selected = false; 
-	static bool keyBuilding2Selected = false;
-	static bool keyBuilding3Selected = false;
-	static bool keyBuilding4Selected = false; 
+	public static bool keyBuilding1Selected = false; 
+	public static bool keyBuilding2Selected = false;
+	public static bool keyBuilding3Selected = false;
+	public static bool keyBuilding4Selected = false; 
 	
-	static int keyBuilding1; 
-	static int keyBuilding2;
-	static int keyBuilding3; 
-	static int keyBuilding4; 
+	public static int keyBuilding1; 
+	public static int keyBuilding2;
+	public static int keyBuilding3; 
+	public static int keyBuilding4; 
 	
 	void Awake() {
 		
@@ -106,10 +99,6 @@ public class BuildingHealth : MonoBehaviour {
 		fireIntensity = 0; 
 		fireDamage = 0; 
 		fireRate = 1;
-
-		//assign buiding key 
-		assignBuildingKey(); 
-		buildingKeyFixer();
 		
 		if(keyBuilding1Selected == false) {  
 			keyBuilding1 = quad1Array[Random.Range(0, quadIterator1+1)].GetComponent<BuildingHealth>().buildingKey; 
@@ -127,18 +116,12 @@ public class BuildingHealth : MonoBehaviour {
 			keyBuilding4 = quad4Array[Random.Range(0, quadIterator4+1)].GetComponent<BuildingHealth>().buildingKey; 
 			keyBuilding4Selected = true; 
 		}
-		
-		//Corutines 
-		//StartCoroutine("waterCheck"); 
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//key buildings 
-		if(buildingKey == keyBuilding1 || buildingKey == keyBuilding2 || buildingKey == keyBuilding3 || buildingKey == keyBuilding4) {
-			GetComponent<BuildingDisplay>().initialColor = Color.cyan;
-			infrastructureValue = 10; 
-		}
+
 		//building destroy when health = 0 and subtracts score 
 		if(health <= 0) {
 			Infrastructure.totalStructure -= infrastructureValue;
@@ -180,13 +163,12 @@ public class BuildingHealth : MonoBehaviour {
 						fireSpread = true;
 					}
 					
-					if(hitColliders[i].tag == "Barricade" && hitColliders[i].GetComponent<BuildingHealth>().onFire == false) {
-						hitColliders[i].GetComponent<BuildingHealth>().fireStarted = true;
+					if(hitColliders[i].tag == "Barricade" && hitColliders[i].GetComponent<BarricadeHealth>().onFire == false) {
+						hitColliders[i].GetComponent<BarricadeHealth>().fireStarted = true;
 						fireSpread = true;
 					}
 				}	
-				
-							
+						
 				if(!fireSpread) {
 					for(int i = 0; i < hitColliders.Length; i++) {
 						//special case for beginning
