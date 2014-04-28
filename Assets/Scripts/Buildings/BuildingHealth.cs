@@ -19,7 +19,7 @@ public class BuildingHealth : MonoBehaviour {
 	public bool onFire; 
 	public float fireIntensity; 
 	public float fireDamage; 
-	bool fireIncreasing;
+	public float fireRate;
 	
 	//water stuff
 	public bool firstFlood; 
@@ -45,7 +45,7 @@ public class BuildingHealth : MonoBehaviour {
 		onFire = false; 		
 		fireIntensity = 0; 
 		fireDamage = 0; 
-		fireIncreasing = false;
+		fireRate = 1;
 		
 		//water stuff
 		firstFlood = false; 
@@ -71,61 +71,16 @@ public class BuildingHealth : MonoBehaviour {
 		}
 		
 		//fire methods  
-		if(fireStarted == true && !isShielded) {
-			burning(); 
-			onFire = true; 
+		if(fireStarted == true) {
+			StartCoroutine( Fire() );
 			fireStarted = false; 
-		} else if(isShielded) {
-			fireStarted = false;
-		}
-		
-		//updates health if on fire and spread fire
-		if(onFire == true) {
-			//this will spread fire 	
-			if(fireIntensity >= 50) {
-				Collider[] hitColliders = Physics.OverlapSphere(transform.position, 6f); 
-				int i = 0;
-				while (i < hitColliders.Length) {
-					if(hitColliders[i].tag.Equals("Building") == true && hitColliders[i].GetComponent<BuildingHealth>().onFire == false) {
-						hitColliders[i].GetComponent<BuildingHealth>().fireStarted = true;
-					}
-					i++;
-				}
-			}	
-		} else if (onFire == false && fireIncreasing == true) {
-			//if it stops being on fire it resets fire Intensity and stops the corutines from runnning. 
-			StopCoroutine("fireIntensityIncreaser"); 
-			StopCoroutine("fireDamageIncreaser"); 
-			StopCoroutine("fireSpread"); 
-			fireIntensity = 0;
-			fireIncreasing = false;
 		} 
 		
-		//detects for water
-		Collider[] hitCollidersWater = Physics.OverlapSphere(transform.position, 4f); 
-		int j = 0; 
-		while (j < hitCollidersWater.Length) {
-			if(hitCollidersWater[j].tag.Equals("Water") == true && firstFlood == false ) {	
-				firstFlood = true;
-				floodStarted = true; 	
-			} if(hitCollidersWater[j].tag.Equals("Building") == true && hitCollidersWater[j].GetComponent<BuildingHealth>().waterLogged == true 
-			     && hitCollidersWater[j].GetComponent<BuildingHealth>().waterLoggedPercent >= 30 && firstFlood == false) {
-				firstFlood = true;
-				floodStarted = true;
-			}
-			else {
-				//waterLogged = false; 
-			}
-			j++;
-		}
-		
 		//water controls
-		if(floodStarted == true && !isShielded){
+		if(floodStarted == true){
 			waterLogged = true; 
 			flooding(); 
 			floodStarted = false;  
-		} else if (isShielded){
-			floodStarted = false;
 		}
 		
 		if(waterLogged == true) {
@@ -138,28 +93,67 @@ public class BuildingHealth : MonoBehaviour {
 			StopCoroutine("waterIntensityIncreaser"); 
 			StopCoroutine("waterDamageIncreaser"); 
 		}
-		
-		//health update 
-		health = 100 - (waterDamage + fireDamage); 
 	}
 	
 	
 	//methods
 	//burning method controls the rate of burning and fire intensity 
-	void burning() {
-		if(fireIntensity < 100) {
-			StartCoroutine( "fireIntensityIncreaser");
+	IEnumerator Fire() {
+		int maxOxygenIndex;
+		bool fireSpread = false;
+		onFire = true;
+		
+
+		
+		while(onFire) {
+
+			fireIntensity += 5;
+			fireSpread = false;
+			
+			
+			if(fireIntensity > 50) {
+				health -= fireIntensity / 10;
+				Collider[] hitColliders = Physics.OverlapSphere(transform.position, 6f); 
+				maxOxygenIndex = -1;
+				
+				for(int i = 0; i < hitColliders.Length; i++) {
+					if(hitColliders[i].tag == "Building" && hitColliders[i].GetComponent<BuildingHealth>().buildingKey == buildingKey &&
+					   hitColliders[i].GetComponent<BuildingHealth>().onFire == false) {
+						hitColliders[i].GetComponent<BuildingHealth>().fireStarted = true;
+						fireSpread = true;
+					}
+					
+					if(hitColliders[i].tag == "Barricade" && hitColliders[i].GetComponent<BuildingHealth>().onFire == false) {
+						hitColliders[i].GetComponent<BuildingHealth>().fireStarted = true;
+						fireSpread = true;
+					}
+				}	
+				
+							
+				if(!fireSpread) {
+					for(int i = 0; i < hitColliders.Length; i++) {
+						//special case for beginning
+						if(hitColliders[i].tag == "Building") {
+							if(maxOxygenIndex == -1) {
+								maxOxygenIndex = i;
+								
+								//compares to all other buildings found, and must be on fire to count
+							} else if(hitColliders[i].GetComponent<PersonalAtmo>().personalAtmo.GetComponent<gasQualities>().oxygen >= 
+							          hitColliders[maxOxygenIndex].GetComponent<PersonalAtmo>().personalAtmo.GetComponent<gasQualities>().oxygen &&
+							          hitColliders[i].GetComponent<BuildingHealth>().onFire == false) {
+								maxOxygenIndex = i;
+							}
+						}	
+					}
+						
+					if(maxOxygenIndex != -1) {
+						hitColliders[maxOxygenIndex].GetComponent<BuildingHealth>().fireStarted = true;
+					}
+				}		
+			}
+			
+			yield return new WaitForSeconds(fireRate);
 		}
-		
-		if(fireIntensity >= 50) {
-			StartCoroutine("fireSpread"); 
-		}	
-		
-		StartCoroutine( "fireDamageIncreaser" );		
-	}
-	//firespread method 
-	void fireSpread() {
-		StartCoroutine("fireSpread"); 	
 	}
 	
 	//flooding method that conrols the corutines that conrtol flooding 
@@ -172,28 +166,6 @@ public class BuildingHealth : MonoBehaviour {
 	}
 	
 	//Couroutines
-	//coroutine that increase fireintesity until it gets to 100 
-	IEnumerator fireIntensityIncreaser() {		
-		fireIncreasing = true;
-		
-		while(true) {
-			if( fireIntensity >= 100) {
-				yield break; 
-			} else {
-				fireIntensity += 5f; 
-				yield return new WaitForSeconds(1);
-			}
-		}
-	}
-	
-	//coroutine that increase the damage the fire is doing based on the intensity of the fire. 
-	IEnumerator fireDamageIncreaser() {		
-		
-		while(true) {
-			fireDamage += (.05f * fireIntensity); 
-			yield return new WaitForSeconds(1);
-		}
-	}
 	
 	//water logged percent increase 
 	IEnumerator waterIntensityIncreaser() {		
@@ -233,6 +205,7 @@ public class BuildingHealth : MonoBehaviour {
 			else {
 				waterLogged = false; 
 			}
+			
 			j++;
 		}
 		
@@ -249,7 +222,7 @@ public class BuildingHealth : MonoBehaviour {
 	 
 	//This script determines which building tiles make up one building 
 	//this is determined at start and will be denoted at by a building key 
-	//some building keys will be reserved for unique building e.g hosptial = 100
+	//some building keys will be reserved for unique building e.g hospital = 100
 	void assignBuildingKey() {
 		Vector3 check = new Vector3 (2,0,2);	
 		Collider[] checkColliders = Physics.OverlapSphere(transform.position - check, 2f);
@@ -259,6 +232,7 @@ public class BuildingHealth : MonoBehaviour {
 				gotKey = true; 
 			}
 		}  
+		
 		if(gotKey == false){
 			keyIncrementer++; 
 			buildingKey = keyIncrementer; 
@@ -273,6 +247,7 @@ public class BuildingHealth : MonoBehaviour {
 					buildingKey = checkColliders2[j].GetComponent<BuildingHealth>().buildingKey; 
 					//buildingKeyHeight = checkColliders2[j].GetComponent<BuildingHealth>().buildingKeyHeight; 
 				} 
+				
 				if(checkColliders2[j].GetComponent<BuildingHealth>().buildingKey < buildingKey) {
 					checkColliders2[j].GetComponent<BuildingHealth>().buildingKeyFixer(); 
 				} 

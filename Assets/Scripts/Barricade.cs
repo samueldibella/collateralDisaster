@@ -5,7 +5,6 @@ public class Barricade : MonoBehaviour {
 	
 	Vector3 startPosition;
 	bool isLifted = false;
-	public int health = 100;
 	
 	Ray ray;
 	RaycastHit hit;
@@ -14,6 +13,7 @@ public class Barricade : MonoBehaviour {
 	
 	void Start() {
 		startPosition = transform.position;
+		GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 	}
 	
 	void Update() {
@@ -27,7 +27,7 @@ public class Barricade : MonoBehaviour {
 				} else {
 					transform.position = new Vector3(hit.point.x, 5f, hit.point.z);
 				}
-				
+
 			}
 			
 		}
@@ -41,7 +41,7 @@ public class Barricade : MonoBehaviour {
 			this.gameObject.layer = 0;
 		}
 		
-		if(health <= 0) {
+		if(GetComponent<BuildingHealth>().health <= 0) {
 			GameObject.FindGameObjectWithTag("Factory").GetComponent<Factory>().BarricadeRefill(startPosition);
 			Destroy(this.gameObject);
 		}

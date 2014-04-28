@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\Atmosphere\gasQualities.cs" />
      <Compile Include="Assets\Scripts\Barricade.cs" />
      <Compile Include="Assets\Scripts\BarricadeControl.cs" />
+     <Compile Include="Assets\Scripts\BarricadeDisplay.cs" />
      <Compile Include="Assets\Scripts\Buildings\BuildingDisplay.cs" />
      <Compile Include="Assets\Scripts\Buildings\BuildingHealth.cs" />
      <Compile Include="Assets\Scripts\Buildings\Factory.cs" />
