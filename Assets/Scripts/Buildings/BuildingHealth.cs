@@ -116,7 +116,8 @@ public class BuildingHealth : MonoBehaviour {
 			keyBuilding4 = quad4Array[Random.Range(0, quadIterator4+1)].GetComponent<BuildingHealth>().buildingKey; 
 			keyBuilding4Selected = true; 
 		}
-
+		
+		StartCoroutine( Oxygen() );
 	}
 	
 	// Update is called once per frame
@@ -192,6 +193,14 @@ public class BuildingHealth : MonoBehaviour {
 			}
 			
 			yield return new WaitForSeconds(fireRate);
+		}
+	}
+	
+	IEnumerator Oxygen() {
+		yield return new WaitForSeconds(1);
+	
+		if(buildingKey == keyBuilding1 || buildingKey == keyBuilding2 || buildingKey == keyBuilding3|| buildingKey == keyBuilding4) {
+			GetComponent<PersonalAtmo>().personalAtmo.GetComponent<gasQualities>().isOxygenGen = true;
 		}
 	}
 	
