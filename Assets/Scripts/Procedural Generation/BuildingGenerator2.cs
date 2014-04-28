@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class BuildingGenerator2 : MonoBehaviour {
@@ -10,7 +10,7 @@ public class BuildingGenerator2 : MonoBehaviour {
 	int coordinateXx = 104; 
 	int coordinateZx = 154; 
 	int buildingKeyAlpha; 
-	public static int buildingsBuilt;  
+	public static int buildingsBuilt;  			   
 				   
 	public static GameObject[] buildingArray = new GameObject[1500]; 
 	

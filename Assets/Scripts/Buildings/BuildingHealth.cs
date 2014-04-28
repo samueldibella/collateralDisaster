@@ -28,13 +28,73 @@ public class BuildingHealth : MonoBehaviour {
 	public float waterLoggedPercent; 
 	public float waterDamage; 
 	
+	//bounds  
+	int middleBoundX; 
+	
+	int middleBoundZ;   
+	
+	public int quadrant; 
+	
 	//building key 
 	public static int keyIncrementer;  
 	public int buildingKey; 
 	bool gotKey = false; 
 	
+	public static GameObject[] quad1Array = new GameObject[300]; 
+	public static GameObject[] quad2Array = new GameObject[300];
+	public static GameObject[] quad3Array = new GameObject[300];
+	public static GameObject[] quad4Array = new GameObject[300];
+	
+	public static int quadIterator1; 
+	public static int quadIterator2; 
+	public static int quadIterator3; 
+	public static int quadIterator4; 
+	
+	static bool keyBuilding1Selected = false; 
+	static bool keyBuilding2Selected = false;
+	static bool keyBuilding3Selected = false;
+	static bool keyBuilding4Selected = false; 
+	
+	static int keyBuilding1; 
+	static int keyBuilding2;
+	static int keyBuilding3; 
+	static int keyBuilding4; 
+	
+	void Awake() {
+		
+		middleBoundX = 218; 
+		
+		middleBoundZ = 208; 
+		
+		//assign buiding key 
+		assignBuildingKey(); 
+		buildingKeyFixer();	
+		
+		//make 4 arrays of each quadrant
+		quadrant = getQuadrant((int)transform.position.x, (int)transform.position.z); 	
+		if(quadrant == 1) {
+			quad1Array[quadIterator1] = gameObject; 
+			quadIterator1++; 
+		} 
+		if(quadrant == 2) {
+			quad2Array[quadIterator2] = gameObject; 
+			quadIterator2++; 
+		} 
+		if(quadrant == 3) {
+			quad3Array[quadIterator3] = gameObject; 
+			quadIterator3++; 
+		} 
+		if(quadrant == 4) {
+			quad4Array[quadIterator4] = gameObject; 
+			quadIterator4++; 
+		} 			
+	}
+	
 	// Use this for initialization
 	void Start () {
+	
+		buildingKeyFixer();
+		
 		//building values 
 		health = 100; 
 		infrastructureValue = 0; 
@@ -50,11 +110,18 @@ public class BuildingHealth : MonoBehaviour {
 		//assign buiding key 
 		assignBuildingKey(); 
 		buildingKeyFixer();
-
+		
+		//Corutines 
+		//StartCoroutine("waterCheck"); 
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		//key buildings 
+		if(buildingKey == keyBuilding1 || buildingKey == keyBuilding2 || buildingKey == keyBuilding3 || buildingKey == keyBuilding4) {
+			GetComponent<BuildingDisplay>().initialColor = Color.cyan;
+			infrastructureValue = 10; 
+		}
 		//building destroy when health = 0 and subtracts score 
 		if(health <= 0) {
 			Infrastructure.totalStructure -= infrastructureValue;
@@ -162,5 +229,20 @@ public class BuildingHealth : MonoBehaviour {
 				} 
 			}	
 		}	
+	}
+	int getQuadrant(int x, int z) {
+		if( x < middleBoundX && z > middleBoundZ) {
+			return 1; 
+		}
+		if( x > middleBoundX && z > middleBoundZ) {
+			return 2;
+		}
+		if( x < middleBoundX && z < middleBoundZ) {
+			return 3;
+		}
+		if( x > middleBoundX && z < middleBoundZ) {
+			return 4;
+		}	
+		return 0; 
 	}
 }
