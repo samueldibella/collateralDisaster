@@ -21,13 +21,6 @@ public class BuildingHealth : MonoBehaviour {
 	public float fireDamage; 
 	public float fireRate;
 	
-	//water stuff
-	public bool firstFlood; 
-	public bool floodStarted; 
-	public bool waterLogged; 
-	public float waterLoggedPercent; 
-	public float waterDamage; 
-	
 	//bounds  
 	int middleBoundX; 
 	
@@ -50,15 +43,15 @@ public class BuildingHealth : MonoBehaviour {
 	public static int quadIterator3; 
 	public static int quadIterator4; 
 	
-	static bool keyBuilding1Selected = false; 
-	static bool keyBuilding2Selected = false;
-	static bool keyBuilding3Selected = false;
-	static bool keyBuilding4Selected = false; 
+	public static bool keyBuilding1Selected = false; 
+	public static bool keyBuilding2Selected = false;
+	public static bool keyBuilding3Selected = false;
+	public static bool keyBuilding4Selected = false; 
 	
-	static int keyBuilding1; 
-	static int keyBuilding2;
-	static int keyBuilding3; 
-	static int keyBuilding4; 
+	public static int keyBuilding1; 
+	public static int keyBuilding2;
+	public static int keyBuilding3; 
+	public static int keyBuilding4; 
 	
 	void Awake() {
 		
@@ -107,13 +100,6 @@ public class BuildingHealth : MonoBehaviour {
 		fireDamage = 0; 
 		fireRate = 1;
 		
-		//water stuff
-		firstFlood = false; 
-		floodStarted = false; 
-		waterLogged = false; 
-		waterLoggedPercent = 0; 
-		waterDamage = 0; 
-		
 		if(keyBuilding1Selected == false) {  
 			keyBuilding1 = quad1Array[Random.Range(0, quadIterator1+1)].GetComponent<BuildingHealth>().buildingKey; 
 			keyBuilding1Selected = true; 
@@ -130,18 +116,12 @@ public class BuildingHealth : MonoBehaviour {
 			keyBuilding4 = quad4Array[Random.Range(0, quadIterator4+1)].GetComponent<BuildingHealth>().buildingKey; 
 			keyBuilding4Selected = true; 
 		}
-		
-		//Corutines 
-		StartCoroutine("waterCheck"); 
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//key buildings 
-		if(buildingKey == keyBuilding1 || buildingKey == keyBuilding2 || buildingKey == keyBuilding3 || buildingKey == keyBuilding4) {
-			GetComponent<BuildingDisplay>().initialColor = Color.cyan;
-			infrastructureValue = 10; 
-		}
+
 		//building destroy when health = 0 and subtracts score 
 		if(health <= 0) {
 			Infrastructure.totalStructure -= infrastructureValue;
@@ -153,24 +133,6 @@ public class BuildingHealth : MonoBehaviour {
 			StartCoroutine( Fire() );
 			fireStarted = false; 
 		} 
-		
-		//water controls
-		if(floodStarted == true){
-			waterLogged = true; 
-			flooding(); 
-			floodStarted = false;  
-		}
-		
-		if(waterLogged == true) {
-			//will put our fires if water logged
-			if(waterLoggedPercent >= 30) {
-				onFire = false;
-			}
-		} else if(waterLoggedPercent > 0 && waterLogged == false) {
-			StartCoroutine("waterIntensityDecreaser"); 
-			StopCoroutine("waterIntensityIncreaser"); 
-			StopCoroutine("waterDamageIncreaser"); 
-		}
 	}
 	
 	
@@ -201,13 +163,12 @@ public class BuildingHealth : MonoBehaviour {
 						fireSpread = true;
 					}
 					
-					if(hitColliders[i].tag == "Barricade" && hitColliders[i].GetComponent<BuildingHealth>().onFire == false) {
-						hitColliders[i].GetComponent<BuildingHealth>().fireStarted = true;
+					if(hitColliders[i].tag == "Barricade" && hitColliders[i].GetComponent<BarricadeHealth>().onFire == false) {
+						hitColliders[i].GetComponent<BarricadeHealth>().fireStarted = true;
 						fireSpread = true;
 					}
 				}	
-				
-							
+						
 				if(!fireSpread) {
 					for(int i = 0; i < hitColliders.Length; i++) {
 						//special case for beginning
@@ -234,70 +195,6 @@ public class BuildingHealth : MonoBehaviour {
 		}
 	}
 	
-	//flooding method that conrols the corutines that conrtol flooding 
-	void flooding(){
-		if(waterLoggedPercent < 100) {
-			StartCoroutine( "waterIntensityIncreaser");
-		}
-			
-		StartCoroutine( "waterDamageIncreaser" );		
-	}
-	
-	//Couroutines
-	
-	//water logged percent increase 
-	IEnumerator waterIntensityIncreaser() {		
-		while(true) {
-			if( waterLoggedPercent >= 100) {
-				yield break; 
-			} else {
-				waterLoggedPercent += 5f; 
-				yield return new WaitForSeconds(1);
-			}
-		}
-	}
-	
-	IEnumerator waterIntensityDecreaser() {		
-		while(true) {
-			if( waterLoggedPercent <= 0) {
-				yield break; 
-			} else {
-				waterLoggedPercent -= 5f; 
-				yield return new WaitForSeconds(1);
-			}
-		}
-	}
-	
-	IEnumerator waterCheck() {		
-		Collider[] hitCollidersWater = Physics.OverlapSphere(transform.position, 4f); 
-		int j = 0; 
-		while (j < hitCollidersWater.Length) {
-			if(hitCollidersWater[j].tag.Equals("Water") == true && firstFlood == false ) {	
-				firstFlood = true;
-				floodStarted = true; 	
-			} if(hitCollidersWater[j].tag.Equals("Building") == true && hitCollidersWater[j].GetComponent<BuildingHealth>().waterLogged == true 
-			     && hitCollidersWater[j].GetComponent<BuildingHealth>().waterLoggedPercent >= 30 && firstFlood == false) {
-				firstFlood = true;
-				floodStarted = true;
-			}
-			else {
-				waterLogged = false; 
-			}
-			
-			j++;
-		}
-		
-		yield return new WaitForSeconds(1);	
-	}
-	
-	//water corutine that increase water damage based on water logged percent 
-	IEnumerator waterDamageIncreaser() {		
-		while(true) {
-			waterDamage +=  (.05f * waterLoggedPercent);
-			yield return new WaitForSeconds(1);
-		}
-	}
-	 
 	//This script determines which building tiles make up one building 
 	//this is determined at start and will be denoted at by a building key 
 	//some building keys will be reserved for unique building e.g hospital = 100

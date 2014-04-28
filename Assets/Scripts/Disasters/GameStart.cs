@@ -33,22 +33,6 @@ public class GameStart : MonoBehaviour {
 		int secondaryImports = 0;
 		//int primaryImports = 0;
 		
-		while(secondaryImports < 1) {
-			if( Input.GetKeyDown(KeyCode.Mouse0)) {
-				
-				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-				
-				if(Physics.Raycast(ray, out rayHit) && rayHit.transform.tag == "Building") {
-					rayHit.transform.GetComponent<BuildingHealth>().infrastructureValue = 5;
-					rayHit.transform.GetComponent<BuildingDisplay>().initialColor = Color.cyan;
-					
-					secondaryImports++;
-				}			
-			}
-			
-			yield return 0;
-		}
-		
 		//initial disaster placements
 		currentDisaster = Disaster.Fire;
 		while(!fireStarted) {
@@ -60,24 +44,6 @@ public class GameStart : MonoBehaviour {
 					rayHit.transform.GetComponent<BuildingHealth>().fireStarted = true;
 					fireStarted = true;
 				}			
-			}
-			
-			yield return 0;
-		}
-		
-		currentDisaster = Disaster.Flood;
-		while(!floodStarted) {
-			if( Input.GetKeyDown(KeyCode.Mouse0)) {
-				
-				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-				
-				if(Physics.Raycast(ray, out rayHit) && rayHit.transform.tag == "Road") {
-					Vector3 location = rayHit.point;
-					location.y += .5f;
-					
-					Instantiate(floodMaker, location, Quaternion.identity);
-					floodStarted = true;			
-				}
 			}
 			
 			yield return 0;

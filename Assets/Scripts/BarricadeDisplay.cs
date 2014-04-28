@@ -38,22 +38,8 @@ public class BarricadeDisplay : MonoBehaviour {
 	
 	void Update() {
 		if(!mouseOver) {
-			intermediateColor = Color.Lerp(initialColor, Color.red, this.gameObject.GetComponent<BuildingHealth>().fireIntensity / 100);
-			renderer.material.color = Color.Lerp(intermediateColor, Color.grey, (100 - this.gameObject.GetComponent<BuildingHealth>().health) / 100);
+			intermediateColor = Color.Lerp(initialColor, Color.red, this.gameObject.GetComponent<BarricadeHealth>().fireIntensity / 100);
+			renderer.material.color = Color.Lerp(intermediateColor, Color.grey, (100 - this.gameObject.GetComponent<BarricadeHealth>().health) / 100);
 		}
-	}
-	
-	//information for tool tip
-	public string Info() {
-		
-		string output = "";
-		//health, fire, 
-		output += "Health: " + this.gameObject.GetComponent<BuildingHealth>().health;
-		
-		if(this.gameObject.GetComponent<BuildingHealth>().onFire) {
-			output += "\nFire Intensity: " + this.gameObject.GetComponent<BuildingHealth>().fireIntensity;
-		}
-		
-		return output;
 	}
 }
