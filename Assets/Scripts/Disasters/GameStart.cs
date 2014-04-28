@@ -32,6 +32,26 @@ public class GameStart : MonoBehaviour {
 		bool floodStarted = false;
 		int secondaryImports = 0;
 		//int primaryImports = 0;
+		currentDisaster = Disaster.Fire;
+		
+		/*
+		currentDisaster = Disaster.Flood;
+		while(!floodStarted) {
+			if( Input.GetKeyDown(KeyCode.Mouse0)) {
+				
+				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				
+				if(Physics.Raycast(ray, out rayHit) && rayHit.transform.tag == "Road") {
+					Vector3 location = rayHit.transform.position;
+					location.y += 2;
+					
+					Instantiate(floodMaker, location, Quaternion.identity);
+					floodStarted = true;			
+				}
+			}
+			
+			yield return 0;
+		}*/
 		
 		//initial disaster placements
 		currentDisaster = Disaster.Fire;

@@ -43,7 +43,6 @@ public class BuildingDisplay : MonoBehaviour {
 		
 	}
 	
-	
 	IEnumerator ColorUpdate() {
 		if(GetComponent<BuildingHealth>().buildingKey == BuildingHealth.keyBuilding1 || 
 		   GetComponent<BuildingHealth>().buildingKey == BuildingHealth.keyBuilding2 || 

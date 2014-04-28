@@ -1,14 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Buildings\BuildingDisplay.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Disasters\GameStart.cs">
     <Files>
-      <File FileName="Assets\Scripts\Barricade.cs" Line="26" Column="66" />
-      <File FileName="Assets\Scripts\Buildings\BuildingHealth.cs" Line="61" Column="34" />
+      <File FileName="Assets\Scripts\Barricade.cs" Line="44" Column="34" />
+      <File FileName="Assets\Scripts\Buildings\BuildingHealth.cs" Line="137" Column="5" />
       <File FileName="Assets\Scripts\Atmosphere\gasQualities.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Buildings\PersonalAtmo.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Disasters\GameStart.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Buildings\BuildingDisplay.cs" Line="51" Column="66" />
-      <File FileName="Assets\Scripts\BarricadeDisplay.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Buildings\PersonalAtmo.cs" Line="11" Column="37" />
+      <File FileName="Assets\Scripts\Disasters\GameStart.cs" Line="54" Column="6" />
+      <File FileName="Assets\Scripts\Buildings\BuildingDisplay.cs" Line="44" Column="3" />
+      <File FileName="Assets\Scripts\BarricadeDisplay.cs" Line="42" Column="123" />
       <File FileName="Assets\Scripts\HUD\ToolTip.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>

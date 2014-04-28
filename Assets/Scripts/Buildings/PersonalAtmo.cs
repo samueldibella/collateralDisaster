@@ -9,7 +9,6 @@ public class PersonalAtmo : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		personalAtmo = GetClosestSector();
-
 	}
 	
 	//compares all sectors to see which is closest

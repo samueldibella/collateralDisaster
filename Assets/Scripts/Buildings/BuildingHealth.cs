@@ -98,7 +98,7 @@ public class BuildingHealth : MonoBehaviour {
 		onFire = false; 		
 		fireIntensity = 0; 
 		fireDamage = 0; 
-		fireRate = 1;
+		fireRate = 1f;
 		
 		if(keyBuilding1Selected == false) {  
 			keyBuilding1 = quad1Array[Random.Range(0, quadIterator1+1)].GetComponent<BuildingHealth>().buildingKey; 
@@ -129,6 +129,7 @@ public class BuildingHealth : MonoBehaviour {
 			Destroy(gameObject); 		
 		}
 		
+		
 		//fire methods  
 		if(fireStarted == true) {
 			StartCoroutine( Fire() );
@@ -143,16 +144,14 @@ public class BuildingHealth : MonoBehaviour {
 		int maxOxygenIndex;
 		bool fireSpread = false;
 		onFire = true;
-		
 
-		
 		while(onFire) {
 
 			fireIntensity += 5;
 			fireSpread = false;
 			
 			
-			if(fireIntensity > 50) {
+			if(fireIntensity > 30) {
 				health -= fireIntensity / 10;
 				Collider[] hitColliders = Physics.OverlapSphere(transform.position, 6f); 
 				maxOxygenIndex = -1;
@@ -238,6 +237,7 @@ public class BuildingHealth : MonoBehaviour {
 			}	
 		}	
 	}
+	
 	int getQuadrant(int x, int z) {
 		if( x < middleBoundX && z > middleBoundZ) {
 			return 1; 

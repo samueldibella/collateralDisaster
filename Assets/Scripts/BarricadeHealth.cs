@@ -20,6 +20,7 @@ public class BarricadeHealth : MonoBehaviour {
 		fireIntensity = 0;
 	 	fireDamage = 0;
 	 	fireRate = 1;
+
 	}
 	
 	IEnumerator Fire() {
@@ -75,5 +76,8 @@ public class BarricadeHealth : MonoBehaviour {
 			
 			yield return new WaitForSeconds(fireRate);
 		}
+		
+		
+		
 	}
 }
