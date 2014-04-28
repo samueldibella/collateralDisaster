@@ -31,7 +31,7 @@ public class GameStart : MonoBehaviour {
 		bool fireStarted = false;
 		bool floodStarted = false;
 		int secondaryImports = 0;
-		int primaryImports = 0;
+		//int primaryImports = 0;
 		
 		while(secondaryImports < 1) {
 			if( Input.GetKeyDown(KeyCode.Mouse0)) {
