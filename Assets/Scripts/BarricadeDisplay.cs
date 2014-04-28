@@ -1,20 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BuildingDisplay : MonoBehaviour {
-//script for building color and appearance, and building tool tip
-
+public class BarricadeDisplay : MonoBehaviour {
+	//script for building color and appearance, and building tool tip
+	
 	public Color initialColor;
 	
 	//after accounting for fire and water presence
 	Color intermediateColor;
-//	Color importantColor;
+	//	Color importantColor;
 	
 	bool mouseOver = false;
-
+	
 	Shader initialShader;
 	public Shader litShader; 
-
+	
 	// Use this for initialization
 	void Start() {
 		initialShader = renderer.material.shader;
@@ -24,13 +24,8 @@ public class BuildingDisplay : MonoBehaviour {
 	
 	void OnMouseOver() {
 		mouseOver = true;
+		renderer.material.shader = litShader;
 		
-		if(Time.timeScale == 0 && GameStart.currentDisaster == GameStart.Disaster.Fire) {
-			renderer.material.color = Color.red;
-		} else {
-			renderer.material.shader = litShader;
-		}
-
 	}
 	
 	void OnMouseExit() {
@@ -50,7 +45,7 @@ public class BuildingDisplay : MonoBehaviour {
 	
 	//information for tool tip
 	public string Info() {
-	
+		
 		string output = "";
 		//health, fire, 
 		output += "Health: " + this.gameObject.GetComponent<BuildingHealth>().health;

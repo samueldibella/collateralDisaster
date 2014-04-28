@@ -7,11 +7,11 @@ public class AtmoControl : MonoBehaviour {
 	public GameObject gas;
 
 	//size of array
-	public static int xSize = 15;
-	public static int zSize = 8;
+	public static int xSize = 60;
+	public static int zSize = 30;
 	
-	//scale of cubes, set to match
-	public int scale = 8;
+	//scale of cubes, set to match (x / 2)
+	public int scale = 4;
 	
 	//array of gasSectors
 	public static GameObject[,] zones; 
@@ -22,13 +22,12 @@ public class AtmoControl : MonoBehaviour {
 	public float diffusionRate = .12f;
 	public int depleteRate = 5;
 	
-	// Use this for initialization
 	void Start () {
 		zones = new GameObject[zSize, xSize];
 	
 		for(int j = 0; j < zSize; j++) {
 			for(int i = 0; i < xSize; i++) {
-				Vector3 generation = new Vector3(transform.position.x + (i * scale * 2), transform.position.y, transform.position.z + (j * scale * 2));
+				Vector3 generation = new Vector3(transform.position.x + (i * scale), transform.position.y, transform.position.z + (j * scale));
 
 				zones[j, i] = Instantiate(gas, generation, Quaternion.identity) as GameObject;
 				zones[j, i].transform.Rotate(new Vector3(90, 0, 0));
@@ -43,7 +42,6 @@ public class AtmoControl : MonoBehaviour {
 	IEnumerator AtmoSpread() {
 		//to store shifting gas
 		float[,] oDeltaHolder = new float[zSize, xSize];
-		float[,] bDeltaHolder = new float[zSize, xSize];
 		
 		while(true) {
 			
@@ -51,7 +49,6 @@ public class AtmoControl : MonoBehaviour {
 			for(int j = 0; j < zSize; j++) {
 				for(int i = 0; i < xSize; i++) {
 					oDeltaHolder[j, i] = individualDelta(j, i, true);
-					bDeltaHolder[j, i] = individualDelta(j, i, false);
 				}
 			}
 			
@@ -59,13 +56,6 @@ public class AtmoControl : MonoBehaviour {
 				for(int i = 0; i < xSize; i++) {
 					//alter gas levels
 					zones[j, i].GetComponent<gasQualities>().oxygen += oDeltaHolder[j, i];
-					zones[j, i].GetComponent<gasQualities>().butane += bDeltaHolder[j, i];
-					
-					
-					//increases gas in generators
-					if(zones[j, i].GetComponent<gasQualities>().isButaneGen == true) {
-						zones[j, i].GetComponent<gasQualities>().butane += .45f;
-					} 
 					
 					if (zones[j, i].GetComponent<gasQualities>().isOxygenGen == true) {
 						zones[j, i].GetComponent<gasQualities>().oxygen += .45f;
@@ -79,20 +69,28 @@ public class AtmoControl : MonoBehaviour {
 					if (zones[j, i].GetComponent<gasQualities>().oxygen > 1) {
 						zones[j, i].GetComponent<gasQualities>().oxygen = 1;
 					}
-					
-					if(zones[j, i].GetComponent<gasQualities>().butane < 0) {
-						zones[j, i].GetComponent<gasQualities>().butane = 0;
-					} 
-					
-					if (zones[j, i].GetComponent<gasQualities>().butane > 1) {
-						zones[j, i].GetComponent<gasQualities>().butane = 1;
-					}	
 				}
 			}
+			
+			colorUpdate();
 			
 			yield return new WaitForSeconds(iteratorSeconds);
 		}
 		
+	}
+	
+	IEnumerator Deplete() {
+		while(true) {
+			for( int z = 0; z < zSize; z++) {
+				for( int x = 0; x < xSize; x++) {
+					if(zones[z, x].GetComponent<gasQualities>().oxygen > 0.05f) {
+						zones[z, x].GetComponent<gasQualities>().oxygen -= .05f;
+					}			
+				}
+			}
+			
+			yield return new WaitForSeconds(depleteRate);
+		}
 	}
 	
 	//calculates individual cells change in gas level, either oxygen or butane
@@ -100,7 +98,7 @@ public class AtmoControl : MonoBehaviour {
 		float delta = 0;
 		float deltaTemp = 0;
 		
-		float bAmount = zones[y, x].GetComponent<gasQualities>().butane;
+		//float bAmount = zones[y, x].GetComponent<gasQualities>().butane;
 		float oAmount = zones[y, x].GetComponent<gasQualities>().oxygen;
 		
 		//switch ++ to += for only cardinal direction spread
@@ -117,17 +115,9 @@ public class AtmoControl : MonoBehaviour {
 						//make corners diffuse less
 						if((i == -1 && j == -1) || (i == -1 && j == 1) 
 						|| (i == 1 && j == -1) && (i == 1 && j == 1)) {
-							deltaTemp *= .75f;
+							deltaTemp *= .25f;
 						}
 
-					} else {
-						deltaTemp = zones[y + j, x + i].GetComponent<gasQualities>().butane - bAmount;
-						
-						//make corners diffuse less
-						if((i == -1 && j == -1) || (i == -1 && j == 1) 
-						   || (i == 1 && j == -1) && (i == 1 && j == 1)) {
-							deltaTemp *= .75f;
-						}
 					}
 					
 					delta += deltaTemp;
@@ -141,23 +131,12 @@ public class AtmoControl : MonoBehaviour {
 		return delta;
 	}
 	
-	
-	IEnumerator Deplete() {
-		while(true) {
-			for( int z = 0; z < zSize; z++) {
-				for( int x = 0; x < xSize; x++) {
-					if(zones[z, x].GetComponent<gasQualities>().oxygen > 0.05f) {
-						zones[z, x].GetComponent<gasQualities>().oxygen -= .05f;
-					}
-				
-					if(zones[z, x].GetComponent<gasQualities>().butane > 0.05f) {
-						zones[z, x].GetComponent<gasQualities>().butane -= .05f;
-					}
-					
-				}
+	//updates color in all gas sectors
+	void colorUpdate() {
+		for(int z = 0; z < zSize; z++) {
+			for(int x = 0; x < xSize; x++) {
+				zones[z, x].GetComponent<gasQualities>().newColor();
 			}
-			
-			yield return new WaitForSeconds(depleteRate);
 		}
 	}
 	

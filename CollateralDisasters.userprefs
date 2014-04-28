@@ -1,13 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Buildings\Factory.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Buildings\BuildingDisplay.cs">
     <Files>
-      <File FileName="Assets\Scripts\Procedural Generation\StreetGeneration.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Procedural Generation\BuildingGenerator2.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Procedural Generation\BuildingConsolidater.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Buildings\OxygenGenerator.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Buildings\PowerGenerator.cs" Line="17" Column="67" />
-      <File FileName="Assets\Scripts\Buildings\Factory.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Barricade.cs" Line="17" Column="79" />
+      <File FileName="Assets\Scripts\Buildings\BuildingHealth.cs" Line="141" Column="1" />
+      <File FileName="Assets\Scripts\Atmosphere\gasQualities.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Buildings\PersonalAtmo.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Disasters\GameStart.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Buildings\BuildingDisplay.cs" Line="5" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

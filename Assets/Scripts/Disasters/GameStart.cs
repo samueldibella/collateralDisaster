@@ -20,6 +20,7 @@ public class GameStart : MonoBehaviour {
 	void Start () {
 		Time.timeScale = 0;
 		
+		currentDisaster = Disaster.None;
 		//secondaryColor = new Color(170, 17, 186);
 		//primaryColor = new Color(96, 8, 105);
 		
@@ -30,9 +31,9 @@ public class GameStart : MonoBehaviour {
 		bool fireStarted = false;
 		bool floodStarted = false;
 		int secondaryImports = 0;
-		int primaryImports = 0;
+		//int primaryImports = 0;
 		
-		while(secondaryImports < 5) {
+		while(secondaryImports < 1) {
 			if( Input.GetKeyDown(KeyCode.Mouse0)) {
 				
 				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -47,23 +48,6 @@ public class GameStart : MonoBehaviour {
 			
 			yield return 0;
 		}
-		
-		while(primaryImports < 1) {
-			if( Input.GetKeyDown(KeyCode.Mouse0)) {
-				
-				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-				
-				if(Physics.Raycast(ray, out rayHit) && rayHit.transform.tag == "Building") {
-					rayHit.transform.GetComponent<BuildingHealth>().infrastructureValue = 10;
-					rayHit.transform.GetComponent<BuildingDisplay>().initialColor = Color.blue;
-					
-					primaryImports++;
-				}			
-			}
-			
-			yield return 0;
-		}
-		
 		
 		//initial disaster placements
 		currentDisaster = Disaster.Fire;

@@ -4,7 +4,6 @@ using System.Collections;
 public class StreetGeneration : MonoBehaviour {
 	
 	//prefabs
-	public Transform streetMakerPrefab;
 	public Transform streetTilePreFab;
 	public Transform streetPlanePreFab; 
 	public Transform wallPreFab; 
@@ -128,7 +127,6 @@ public class StreetGeneration : MonoBehaviour {
 		}	
 		
 		if(currentStreets == maxStreets && endedStreetMakers == maxStreetMakers) { 
-			MakeMap(); 
 			builder.buildingGenerator();  
 			Destroy(gameObject); 			
 		}						
@@ -219,18 +217,6 @@ public class StreetGeneration : MonoBehaviour {
 			
 			break;
 		}
-	}
-	
-	void MakeMap() {
-		Instantiate (streetPlanePreFab, new Vector3(220f, 1f, 210f), Quaternion.identity);
-//		for(int z = 0; z < 400; z++) {
-//			for(int x = 0; x < 400; x++) {
-//				if(streetMap[x, z] == street) {
-//					Instantiate (streetTilePreFab, new Vector3(((float)x+.5f), 1f, ((float)z)+.5f), Quaternion.identity);
-//				}
-//			}
-//			
-//		}
 	}
 	
 	int getQuadrant(int x, int z) {
