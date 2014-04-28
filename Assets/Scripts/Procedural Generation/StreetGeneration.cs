@@ -34,19 +34,19 @@ public class StreetGeneration : MonoBehaviour {
 	int currentXMax; 
 	int currentZMax;  
 	
-	static int lowerBoundX = 110 - 12; 
-	static int middleBoundX = 206 + 12; 
-	static int upperBoundX = 326 + 12; 
+	int lowerBoundX = 98; 
+	int middleBoundX = 218; 
+	int upperBoundX = 338; 
 	
-	static int lowerBoundZ = 160 - 12; 
-	static int middleBoundZ = 196 + 12; 
-	static int upperBoundZ = 256 + 12; 
+	int lowerBoundZ = 148; 
+	int middleBoundZ = 208; 
+	int upperBoundZ = 268; 
 	
 	//240
-	public static int gridLengthX = upperBoundX - lowerBoundX; 
+	public static int gridLengthX = 338 - 98; 
 	
 	//120
-	public static int gridLengthZ = upperBoundZ - lowerBoundZ; 
+	public static int gridLengthZ = 268 - 148; 
 	
 	// Use this for initialization
 	void Start () {

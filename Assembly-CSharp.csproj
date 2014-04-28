@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\Buildings\BuildingDisplay.cs" />
      <Compile Include="Assets\Scripts\Buildings\BuildingHealth.cs" />
      <Compile Include="Assets\Scripts\Buildings\Factory.cs" />
+     <Compile Include="Assets\Scripts\Buildings\KeyBuildingSelector.cs" />
      <Compile Include="Assets\Scripts\Buildings\OxygenGenerator.cs" />
      <Compile Include="Assets\Scripts\Buildings\PersonalAtmo.cs" />
      <Compile Include="Assets\Scripts\Buildings\PowerGenerator.cs" />
