@@ -19,18 +19,11 @@ public class BoxSpread : MonoBehaviour {
 	void Start () {
 		dimensions = gameObject.GetComponent<BoxCollider>().bounds;
 		lastSpread = Time.time;
-	
-	}
-
-	// Update is called once per frame
-	void Update () {
 		StartCoroutine ("Spread");
-
-
-	
 	}
+	
 	IEnumerator Spread(){
-		yield return new WaitForSeconds (Random.Range (0f, 2f));
+		
 		while (true) {
 						if (up && down && left && right) {
 								spread = false;
@@ -79,12 +72,12 @@ public class BoxSpread : MonoBehaviour {
 				
 								}
 			
-								if (newCube != null) {
-										newCube.GetComponent<BoxSpread> ().gen = gen + 1;
-								}
+//								if (newCube != null) {
+//										newCube.GetComponent<BoxSpread> ().gen = gen + 1;
+//								}
 			
 						}
-						yield return new WaitForSeconds (0.5f);
+						yield return new WaitForSeconds (1f);
 				}
 		
 	}
