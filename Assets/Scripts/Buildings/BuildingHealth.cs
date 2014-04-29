@@ -104,10 +104,13 @@ public class BuildingHealth : MonoBehaviour {
 		//detects for water
 		Collider[] hitCollidersWater = Physics.OverlapSphere(transform.position, 4f); 
 		int j = 0; 
+		waterLogged=false;
 		while (j < hitCollidersWater.Length) {
+
 			if(hitCollidersWater[j].tag.Equals("Water") == true && firstFlood == false ) {	
 				firstFlood = true;
-				floodStarted = true; 	
+				floodStarted = true;
+
 			} if(hitCollidersWater[j].tag.Equals("Building") == true && hitCollidersWater[j].GetComponent<BuildingHealth>().waterLogged == true 
 			     && hitCollidersWater[j].GetComponent<BuildingHealth>().waterLoggedPercent >= 30 && firstFlood == false) {
 				firstFlood = true;
@@ -115,6 +118,7 @@ public class BuildingHealth : MonoBehaviour {
 			}
 			else {
 				//waterLogged = false; 
+			
 			}
 			j++;
 		}
@@ -130,7 +134,7 @@ public class BuildingHealth : MonoBehaviour {
 		
 		if(waterLogged == true) {
 			//will put our fires if water logged
-			if(waterLoggedPercent >= 30) {
+			if(waterLoggedPercent >= 10) {
 				onFire = false;
 			}
 		} else if(waterLoggedPercent > 0 && waterLogged == false) {
@@ -231,9 +235,9 @@ public class BuildingHealth : MonoBehaviour {
 				floodStarted = true;
 			}
 			else {
-				waterLogged = false; 
+				//waterLogged = false; 
 			}
-			j++;
+			j++;   
 		}
 		
 		yield return new WaitForSeconds(1);	
@@ -242,7 +246,7 @@ public class BuildingHealth : MonoBehaviour {
 	//water corutine that increase water damage based on water logged percent 
 	IEnumerator waterDamageIncreaser() {		
 		while(true) {
-			waterDamage +=  (.05f * waterLoggedPercent);
+			waterDamage +=  (.5f * waterLoggedPercent);
 			yield return new WaitForSeconds(1);
 		}
 	}
