@@ -6,25 +6,40 @@ public class PlayerControl : MonoBehaviour {
 
 	Ray ray;
 	RaycastHit hit;
+	Rigidbody body;
 
-	//barricade prefab
-	public GameObject barricade;
-
+	Vector3 movement;
+	public float speed = 10;
+	
 	// Use this for initialization
 	void Start () {
-	
+		body = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetMouseButtonDown(0) && Time.timeScale == 1) {
-			ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			
-			if(Physics.Raycast(ray, out hit)) {
-				if(hit.transform.tag == "Road") {
-					Instantiate(barricade, hit.point, Quaternion.identity);
-				}
-			}
+		movement = Vector3.zero;
+		
+		if(Input.GetKey(KeyCode.W)) {
+			movement.z += 1;
 		}
+		
+		if(Input.GetKey(KeyCode.A)) {
+			movement.z -= 1;
+		}
+		
+		if(Input.GetKey(KeyCode.S)) {
+			movement.x -= 1;
+		}
+		
+		if(Input.GetKey(KeyCode.D)) {
+			movement.x += 1;
+		}
+		
+		movement *= speed * Time.deltaTime;
+	
+		
+	
+		body.AddForce( movement );
 	}
 }

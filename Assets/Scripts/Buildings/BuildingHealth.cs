@@ -117,7 +117,6 @@ public class BuildingHealth : MonoBehaviour {
 			keyBuilding4Selected = true; 
 		}
 		
-		StartCoroutine( Oxygen() );
 	}
 	
 	// Update is called once per frame
@@ -128,7 +127,6 @@ public class BuildingHealth : MonoBehaviour {
 			Infrastructure.totalStructure -= infrastructureValue;
 			Destroy(gameObject); 		
 		}
-		
 		
 		//fire methods  
 		if(fireStarted == true) {
@@ -141,67 +139,47 @@ public class BuildingHealth : MonoBehaviour {
 	//methods
 	//burning method controls the rate of burning and fire intensity 
 	IEnumerator Fire() {
-		int maxOxygenIndex;
-		bool fireSpread = false;
+		int randomBuilding;
 		onFire = true;
 
 		while(onFire) {
 
-			fireIntensity += 5;
-			fireSpread = false;
+			fireIntensity += Random.Range(1, 10);			
 			
-			
-			if(fireIntensity > 30) {
+			if(fireIntensity > 10) {
 				health -= fireIntensity / 10;
-				Collider[] hitColliders = Physics.OverlapSphere(transform.position, 6f); 
-				maxOxygenIndex = -1;
+				Collider[] hitColliders = Physics.OverlapSphere(transform.position, 8f); 
 				
 				for(int i = 0; i < hitColliders.Length; i++) {
+					randomBuilding = Random.Range(0, 10);
+				
+					if(hitColliders[i].tag == "Road" && hitColliders[i].GetComponent<RoadDisplay>().onFire == false) {
+						hitColliders[i].GetComponent<RoadDisplay>().fireStarted = true;
+					}
+				
 					if(hitColliders[i].tag == "Building" && hitColliders[i].GetComponent<BuildingHealth>().buildingKey == buildingKey &&
-					   hitColliders[i].GetComponent<BuildingHealth>().onFire == false) {
-						hitColliders[i].GetComponent<BuildingHealth>().fireStarted = true;
-						fireSpread = true;
+					   				hitColliders[i].GetComponent<BuildingHealth>().onFire == false) {
+						randomBuilding = Random.Range(0,10);
+						
+						if(randomBuilding < 6) {
+							hitColliders[i].GetComponent<BuildingHealth>().fireStarted = true;
+							
+						}
+						
+					} else if (hitColliders[i].tag == "Building" && hitColliders[i].GetComponent<BuildingHealth>().onFire == false) {
+						if(randomBuilding < 4) {
+							hitColliders[i].GetComponent<BuildingHealth>().fireStarted = true;
+						}
 					}
 					
-					if(hitColliders[i].tag == "Barricade" && hitColliders[i].GetComponent<BarricadeHealth>().onFire == false) {
-						hitColliders[i].GetComponent<BarricadeHealth>().fireStarted = true;
-						fireSpread = true;
-					}
 				}	
-						
-				if(!fireSpread) {
-					for(int i = 0; i < hitColliders.Length; i++) {
-						//special case for beginning
-						if(hitColliders[i].tag == "Building") {
-							if(maxOxygenIndex == -1) {
-								maxOxygenIndex = i;
-								
-								//compares to all other buildings found, and must be on fire to count
-							} else if(hitColliders[i].GetComponent<PersonalAtmo>().personalAtmo.GetComponent<gasQualities>().oxygen >= 
-							          hitColliders[maxOxygenIndex].GetComponent<PersonalAtmo>().personalAtmo.GetComponent<gasQualities>().oxygen &&
-							          hitColliders[i].GetComponent<BuildingHealth>().onFire == false) {
-								maxOxygenIndex = i;
-							}
-						}	
-					}
-						
-					if(maxOxygenIndex != -1) {
-						hitColliders[maxOxygenIndex].GetComponent<BuildingHealth>().fireStarted = true;
-					}
-				}		
 			}
 			
+			
 			yield return new WaitForSeconds(fireRate);
-		}
-	}
-	
-	IEnumerator Oxygen() {
-		yield return new WaitForSeconds(1);
-	
-		if(buildingKey == keyBuilding1 || buildingKey == keyBuilding2 || buildingKey == keyBuilding3|| buildingKey == keyBuilding4) {
-			GetComponent<PersonalAtmo>().personalAtmo.GetComponent<gasQualities>().isOxygenGen = true;
-		}
-	}
+			
+		}				
+	}	
 	
 	//This script determines which building tiles make up one building 
 	//this is determined at start and will be denoted at by a building key 

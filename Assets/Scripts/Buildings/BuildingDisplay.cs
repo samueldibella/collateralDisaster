@@ -21,7 +21,6 @@ public class BuildingDisplay : MonoBehaviour {
 		initialColor = renderer.material.color;
 		
 		StartCoroutine( ColorUpdate() );
-		
 	}
 	
 	void OnMouseOver() {
@@ -57,10 +56,7 @@ public class BuildingDisplay : MonoBehaviour {
 				intermediateColor = Color.Lerp(initialColor, Color.red, this.gameObject.GetComponent<BuildingHealth>().fireIntensity / 100);
 				renderer.material.color = Color.Lerp(intermediateColor, Color.grey, (100 - this.gameObject.GetComponent<BuildingHealth>().health) / 100);
 			}
-			
-			//key buildings 
-			
-			
+
 			yield return new WaitForSeconds(1);
 		}
 
