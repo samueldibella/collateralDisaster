@@ -167,7 +167,7 @@ public class BuildingHealth : MonoBehaviour {
 						}
 						
 					} else if (hitColliders[i].tag == "Building" && hitColliders[i].GetComponent<BuildingHealth>().onFire == false) {
-						if(randomBuilding < 4) {
+						if(randomBuilding < 2) {
 							hitColliders[i].GetComponent<BuildingHealth>().fireStarted = true;
 						}
 					}
