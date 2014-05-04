@@ -37,8 +37,10 @@ public class BuildingDisplay : MonoBehaviour {
 	void OnMouseExit() {
 		mouseOver = false;
 		renderer.material.shader = initialShader;
-		renderer.material.color = initialColor;	
 		
+		if(Time.timeScale == 0) {
+			renderer.material.color = initialColor;	
+		}
 	}
 	
 	IEnumerator ColorUpdate() {

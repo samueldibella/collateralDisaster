@@ -24,19 +24,19 @@ public class CameraControl : MonoBehaviour {
 	IEnumerator CameraZoom() {
 		while(true) {
 			
-			if(player.GetComponent<Rigidbody>().velocity.y < 0) {
+			if(player.transform.position.y < 1) {
 				transform.position = Vector3.Lerp(transform.position, active, Time.deltaTime * 4f);
-			} else if(player.GetComponent<Rigidbody>().velocity == Vector3.zero) {
+			} else if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) {
 				yield return new WaitForSeconds(.05f);
 				
-				while(player.GetComponent<Rigidbody>().velocity == Vector3.zero) {
-					transform.position = Vector3.Lerp(transform.position, start, Time.deltaTime * .25f);
+				while(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) {
+					transform.position = Vector3.Lerp(transform.position, active, Time.deltaTime * 4f);
 					
 					yield return 0;
 				}
 				
 			} else {
-				transform.position = Vector3.Lerp(transform.position, active, Time.deltaTime * 4f);
+				transform.position = Vector3.Lerp(transform.position, start, Time.deltaTime * .25f);
 			}
 			
 			yield return 0;
