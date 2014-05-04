@@ -15,6 +15,7 @@ public class BuildingDisplay : MonoBehaviour {
 	Shader initialShader;
 	public Shader litShader; 
 
+	
 	// Use this for initialization
 	void Start() {
 		initialShader = renderer.material.shader;
@@ -44,8 +45,11 @@ public class BuildingDisplay : MonoBehaviour {
 	
 	IEnumerator ColorUpdate() {
 		if(GetComponent<BuildingHealth>().buildingKey == BuildingHealth.keyBuilding4) {
-				initialColor = Color.cyan;
-				GetComponent<BuildingHealth>().infrastructureValue = 10; 
+			initialColor = Color.cyan; 
+			GetComponent<BuildingHealth>().infrastructureValue += 1; 
+			Infrastructure.totalStructure += 1; 
+			transform.position = new Vector3(transform.position.x, transform.position.y - 3, transform.position.z); 
+			StartCoroutine("playerCheck"); 
 		}
 		
 		while(true) {
@@ -58,7 +62,17 @@ public class BuildingDisplay : MonoBehaviour {
 		}
 
 	}
-	
+	IEnumerator playerCheck() {
+		while(true) {
+			Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f); 
+			for(int i = 0; i < hitColliders.Length; i++) {
+				if(hitColliders[i].tag.Equals("Player")) {
+					print("you win!"); 
+				}
+			}
+			yield return new WaitForSeconds(5);			
+		}
+	}
 	//information for tool tip
 	public string Info() {
 	

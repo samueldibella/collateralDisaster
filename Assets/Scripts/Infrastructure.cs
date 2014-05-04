@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Infrastructure : MonoBehaviour {
 
-	public static int totalStructure = 10;
+	public static int totalStructure;
 	
 	// Update is called once per frame
 	void Update () {

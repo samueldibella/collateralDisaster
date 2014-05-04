@@ -180,7 +180,18 @@ public class BuildingHealth : MonoBehaviour {
 			
 		}				
 	}	
-	
+	IEnumerator playerCheck() {
+		while(true) {
+			Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2f); 
+			for(int i = 0; i < hitColliders.Length; i++) {
+				if(hitColliders[i].tag.Equals("Player")) {
+					print("you win!"); 
+				}
+			}
+			yield return new WaitForSeconds(5);
+			
+		}
+	}
 	//This script determines which building tiles make up one building 
 	//this is determined at start and will be denoted at by a building key 
 	//some building keys will be reserved for unique building e.g hospital = 100
@@ -216,18 +227,6 @@ public class BuildingHealth : MonoBehaviour {
 	}
 	
 	int getQuadrant(int x, int z) {
-//		if( x < middleBoundX && z > middleBoundZ) {
-//			return 1; 
-//		}
-//		if( x > middleBoundX && z > middleBoundZ) {
-//			return 2;
-//		}
-//		if( x < middleBoundX && z < middleBoundZ) {
-//			return 3;
-//		}
-//		if( x > middleBoundX && z < middleBoundZ) {
-//			return 4;
-//		}	
 		if( x > 328) {
 			return 4;
 		}	
