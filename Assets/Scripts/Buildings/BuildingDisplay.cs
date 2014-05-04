@@ -37,8 +37,7 @@ public class BuildingDisplay : MonoBehaviour {
 	void OnMouseExit() {
 		mouseOver = false;
 		renderer.material.shader = initialShader;
-		renderer.material.color = initialColor;
-		
+		renderer.material.color = initialColor;	
 		
 	}
 	

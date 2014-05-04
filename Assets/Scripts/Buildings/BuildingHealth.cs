@@ -6,6 +6,8 @@ public class BuildingHealth : MonoBehaviour {
 	//relevant game object 
 	public GameObject building; 
 	
+	GameObject player;
+	
 	//total score
 	public static float totalScore;
 	
@@ -46,7 +48,7 @@ public class BuildingHealth : MonoBehaviour {
 	public static bool keyBuilding1Selected = true; 
 	public static bool keyBuilding2Selected = true;
 	public static bool keyBuilding3Selected = true;
-	public static bool keyBuilding4Selected = true; 
+	public static bool keyBuilding4Selected = false; 
 	
 	public static int keyBuilding1 = -1; 
 	public static int keyBuilding2 = -1;
@@ -85,6 +87,8 @@ public class BuildingHealth : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		player = GameObject.FindGameObjectWithTag("Player");
+	
 		if(gameObject.tag.Equals("Building") == true) { 
 			buildingKeyFixer();
 		}
@@ -144,7 +148,7 @@ public class BuildingHealth : MonoBehaviour {
 
 		while(onFire) {
 
-			fireIntensity += Random.Range(1, 10);			
+			fireIntensity += Random.Range(4, 10);			
 			
 			if(fireIntensity > 10) {
 				health -= fireIntensity / 10;
@@ -170,6 +174,10 @@ public class BuildingHealth : MonoBehaviour {
 						if(randomBuilding < 2) {
 							hitColliders[i].GetComponent<BuildingHealth>().fireStarted = true;
 						}
+					} else if (hitColliders[i].tag == "BuildingRNG" && hitColliders[i].GetComponent<BuildingHealth>().onFire == false) {
+						if(randomBuilding < 5) {
+							hitColliders[i].GetComponent<BuildingHealth>().fireStarted = true;
+						}
 					}
 					
 				}	
@@ -180,6 +188,10 @@ public class BuildingHealth : MonoBehaviour {
 			
 		}				
 	}	
+	
+	void OnParticleCollision(GameObject other) {
+		health -= player.GetComponent<PlayerControl>().damage;
+	}
 	
 	//This script determines which building tiles make up one building 
 	//this is determined at start and will be denoted at by a building key 
