@@ -34,9 +34,9 @@ public class BuildingHealth : MonoBehaviour {
 	bool gotKey = false; 
 	
 	public static GameObject[] quad1Array = new GameObject[300]; 
-	public static GameObject[] quad2Array = new GameObject[2000];
+	public static GameObject[] quad2Array = new GameObject[300];
 	public static GameObject[] quad3Array = new GameObject[300];
-	public static GameObject[] quad4Array = new GameObject[2000];
+	public static GameObject[] quad4Array = new GameObject[1000];
 	
 	public static int quadIterator1; 
 	public static int quadIterator2; 
@@ -46,12 +46,12 @@ public class BuildingHealth : MonoBehaviour {
 	public static bool keyBuilding1Selected = true; 
 	public static bool keyBuilding2Selected = true;
 	public static bool keyBuilding3Selected = true;
-	public static bool keyBuilding4Selected = false; 
+	public static bool keyBuilding4Selected = true; 
 	
-	public static int keyBuilding1; 
-	public static int keyBuilding2;
-	public static int keyBuilding3; 
-	public static int keyBuilding4; 
+	public static int keyBuilding1 = -1; 
+	public static int keyBuilding2 = -1;
+	public static int keyBuilding3 = -1; 
+	public static int keyBuilding4 = -1; 
 	
 	void Awake() {
 		
@@ -228,7 +228,7 @@ public class BuildingHealth : MonoBehaviour {
 //		if( x > middleBoundX && z < middleBoundZ) {
 //			return 4;
 //		}	
-		if( x > 338-10) {
+		if( x > 328) {
 			return 4;
 		}	
 		return 0; 

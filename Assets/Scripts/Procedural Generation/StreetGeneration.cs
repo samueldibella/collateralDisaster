@@ -25,7 +25,7 @@ public class StreetGeneration : MonoBehaviour {
 	static int currentStreetMakers = 1;
 	static int madeStreetMakers = 1; 
 	static int endedStreetMakers = 0;
-	static int maxStreetMakers = 129;
+	static int maxStreetMakers = 128;
 	
 	int currentXMin; 
 	int currentZMin; 
