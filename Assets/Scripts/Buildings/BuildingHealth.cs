@@ -87,8 +87,6 @@ public class BuildingHealth : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		player = GameObject.FindGameObjectWithTag("Player");
-	
 		if(gameObject.tag.Equals("Building") == true) { 
 			buildingKeyFixer();
 		}
@@ -190,6 +188,7 @@ public class BuildingHealth : MonoBehaviour {
 	}	
 	
 	void OnParticleCollision(GameObject other) {
+		player = GameObject.FindGameObjectWithTag("Player");
 		health -= player.GetComponent<PlayerControl>().damage;
 	}
 	

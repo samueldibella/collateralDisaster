@@ -9,19 +9,19 @@ public class CameraControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		player = GameObject.FindGameObjectWithTag("Player");
+		
 	
 		start = transform.position;
 		
+		StartCoroutine( CameraPosition() );
 		StartCoroutine( CameraZoom() );
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		active = new Vector3(player.transform.position.x, 15f, player.transform.position.z);
+		
 	}
 	
 	IEnumerator CameraZoom() {
+		yield return new WaitForSeconds(.1f);
+		player = GameObject.FindGameObjectWithTag("Player");
+		
 		while(true) {
 			
 			if(player.transform.position.y < 1) {
@@ -38,6 +38,16 @@ public class CameraControl : MonoBehaviour {
 			} else {
 				transform.position = Vector3.Lerp(transform.position, start, Time.deltaTime * .1f);
 			}
+			
+			yield return 0;
+		}
+	}
+	
+	IEnumerator CameraPosition() {
+		yield return new WaitForSeconds(.2f);
+		
+		while(true) {
+			active = new Vector3(player.transform.position.x, 15f, player.transform.position.z);
 			
 			yield return 0;
 		}
