@@ -51,6 +51,11 @@
      <Compile Include="Assets\Scripts\Buildings\BuildingDisplay.cs" />
      <Compile Include="Assets\Scripts\Buildings\BuildingHealth.cs" />
      <Compile Include="Assets\Scripts\Buildings\KeyBuildingSelector.cs" />
+     <Compile Include="Assets\Scripts\Buildings\RoadDisplay.cs" />
+     <Compile Include="Assets\Scripts\Controls\CameraControl.cs" />
+     <Compile Include="Assets\Scripts\Controls\LoseScreen.cs" />
+     <Compile Include="Assets\Scripts\Controls\PlayerControl.cs" />
+     <Compile Include="Assets\Scripts\Controls\TitleScreen.cs" />
      <Compile Include="Assets\Scripts\Disasters\BoxSpread.cs" />
      <Compile Include="Assets\Scripts\Disasters\GameStart.cs" />
      <Compile Include="Assets\Scripts\Disasters\RandomSlide.cs" />
@@ -58,14 +63,12 @@
      <Compile Include="Assets\Scripts\HUD\Timer.cs" />
      <Compile Include="Assets\Scripts\HUD\ToolTip.cs" />
      <Compile Include="Assets\Scripts\Infrastructure.cs" />
-     <Compile Include="Assets\Scripts\PlayerControl.cs" />
      <Compile Include="Assets\Scripts\Procedural Generation\BuildingConsolidater.cs" />
      <Compile Include="Assets\Scripts\Procedural Generation\BuildingGenerator2.cs" />
      <Compile Include="Assets\Scripts\Procedural Generation\RngBuilding.cs" />
      <Compile Include="Assets\Scripts\Procedural Generation\Spawn.cs" />
      <Compile Include="Assets\Scripts\Procedural Generation\StreetGeneration.cs" />
      <Compile Include="Assets\Scripts\Procedural Generation\StreetTiles.cs" />
-     <Compile Include="Assets\Scripts\RoadDisplay.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,12 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Procedural Generation/RngBuilding.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Buildings/BuildingDisplay.cs">
     <Files>
-      <File FileName="Assets/Scripts/Buildings/BuildingHealth.cs" Line="227" Column="6" />
-      <File FileName="Assets/Scripts/Procedural Generation/BuildingGenerator2.cs" Line="10" Column="19" />
-      <File FileName="Assets/Scripts/Procedural Generation/StreetGeneration.cs" Line="54" Column="44" />
-      <File FileName="Assets/Scripts/Procedural Generation/RngBuilding.cs" Line="8" Column="32" />
-      <File FileName="Assets/Scripts/Buildings/BuildingDisplay.cs" Line="76" Column="1" />
+      <File FileName="Assets/Scripts/Buildings/BuildingHealth.cs" Line="196" Column="62" />
+      <File FileName="Assets/Scripts/Procedural Generation/BuildingGenerator2.cs" Line="48" Column="5" />
+      <File FileName="Assets/Scripts/Procedural Generation/StreetGeneration.cs" Line="230" Column="13" />
+      <File FileName="Assets/Scripts/Procedural Generation/RngBuilding.cs" Line="21" Column="27" />
+      <File FileName="Assets/Scripts/Buildings/BuildingDisplay.cs" Line="74" Column="4" />
+      <File FileName="Assets/Scripts/Procedural Generation/Spawn.cs" Line="32" Column="1" />
+      <File FileName="Assets/Scripts/Infrastructure.cs" Line="13" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

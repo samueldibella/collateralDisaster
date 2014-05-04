@@ -38,9 +38,10 @@ public class BuildingDisplay : MonoBehaviour {
 	void OnMouseExit() {
 		mouseOver = false;
 		renderer.material.shader = initialShader;
-		renderer.material.color = initialColor;
 		
-		
+		if(Time.timeScale == 0) {
+			renderer.material.color = initialColor;	
+		}
 	}
 	
 	IEnumerator ColorUpdate() {
@@ -53,12 +54,11 @@ public class BuildingDisplay : MonoBehaviour {
 		}
 		
 		while(true) {
-			if(!mouseOver) {
-				intermediateColor = Color.Lerp(initialColor, Color.red, this.gameObject.GetComponent<BuildingHealth>().fireIntensity / 100);
-				renderer.material.color = Color.Lerp(intermediateColor, Color.grey, (100 - this.gameObject.GetComponent<BuildingHealth>().health) / 100);
-			}
+			intermediateColor = Color.Lerp(initialColor, Color.red, this.gameObject.GetComponent<BuildingHealth>().fireIntensity / 100);
+			renderer.material.color = Color.Lerp(intermediateColor, Color.grey, (100 - this.gameObject.GetComponent<BuildingHealth>().health) / 100);
+			
 
-			yield return new WaitForSeconds(1);
+			yield return new WaitForSeconds(.25f);
 		}
 
 	}

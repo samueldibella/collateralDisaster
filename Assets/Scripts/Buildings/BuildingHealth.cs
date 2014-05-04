@@ -6,6 +6,8 @@ public class BuildingHealth : MonoBehaviour {
 	//relevant game object 
 	public GameObject building; 
 	
+	GameObject player;
+	
 	//total score
 	public static float totalScore;
 	
@@ -85,6 +87,8 @@ public class BuildingHealth : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		player = GameObject.FindGameObjectWithTag("Player");
+	
 		if(gameObject.tag.Equals("Building") == true) { 
 			buildingKeyFixer();
 		}
@@ -144,7 +148,7 @@ public class BuildingHealth : MonoBehaviour {
 
 		while(onFire) {
 
-			fireIntensity += Random.Range(1, 10);			
+			fireIntensity += Random.Range(4, 10);			
 			
 			if(fireIntensity > 10) {
 				health -= fireIntensity / 10;
@@ -170,6 +174,10 @@ public class BuildingHealth : MonoBehaviour {
 						if(randomBuilding < 2) {
 							hitColliders[i].GetComponent<BuildingHealth>().fireStarted = true;
 						}
+					} else if (hitColliders[i].tag == "BuildingRNG" && hitColliders[i].GetComponent<BuildingHealth>().onFire == false) {
+						if(randomBuilding < 5) {
+							hitColliders[i].GetComponent<BuildingHealth>().fireStarted = true;
+						}
 					}
 					
 				}	
@@ -180,18 +188,11 @@ public class BuildingHealth : MonoBehaviour {
 			
 		}				
 	}	
-	IEnumerator playerCheck() {
-		while(true) {
-			Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2f); 
-			for(int i = 0; i < hitColliders.Length; i++) {
-				if(hitColliders[i].tag.Equals("Player")) {
-					print("you win!"); 
-				}
-			}
-			yield return new WaitForSeconds(5);
-			
-		}
+	
+	void OnParticleCollision(GameObject other) {
+		health -= player.GetComponent<PlayerControl>().damage;
 	}
+	
 	//This script determines which building tiles make up one building 
 	//this is determined at start and will be denoted at by a building key 
 	//some building keys will be reserved for unique building e.g hospital = 100
@@ -227,6 +228,18 @@ public class BuildingHealth : MonoBehaviour {
 	}
 	
 	int getQuadrant(int x, int z) {
+//		if( x < middleBoundX && z > middleBoundZ) {
+//			return 1; 
+//		}
+//		if( x > middleBoundX && z > middleBoundZ) {
+//			return 2;
+//		}
+//		if( x < middleBoundX && z < middleBoundZ) {
+//			return 3;
+//		}
+//		if( x > middleBoundX && z < middleBoundZ) {
+//			return 4;
+//		}	
 		if( x > 328) {
 			return 4;
 		}	
