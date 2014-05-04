@@ -4,6 +4,7 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - buildingTile: {fileID: 100000, guid: 7b8acd31bfc6a4a479b27dcd0e111e6d, type: 2}
+  - streetTile: {fileID: 11400002, guid: fbdccd90efe81ed4b8ea05db7505e802, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

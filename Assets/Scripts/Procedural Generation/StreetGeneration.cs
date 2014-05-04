@@ -20,12 +20,12 @@ public class StreetGeneration : MonoBehaviour {
 	
 	//counters
 	int currentStreets = 0; 
-	int maxStreets = 5;
+	int maxStreets = 4;
 	
 	static int currentStreetMakers = 1;
 	static int madeStreetMakers = 1; 
 	static int endedStreetMakers = 0;
-	static int maxStreetMakers = 128;
+	static int maxStreetMakers = 129;
 	
 	int currentXMin; 
 	int currentZMin; 
@@ -56,15 +56,15 @@ public class StreetGeneration : MonoBehaviour {
 		int quadrant = getQuadrant(currentX,currentZ); 
 		if( quadrant == 1 ) {
 			currentXMin = lowerBoundX; 
-			currentZMin = middleBoundZ; 
+			currentZMin = lowerBoundZ; 
 			
-			currentXMax = middleBoundX; 
+			currentXMax = upperBoundX; 
 			currentZMax = upperBoundZ; 
 		}
 		
 		if( quadrant == 2 ) {
-			currentXMin = middleBoundX; 
-			currentZMin = middleBoundZ; 
+			currentXMin = lowerBoundX;
+			currentZMin = lowerBoundZ;  
 			
 			currentXMax = upperBoundX; 
 			currentZMax = upperBoundZ; 
@@ -74,19 +74,19 @@ public class StreetGeneration : MonoBehaviour {
 			currentXMin = lowerBoundX; 
 			currentZMin = lowerBoundZ; 
 			
-			currentXMax = middleBoundX; 
-			currentZMax = middleBoundZ; 
+			currentXMax = upperBoundX;
+			currentZMax = upperBoundZ; 
 		}
 		
 		if( quadrant == 4 ) {
-			currentXMin = middleBoundX; 
+			currentXMin = lowerBoundX; 
 			currentZMin = lowerBoundZ; 
 			
 			currentXMax = upperBoundX; 
-			currentZMax = middleBoundZ; 
+			currentZMax = upperBoundZ; 
 		}
 		
-		MapFill(middleBoundX, middleBoundZ, 0); 
+		//MapFill(middleBoundX, middleBoundZ, 0); 
 		while(currentStreets < maxStreets) { 
 			int randomStreetNumber = Random.Range (0,101);
 			

@@ -34,18 +34,18 @@ public class BuildingHealth : MonoBehaviour {
 	bool gotKey = false; 
 	
 	public static GameObject[] quad1Array = new GameObject[300]; 
-	public static GameObject[] quad2Array = new GameObject[300];
+	public static GameObject[] quad2Array = new GameObject[2000];
 	public static GameObject[] quad3Array = new GameObject[300];
-	public static GameObject[] quad4Array = new GameObject[300];
+	public static GameObject[] quad4Array = new GameObject[2000];
 	
 	public static int quadIterator1; 
 	public static int quadIterator2; 
 	public static int quadIterator3; 
 	public static int quadIterator4; 
 	
-	public static bool keyBuilding1Selected = false; 
-	public static bool keyBuilding2Selected = false;
-	public static bool keyBuilding3Selected = false;
+	public static bool keyBuilding1Selected = true; 
+	public static bool keyBuilding2Selected = true;
+	public static bool keyBuilding3Selected = true;
 	public static bool keyBuilding4Selected = false; 
 	
 	public static int keyBuilding1; 
@@ -60,11 +60,11 @@ public class BuildingHealth : MonoBehaviour {
 		middleBoundZ = 208; 
 		
 		//assign buiding key 
-		assignBuildingKey(); 
-		buildingKeyFixer();	
-		
-		//make 4 arrays of each quadrant
-		quadrant = getQuadrant((int)transform.position.x, (int)transform.position.z); 	
+		if(gameObject.tag.Equals("Building") == true) {  
+			assignBuildingKey(); 
+			buildingKeyFixer();	
+			quadrant = getQuadrant((int)transform.position.x, (int)transform.position.z); 
+		}	
 		if(quadrant == 1) {
 			quad1Array[quadIterator1] = gameObject; 
 			quadIterator1++; 
@@ -85,9 +85,9 @@ public class BuildingHealth : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-	
-		buildingKeyFixer();
-		
+		if(gameObject.tag.Equals("Building") == true) { 
+			buildingKeyFixer();
+		}
 		//building values 
 		health = 100; 
 		infrastructureValue = 0; 
@@ -220,7 +220,6 @@ public class BuildingHealth : MonoBehaviour {
 			if(checkColliders2[j].tag.Equals("Building") == true && checkColliders2[j].transform.position != transform.position) {
 				if(checkColliders2[j].GetComponent<BuildingHealth>().buildingKey > buildingKey) {
 					buildingKey = checkColliders2[j].GetComponent<BuildingHealth>().buildingKey; 
-					//buildingKeyHeight = checkColliders2[j].GetComponent<BuildingHealth>().buildingKeyHeight; 
 				} 
 				
 				if(checkColliders2[j].GetComponent<BuildingHealth>().buildingKey < buildingKey) {
@@ -230,16 +229,19 @@ public class BuildingHealth : MonoBehaviour {
 		}	
 	}
 	int getQuadrant(int x, int z) {
-		if( x < middleBoundX && z > middleBoundZ) {
-			return 1; 
-		}
-		if( x > middleBoundX && z > middleBoundZ) {
-			return 2;
-		}
-		if( x < middleBoundX && z < middleBoundZ) {
-			return 3;
-		}
-		if( x > middleBoundX && z < middleBoundZ) {
+//		if( x < middleBoundX && z > middleBoundZ) {
+//			return 1; 
+//		}
+//		if( x > middleBoundX && z > middleBoundZ) {
+//			return 2;
+//		}
+//		if( x < middleBoundX && z < middleBoundZ) {
+//			return 3;
+//		}
+//		if( x > middleBoundX && z < middleBoundZ) {
+//			return 4;
+//		}	
+		if( x > 338-10) {
 			return 4;
 		}	
 		return 0; 

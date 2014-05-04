@@ -45,10 +45,7 @@ public class BuildingDisplay : MonoBehaviour {
 	
 	
 	IEnumerator ColorUpdate() {
-		if(GetComponent<BuildingHealth>().buildingKey == BuildingHealth.keyBuilding1 || 
-		   GetComponent<BuildingHealth>().buildingKey == BuildingHealth.keyBuilding2 || 
-		   GetComponent<BuildingHealth>().buildingKey == BuildingHealth.keyBuilding3 || 
-		   GetComponent<BuildingHealth>().buildingKey == BuildingHealth.keyBuilding4) {
+		if(GetComponent<BuildingHealth>().buildingKey == BuildingHealth.keyBuilding4) {
 				initialColor = Color.cyan;
 				GetComponent<BuildingHealth>().infrastructureValue = 10; 
 		}
