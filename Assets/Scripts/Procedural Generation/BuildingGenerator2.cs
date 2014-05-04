@@ -4,6 +4,8 @@ using System.Collections;
 public class BuildingGenerator2 : MonoBehaviour {
 	
 	public Transform buildingTile;
+	
+	
 	int street = 1; 
 	int building = 2;
 	int buildingSpace = 3; 
@@ -29,6 +31,7 @@ public class BuildingGenerator2 : MonoBehaviour {
 	}
 	
 	void MakeMap() {
+		print ("dfdf"); 
 		int a = 0; 
 		for(int z = 0; z < 400; z++) {
 			for(int x = 0; x < 400; x++) {
@@ -42,7 +45,7 @@ public class BuildingGenerator2 : MonoBehaviour {
 					buildingKeyAlpha++; 
 				}
 			}		
-		}
+		} 
 	}
 	
 	bool MapCheck(int x, int z) { 
