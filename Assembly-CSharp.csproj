@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\Buildings\BuildingDisplay.cs" />
      <Compile Include="Assets\Scripts\Buildings\BuildingHealth.cs" />
      <Compile Include="Assets\Scripts\Buildings\KeyBuildingSelector.cs" />
+     <Compile Include="Assets\Scripts\CameraControl.cs" />
      <Compile Include="Assets\Scripts\Disasters\BoxSpread.cs" />
      <Compile Include="Assets\Scripts\Disasters\GameStart.cs" />
      <Compile Include="Assets\Scripts\Disasters\RandomSlide.cs" />

@@ -1,14 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Buildings\BuildingHealth.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Camera Control.cs">
     <Files>
-      <File FileName="Assets\Scripts\Buildings\BuildingHealth.cs" Line="179" Column="3" />
-      <File FileName="Assets\Scripts\Buildings\BuildingDisplay.cs" Line="41" Column="3" />
-      <File FileName="Assets\Scripts\PlayerControl.cs" Line="41" Column="3" />
-      <File FileName="Assets\Scripts\RoadDisplay.cs" Line="41" Column="54" />
-      <File FileName="Assets\Scripts\Procedural Generation\BuildingGenerator2.cs" Line="36" Column="1" />
-      <File FileName="Assets\Scripts\HUD\Timer.cs" Line="23" Column="1" />
-      <File FileName="Assets\Scripts\Disasters\GameStart.cs" Line="32" Column="1" />
+      <File FileName="Assets\Scripts\Camera Control.cs" Line="4" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

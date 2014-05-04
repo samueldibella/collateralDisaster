@@ -2,20 +2,21 @@
 using System.Collections;
 
 public class PlayerControl : MonoBehaviour {
-// actual player placement of barricades
-
 	Ray ray;
 	RaycastHit hit;
 	Rigidbody body;
+	//Collider collider;
+	
 
 	Quaternion rotation;
-	Vector3 mouse;
+	Vector3 location;
 	Vector3 movement;
 	public float speed = 100000;
 	
 	// Use this for initialization
 	void Start () {
 		body = GetComponent<Rigidbody>();
+		//collider = GerComponent<Collider>();
 		
 		body.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 	}
@@ -26,10 +27,13 @@ public class PlayerControl : MonoBehaviour {
 		
 		Physics.Raycast(ray, out hit);
 		
-		rotation = Quaternion.LookRotation(transform.position - hit.point, Vector3.forward);
+		location = new Vector3(hit.point.x, 2, hit.point.z);
+		
+		/*
+		rotation = Quaternion.LookRotation(transform.position - location, Vector3.up);
 		rotation.x = 0;
 		rotation.y = 0;
-		//transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 4);
+		transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 4); */
 	
 		movement = Vector3.zero;
 		
@@ -54,7 +58,7 @@ public class PlayerControl : MonoBehaviour {
 		body.velocity = movement;
 		
 		if(transform.position.y < 0) {
-			//Application.LoadLevel("Fall Lose");
+			Application.LoadLevel("Fall Lose");
 		}
 	}
 }
