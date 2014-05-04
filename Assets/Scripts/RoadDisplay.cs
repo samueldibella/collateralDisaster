@@ -4,34 +4,52 @@ using System.Collections;
 public class RoadDisplay : MonoBehaviour {
 	//attach to street prefab
 	
-	//assign prefab in inspector
-	//public GameObject waterMarker;
-	
-	GameObject waterInstance;
-	
 	Vector3 storageLocation;
 	Ray ray;
 	RaycastHit hit;
 
+	public bool fireStarted = false;
+	public bool onFire = false;
+	public float health = 1;
 
 	Color initialColor = Color.white;
+	Color intermediate;
 	
 	void Start() {
-		storageLocation = new Vector3(-200, 0, -200);
 		//waterInstance = Instantiate(waterMarker, storageLocation, Quaternion.identity) as GameObject;
 	}
 	
-	void OnMouseOver() {
-		if(Time.timeScale == 1 && Input.GetMouseButton(0)) {
-			renderer.material.color = Color.yellow;
+	void Update() {
+		if(fireStarted == true) {
+			StartCoroutine( Fire() );
+			fireStarted = false;
 		}
 		
-		if(Time.timeScale == 0 && GameStart.currentDisaster == GameStart.Disaster.Flood) {
-			renderer.material.color = Color.blue;
-		} 
+		intermediate = Color.Lerp(initialColor, Color.red, health);
 	}
 	
-	void OnMouseExit() {
-		renderer.material.color = initialColor;
+	IEnumerator Fire() {
+		onFire = true;
+		float newY;
+	
+		while(health > 0) {
+			health -= .1f;
+		
+			yield return new WaitForSeconds(1);
+		}
+		
+		yield return new WaitForSeconds(Random.Range(3f, 5f));
+		
+		while(transform.position.y > -5) {
+			newY = transform.position.y - .05f;
+			
+			transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+			
+			yield return new WaitForSeconds(.01f);
+		}
+		
+		Destroy(this.gameObject);
 	}
+	
+	
 }
