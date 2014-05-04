@@ -36,7 +36,7 @@ public class CameraControl : MonoBehaviour {
 				}
 				
 			} else {
-				transform.position = Vector3.Lerp(transform.position, start, Time.deltaTime * .25f);
+				transform.position = Vector3.Lerp(transform.position, start, Time.deltaTime * .1f);
 			}
 			
 			yield return 0;

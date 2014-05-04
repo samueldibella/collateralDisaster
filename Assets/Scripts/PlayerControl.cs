@@ -13,7 +13,8 @@ public class PlayerControl : MonoBehaviour {
 	Quaternion start;
 	Vector3 location;
 	Vector3 movement;
-	public float speed = 110000;
+	Color transit;
+	public float speed = 150000;
 	
 	// Use this for initialization
 	void Start () {
@@ -27,6 +28,7 @@ public class PlayerControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
  		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		
 		Physics.Raycast(ray, out hit);
@@ -48,26 +50,23 @@ public class PlayerControl : MonoBehaviour {
 		
 		movement = Vector3.zero;
 		
-		if(Input.GetKey(KeyCode.W)) {
+		if(transform.position.y < 0 ) {
+			movement.x = 0;
+			movement.z = 0;
+		} else if(Input.GetKey(KeyCode.W)) {
 			movement.z += 25;
-		}
-		
-		if(Input.GetKey(KeyCode.S)) {
+		} else if(Input.GetKey(KeyCode.S)) {
 			movement.z -= 25;
-		}
-		
-		if(Input.GetKey(KeyCode.A)) {
+		} else if(Input.GetKey(KeyCode.A)) {
 			movement.x -= 25;
-		}
-		
-		if(Input.GetKey(KeyCode.D)) {
+		} else if(Input.GetKey(KeyCode.D)) {
 			movement.x += 25;
 		}
 		
 		movement.y -= 10;
 		
 		movement *= (speed * Time.deltaTime);
-	
+
 		body.velocity = movement;
 		
 		if(transform.position.y < -10) {
