@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\Procedural Generation\BuildingConsolidater.cs" />
      <Compile Include="Assets\Scripts\Procedural Generation\BuildingGenerator2.cs" />
      <Compile Include="Assets\Scripts\Procedural Generation\RngBuilding.cs" />
+     <Compile Include="Assets\Scripts\Procedural Generation\Spawn.cs" />
      <Compile Include="Assets\Scripts\Procedural Generation\StreetGeneration.cs" />
      <Compile Include="Assets\Scripts\Procedural Generation\StreetTiles.cs" />
      <Compile Include="Assets\Scripts\RoadDisplay.cs" />

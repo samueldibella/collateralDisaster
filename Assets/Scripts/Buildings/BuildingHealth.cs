@@ -46,7 +46,7 @@ public class BuildingHealth : MonoBehaviour {
 	public static bool keyBuilding1Selected = true; 
 	public static bool keyBuilding2Selected = true;
 	public static bool keyBuilding3Selected = true;
-	public static bool keyBuilding4Selected = true; 
+	public static bool keyBuilding4Selected = false; 
 	
 	public static int keyBuilding1 = -1; 
 	public static int keyBuilding2 = -1;
