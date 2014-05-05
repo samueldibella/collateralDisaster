@@ -27,8 +27,7 @@ public class BuildingGenerator2 : MonoBehaviour {
 		MakeMap(); 
 	}
 	
-	void MakeMap() {
-		print ("dfdf"); 
+	void MakeMap() { 
 		int a = 0; 
 		for(int z = 0; z < 400; z++) {
 			for(int x = 0; x < 400; x++) {

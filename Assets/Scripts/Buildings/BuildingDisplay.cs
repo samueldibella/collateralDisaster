@@ -78,7 +78,7 @@ public class BuildingDisplay : MonoBehaviour {
 					StreetGeneration.madeStreetMakers = 1; 
 					StreetGeneration.endedStreetMakers = 0;
 					Spawn.spawnSelected = false; 
-					Infrastructure.totalStructure = 0; 
+					Infrastructure.totalStructure = 10; 
 					
 					//vairbles that will change to make the game harder 
 					BuildingHealth.fireRate += .2f; 
@@ -87,7 +87,7 @@ public class BuildingDisplay : MonoBehaviour {
 					Application.LoadLevel("FullBuild"); 
 				}
 			}
-			yield return new WaitForSeconds(5);			
+			yield return new WaitForSeconds(1);			
 		}
 	}
 	//information for tool tip
