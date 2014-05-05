@@ -23,6 +23,5 @@ public class LoseScreen : MonoBehaviour {
 			RngBuilding.buildingSpawnRate = 11; 
 			Application.LoadLevel("FullBuild");
 		}
-		
 	}
 }

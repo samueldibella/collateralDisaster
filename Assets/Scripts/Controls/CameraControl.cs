@@ -4,6 +4,7 @@ using System.Collections;
 public class CameraControl : MonoBehaviour {
 	Vector3 start;
 	Vector3 active;
+	public bool shakeAndBake = false;
 
 	public GameObject player;
 
@@ -15,12 +16,13 @@ public class CameraControl : MonoBehaviour {
 		
 		StartCoroutine( CameraPosition() );
 		StartCoroutine( CameraZoom() );
-		
 	}
 	
 	IEnumerator CameraZoom() {
 		yield return new WaitForSeconds(.1f);
 		player = GameObject.FindGameObjectWithTag("Player");
+		
+		Vector3 shake;
 		
 		while(true) {
 			
@@ -31,6 +33,16 @@ public class CameraControl : MonoBehaviour {
 				
 				while(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) {
 					transform.position = Vector3.Lerp(transform.position, active, Time.deltaTime * 4f);
+					
+					if(shakeAndBake) {
+						shake = transform.position;
+						shake.z += Random.Range(-1f, 1f);
+						shake.x += Random.Range(-1f, 1f);
+						
+						transform.position = shake;
+						
+						StartCoroutine( Still() );
+					}
 					
 					yield return 0;
 				}
@@ -51,5 +63,11 @@ public class CameraControl : MonoBehaviour {
 			
 			yield return 0;
 		}
+	}
+	
+	IEnumerator Still() {
+		yield return new WaitForSeconds(1);
+		
+		shakeAndBake = false;
 	}
 }

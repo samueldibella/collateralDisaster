@@ -90,6 +90,7 @@ public class BuildingDisplay : MonoBehaviour {
 			yield return new WaitForSeconds(1);			
 		}
 	}
+	
 	//information for tool tip
 	public string Info() {
 	
