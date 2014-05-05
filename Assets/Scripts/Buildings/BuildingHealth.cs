@@ -103,19 +103,19 @@ public class BuildingHealth : MonoBehaviour {
 		fireRate = 1f;
 		
 		if(keyBuilding1Selected == false) {  
-			keyBuilding1 = quad1Array[Random.Range(0, quadIterator1+1)].GetComponent<BuildingHealth>().buildingKey; 
+			keyBuilding1 = quad1Array[Random.Range(0, quadIterator1 + 1)].GetComponent<BuildingHealth>().buildingKey; 
 			keyBuilding1Selected = true; 
 		}
 		if(keyBuilding2Selected == false) {  
-			keyBuilding2 = quad2Array[Random.Range(0, quadIterator2+1)].GetComponent<BuildingHealth>().buildingKey; 
+			keyBuilding2 = quad2Array[Random.Range(0, quadIterator2 + 1)].GetComponent<BuildingHealth>().buildingKey; 
 			keyBuilding2Selected = true; 
 		}
 		if(keyBuilding3Selected == false) {  
-			keyBuilding3 = quad3Array[Random.Range(0, quadIterator3+1)].GetComponent<BuildingHealth>().buildingKey; 
+			keyBuilding3 = quad3Array[Random.Range(0, quadIterator3 + 1)].GetComponent<BuildingHealth>().buildingKey; 
 			keyBuilding3Selected = true; 
 		}
 		if(keyBuilding4Selected == false) {
-			keyBuilding4 = quad4Array[Random.Range(0, quadIterator4+1)].GetComponent<BuildingHealth>().buildingKey; 
+			keyBuilding4 = quad4Array[Random.Range(0, quadIterator4 + 1)].GetComponent<BuildingHealth>().buildingKey; 
 			keyBuilding4Selected = true; 
 		}
 		

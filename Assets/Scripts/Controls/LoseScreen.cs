@@ -5,6 +5,9 @@ public class LoseScreen : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Application.LoadLevel("FullBuild");
+		if(Input.GetKeyDown(KeyCode.R)) {
+			Application.LoadLevel("FullBuild");
+		}
+		
 	}
 }
