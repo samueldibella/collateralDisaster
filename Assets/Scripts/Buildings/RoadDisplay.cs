@@ -11,7 +11,7 @@ public class RoadDisplay : MonoBehaviour {
 	public bool fireStarted = false;
 	public bool onFire = false;
 	public float health = 1;
-
+	public static float fireRateRoad = 2; 
 	Color initialColor = Color.white;
 	Color intermediate;
 	
@@ -35,7 +35,7 @@ public class RoadDisplay : MonoBehaviour {
 		while(health > 0) {
 			health -= .1f;
 		
-			yield return new WaitForSeconds(1);
+			yield return new WaitForSeconds(fireRateRoad);
 		}
 		
 		yield return new WaitForSeconds(Random.Range(3f, 5f));

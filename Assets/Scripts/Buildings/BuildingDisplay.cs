@@ -82,6 +82,7 @@ public class BuildingDisplay : MonoBehaviour {
 					
 					//vairbles that will change to make the game harder 
 					BuildingHealth.fireRate -= .2f; 
+					RoadDisplay.fireRateRoad -= .2f;
 					RngBuilding.buildingSpawnRate -= 1; 
 					//load level
 					Application.LoadLevel("FullBuild"); 
