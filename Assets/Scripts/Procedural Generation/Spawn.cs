@@ -6,7 +6,7 @@ public class Spawn : MonoBehaviour {
 	public Transform player; 
 	
 	bool runOnce = false; 
-	static bool spawnSelected = false; 
+	public static bool spawnSelected = false; 
 	bool occupied = false; 
 	
 	// Update is called once per frame

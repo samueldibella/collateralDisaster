@@ -8,6 +8,7 @@ public class RngBuilding : MonoBehaviour {
 	public bool occupied = false; 
 	
 	bool runOnce = false; 
+	public static int buildingSpawnRate = 11; 
 	
 	// Use this for initialization
 	void Update() {
@@ -20,7 +21,7 @@ public class RngBuilding : MonoBehaviour {
 			}
 			if(occupied == false) {
 				Vector3 filler = new Vector3(0,1,0); 
-				if(Random.Range(0,8) == 1) {
+				if(Random.Range(0,buildingSpawnRate) == 0) {
 					Instantiate (buildingTile, (transform.position + filler), Quaternion.identity);
 				}
 			}
