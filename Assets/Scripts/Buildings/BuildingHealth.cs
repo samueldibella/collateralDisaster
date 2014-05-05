@@ -7,6 +7,7 @@ public class BuildingHealth : MonoBehaviour {
 	public GameObject building; 
 	
 	GameObject player;
+	GameObject camera;
 	
 	//total score
 	public static float totalScore;
@@ -25,7 +26,6 @@ public class BuildingHealth : MonoBehaviour {
 	
 	//bounds  
 	int middleBoundX; 
-	
 	int middleBoundZ;   
 	
 	public int quadrant; 
@@ -90,6 +90,9 @@ public class BuildingHealth : MonoBehaviour {
 		if(gameObject.tag.Equals("Building") == true) { 
 			buildingKeyFixer();
 		}
+		
+		camera = GameObject.FindGameObjectWithTag("MainCamera");
+		
 		//building values 
 		health = 100; 
 		infrastructureValue = 0; 
@@ -127,6 +130,7 @@ public class BuildingHealth : MonoBehaviour {
 		//building destroy when health = 0 and subtracts score 
 		if(health <= 0) {
 			Infrastructure.totalStructure -= infrastructureValue;
+			camera.GetComponent<CameraControl>().shakeAndBake = true;
 			Destroy(gameObject); 		
 		}
 		
@@ -187,6 +191,7 @@ public class BuildingHealth : MonoBehaviour {
 		}				
 	}	
 	
+	//damage
 	void OnParticleCollision(GameObject other) {
 		player = GameObject.FindGameObjectWithTag("Player");
 		health -= player.GetComponent<PlayerControl>().damage;

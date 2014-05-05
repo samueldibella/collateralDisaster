@@ -8,6 +8,5 @@ public class LoseScreen : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.R)) {
 			Application.LoadLevel("FullBuild");
 		}
-		
 	}
 }
