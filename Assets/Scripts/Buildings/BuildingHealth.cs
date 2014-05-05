@@ -90,6 +90,7 @@ public class BuildingHealth : MonoBehaviour {
 		if(health <= 0) {
 			Infrastructure.totalStructure -= infrastructureValue;
 			camera.GetComponent<CameraControl>().shakeAndBake = true;
+			GetComponent<AudioSource>().Play();
 			Destroy(gameObject); 		
 		}
 		
