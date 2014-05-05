@@ -67,7 +67,24 @@ public class BuildingDisplay : MonoBehaviour {
 			Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f); 
 			for(int i = 0; i < hitColliders.Length; i++) {
 				if(hitColliders[i].tag.Equals("Player")) {
-					print("you win!"); 
+					//vaiables that are reset 
+					BuildingHealth.quad4Array = new GameObject[1000];
+					BuildingHealth.keyIncrementer = 0; 
+					BuildingHealth.quadIterator4 = 0; 
+					BuildingHealth.keyBuilding4Selected = false; 
+					BuildingHealth.keyBuilding4 = -1; 
+					StreetGeneration.streetMap = new int[601, 601]; 
+					StreetGeneration.currentStreetMakers = 1;
+					StreetGeneration.madeStreetMakers = 1; 
+					StreetGeneration.endedStreetMakers = 0;
+					Spawn.spawnSelected = false; 
+					Infrastructure.totalStructure = 0; 
+					
+					//vairbles that will change to make the game harder 
+					BuildingHealth.fireRate += .2f; 
+					RngBuilding.buildingSpawnRate -= 1; 
+					//load level
+					Application.LoadLevel("FullBuild"); 
 				}
 			}
 			yield return new WaitForSeconds(5);			

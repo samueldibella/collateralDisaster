@@ -11,10 +11,7 @@ public class BuildingGenerator2 : MonoBehaviour {
 	int buildingSpace = 3; 
 	int coordinateXx = 104; 
 	int coordinateZx = 154; 
-	int buildingKeyAlpha; 
-	public static int buildingsBuilt;  			   
-				   
-	public static GameObject[] buildingArray = new GameObject[1500]; 
+	int buildingKeyAlpha;   			   			   
 	
 	// Method that makes buildings 
 	   public void buildingGenerator() {  
@@ -37,9 +34,6 @@ public class BuildingGenerator2 : MonoBehaviour {
 			for(int x = 0; x < 400; x++) {
 				if(StreetGeneration.streetMap[x, z] == building) {
 					GameObject buildingTileClone = Instantiate (buildingTile, new Vector3((float) x, 1f, ((float) z)), Quaternion.identity) as GameObject;
-					buildingsBuilt++; 
-					buildingArray[a] = buildingTileClone; 
-					a++; 
 				}
 				if(StreetGeneration.streetMap[x, z] == street) {
 					buildingKeyAlpha++; 

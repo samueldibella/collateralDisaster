@@ -9,9 +9,6 @@ public class BuildingHealth : MonoBehaviour {
 	GameObject player;
 	GameObject camera;
 	
-	//total score
-	public static float totalScore;
-	
 	//building values
 	public int infrastructureValue; 
 	public float health; 
@@ -22,7 +19,7 @@ public class BuildingHealth : MonoBehaviour {
 	public bool onFire; 
 	public float fireIntensity; 
 	public float fireDamage; 
-	public float fireRate;
+	public static float fireRate = 1f;
 	
 	//bounds  
 	int middleBoundX; 
@@ -35,24 +32,12 @@ public class BuildingHealth : MonoBehaviour {
 	public int buildingKey; 
 	bool gotKey = false; 
 	
-	public static GameObject[] quad1Array = new GameObject[300]; 
-	public static GameObject[] quad2Array = new GameObject[300];
-	public static GameObject[] quad3Array = new GameObject[300];
 	public static GameObject[] quad4Array = new GameObject[1000];
 	
-	public static int quadIterator1; 
-	public static int quadIterator2; 
-	public static int quadIterator3; 
 	public static int quadIterator4; 
 	
-	public static bool keyBuilding1Selected = true; 
-	public static bool keyBuilding2Selected = true;
-	public static bool keyBuilding3Selected = true;
 	public static bool keyBuilding4Selected = false; 
 	
-	public static int keyBuilding1 = -1; 
-	public static int keyBuilding2 = -1;
-	public static int keyBuilding3 = -1; 
 	public static int keyBuilding4 = -1; 
 	
 	void Awake() {
@@ -67,18 +52,6 @@ public class BuildingHealth : MonoBehaviour {
 			buildingKeyFixer();	
 			quadrant = getQuadrant((int)transform.position.x, (int)transform.position.z); 
 		}	
-		if(quadrant == 1) {
-			quad1Array[quadIterator1] = gameObject; 
-			quadIterator1++; 
-		} 
-		if(quadrant == 2) {
-			quad2Array[quadIterator2] = gameObject; 
-			quadIterator2++; 
-		} 
-		if(quadrant == 3) {
-			quad3Array[quadIterator3] = gameObject; 
-			quadIterator3++; 
-		} 
 		if(quadrant == 4) {
 			quad4Array[quadIterator4] = gameObject; 
 			quadIterator4++; 
@@ -102,26 +75,12 @@ public class BuildingHealth : MonoBehaviour {
 		fireStarted = false;
 		onFire = false; 		
 		fireIntensity = 0; 
-		fireDamage = 0; 
-		fireRate = 1f;
+		fireDamage = 0;
 		
-		if(keyBuilding1Selected == false) {  
-			keyBuilding1 = quad1Array[Random.Range(0, quadIterator1 + 1)].GetComponent<BuildingHealth>().buildingKey; 
-			keyBuilding1Selected = true; 
-		}
-		if(keyBuilding2Selected == false) {  
-			keyBuilding2 = quad2Array[Random.Range(0, quadIterator2 + 1)].GetComponent<BuildingHealth>().buildingKey; 
-			keyBuilding2Selected = true; 
-		}
-		if(keyBuilding3Selected == false) {  
-			keyBuilding3 = quad3Array[Random.Range(0, quadIterator3 + 1)].GetComponent<BuildingHealth>().buildingKey; 
-			keyBuilding3Selected = true; 
-		}
 		if(keyBuilding4Selected == false) {
-			keyBuilding4 = quad4Array[Random.Range(0, quadIterator4 + 1)].GetComponent<BuildingHealth>().buildingKey; 
+			keyBuilding4 = quad4Array[Random.Range(0, quadIterator4+1)].GetComponent<BuildingHealth>().buildingKey; 
 			keyBuilding4Selected = true; 
 		}
-		
 	}
 	
 	// Update is called once per frame
@@ -232,18 +191,6 @@ public class BuildingHealth : MonoBehaviour {
 	}
 	
 	int getQuadrant(int x, int z) {
-//		if( x < middleBoundX && z > middleBoundZ) {
-//			return 1; 
-//		}
-//		if( x > middleBoundX && z > middleBoundZ) {
-//			return 2;
-//		}
-//		if( x < middleBoundX && z < middleBoundZ) {
-//			return 3;
-//		}
-//		if( x > middleBoundX && z < middleBoundZ) {
-//			return 4;
-//		}	
 		if( x > 328) {
 			return 4;
 		}	
