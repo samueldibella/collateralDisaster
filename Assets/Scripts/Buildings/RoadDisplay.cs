@@ -11,7 +11,7 @@ public class RoadDisplay : MonoBehaviour {
 	public bool fireStarted = false;
 	public bool onFire = false;
 	public float health = 1;
-	public static float fireRateRoad = 1.6f; 
+	public static float fireRateRoad = 2.8f; 
 	Color initialColor = Color.white;
 	Color intermediate;
 	
