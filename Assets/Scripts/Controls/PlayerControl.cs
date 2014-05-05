@@ -14,7 +14,7 @@ public class PlayerControl : MonoBehaviour {
 	Vector3 location;
 	Vector3 movement;
 	Color transit;
-	public float speed = 150000;
+	public float speed = 1500000000;
 	
 	// Use this for initialization
 	void Start () {

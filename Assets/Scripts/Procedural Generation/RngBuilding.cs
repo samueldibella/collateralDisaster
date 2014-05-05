@@ -19,14 +19,13 @@ public class RngBuilding : MonoBehaviour {
 					occupied = true; 
 				}
 			}
-			if(occupied == false) {
+			if(occupied == false && transform.position.x > 110) {
 				Vector3 filler = new Vector3(0,1,0); 
 				if(Random.Range(0,buildingSpawnRate) == 0) {
 					Instantiate (buildingTile, (transform.position + filler), Quaternion.identity);
 				}
 			}
 			runOnce = true; 
-		} 
-			
+		} 		
 	}
 }

@@ -11,7 +11,7 @@ public class Spawn : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(runOnce == false && transform.position.x < 110) {
+		if(runOnce == false && transform.position.x < 110 && transform.position.z < 268) {
 			Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1f);
 			for(int i = 0; i < hitColliders.Length; i++) {
 				if(hitColliders[i].tag == "Building" || hitColliders[i].tag == "Building RNG") { 
