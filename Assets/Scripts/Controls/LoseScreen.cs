@@ -16,10 +16,8 @@ public class LoseScreen : MonoBehaviour {
 			StreetGeneration.madeStreetMakers = 1; 
 			StreetGeneration.endedStreetMakers = 0;
 			Spawn.spawnSelected = false; 
-			Infrastructure.totalStructure = 1; 
-			
-			//vairbles that will change to make the game harder 
-			BuildingHealth.fireRate += 1; 
+			Infrastructure.totalStructure = 1;  
+			BuildingHealth.fireRate = .5f; 
 			RngBuilding.buildingSpawnRate = 11; 
 			Application.LoadLevel("FullBuild");
 		}
