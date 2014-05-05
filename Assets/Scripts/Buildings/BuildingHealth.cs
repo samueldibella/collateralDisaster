@@ -143,8 +143,7 @@ public class BuildingHealth : MonoBehaviour {
 					
 				}	
 			}
-			
-			
+
 			yield return new WaitForSeconds(fireRate);
 			
 		}				

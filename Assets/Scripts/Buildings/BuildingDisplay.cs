@@ -62,6 +62,7 @@ public class BuildingDisplay : MonoBehaviour {
 		}
 
 	}
+	
 	IEnumerator playerCheck() {
 		while(true) {
 			Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f); 

@@ -36,8 +36,8 @@ public class CameraControl : MonoBehaviour {
 					
 					if(shakeAndBake) {
 						shake = transform.position;
-						shake.z += Random.Range(-1f, 1f);
-						shake.x += Random.Range(-1f, 1f);
+						shake.z += Random.Range(-.5f, .5f);
+						shake.x += Random.Range(-.5f, .5f);
 						
 						transform.position = shake;
 						
@@ -66,7 +66,7 @@ public class CameraControl : MonoBehaviour {
 	}
 	
 	IEnumerator Still() {
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(.5f);
 		
 		shakeAndBake = false;
 	}

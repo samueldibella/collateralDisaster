@@ -1,11 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Buildings\BuildingHealth.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\HUD\Timer.cs">
     <Files>
-      <File FileName="Assets\Scripts\Buildings\BuildingDisplay.cs" Line="91" Column="1" />
-      <File FileName="Assets\Scripts\Buildings\BuildingHealth.cs" Line="133" Column="60" />
-      <File FileName="Assets\Scripts\Controls\PlayerControl.cs" Line="70" Column="20" />
-      <File FileName="Assets\Scripts\Controls\CameraControl.cs" Line="43" Column="34" />
+      <File FileName="Assets\Scripts\Buildings\BuildingDisplay.cs" Line="109" Column="1" />
+      <File FileName="Assets\Scripts\Buildings\BuildingHealth.cs" Line="198" Column="2" />
+      <File FileName="Assets\Scripts\Controls\PlayerControl.cs" Line="70" Column="21" />
+      <File FileName="Assets\Scripts\Controls\CameraControl.cs" Line="69" Column="1" />
+      <File FileName="Assets\Scripts\Controls\LoseScreen.cs" Line="10" Column="4" />
+      <File FileName="Assets\Scripts\HUD\Timer.cs" Line="22" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

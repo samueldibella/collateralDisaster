@@ -12,11 +12,15 @@ public class Timer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		mesh.text = string.Format("{0:0}\n", Time.time);
-		//mesh.text += GameStart.currentDisaster;
+		mesh.text = "";
 		
 		if(Time.time == 0) {
-			mesh.text += "Click Building for Fire Location,\n and then Run to the cyan Evac Zone";
+			mesh.text += "Click Building for Fire Location, \nRun to the cyan Evac Zone";
+			mesh.text += "\nLeft Click to Arc Weld\n";
 		}
+		
+		//mesh.text += string.Format("{0:0}\n", Time.time);
+		
+		
 	}
 }

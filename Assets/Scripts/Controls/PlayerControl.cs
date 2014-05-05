@@ -55,19 +55,19 @@ public class PlayerControl : MonoBehaviour {
 			movement.z = 0;
 		} else {
 			if(Input.GetKey(KeyCode.W)) {
-				movement.z += 30;
+				movement.z += 40;
 			} 
 			
 			if(Input.GetKey(KeyCode.S)) {
-				movement.z -= 30;
+				movement.z -= 40;
 			}
 			
 			if(Input.GetKey(KeyCode.A)) {
-				movement.x -= 30;
+				movement.x -= 40;
 			}
 			
 			if(Input.GetKey(KeyCode.D)) {
-				movement.x += 30;
+				movement.x += 40;
 			}
 		} 
 		
