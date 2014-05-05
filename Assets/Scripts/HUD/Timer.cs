@@ -16,7 +16,7 @@ public class Timer : MonoBehaviour {
 		//mesh.text += GameStart.currentDisaster;
 		
 		if(Time.time == 0) {
-			mesh.text += "\nClick For Building for Fire Location, and then Run to the cyan Evac Zone";
+			mesh.text += "Click Building for Fire Location,\n and then Run to the cyan Evac Zone";
 		}
 	}
 }

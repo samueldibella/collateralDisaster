@@ -8,7 +8,7 @@ public class Infrastructure : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(totalStructure == 0) {
-			Application.LoadLevel("Lose");
+			Application.LoadLevel("Evac Lose");
 		}
 	}
 }
