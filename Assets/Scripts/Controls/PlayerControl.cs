@@ -41,6 +41,10 @@ public class PlayerControl : MonoBehaviour {
 		transform.rotation = Quaternion.Lerp(start, rotation, Time.deltaTime * rotSpeed);
 		transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 	
+		if(Input.GetMouseButtonDown(0) && Time.timeScale == 1) {
+			GetComponent<AudioSource>().Play();
+		}
+	
 		if(Input.GetMouseButton(0)) {
 			transform.GetChild(0).GetComponent<ParticleSystem>().enableEmission = true;
 

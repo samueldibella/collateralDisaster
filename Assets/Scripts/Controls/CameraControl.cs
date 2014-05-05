@@ -5,7 +5,8 @@ public class CameraControl : MonoBehaviour {
 	Vector3 start;
 	Vector3 active;
 	public bool shakeAndBake = false;
-
+	public AudioClip songLoop;
+	bool songSwitch = true;
 	public GameObject player;
 
 	// Use this for initialization
@@ -16,6 +17,15 @@ public class CameraControl : MonoBehaviour {
 		
 		StartCoroutine( CameraPosition() );
 		StartCoroutine( CameraZoom() );
+	}
+	
+	void Update() {
+		if(Time.timeScale == 1 && songSwitch) {
+			GetComponent<AudioSource>().clip = songLoop;
+			songSwitch = false;
+			GetComponent<AudioSource>().Play();
+		}
+		
 	}
 	
 	IEnumerator CameraZoom() {
