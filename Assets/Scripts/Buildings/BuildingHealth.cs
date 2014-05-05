@@ -19,7 +19,7 @@ public class BuildingHealth : MonoBehaviour {
 	public bool onFire; 
 	public float fireIntensity; 
 	public float fireDamage; 
-	public static float fireRate = .5f;
+	public static float fireRate = 2f;
 	
 	//bounds  
 	int middleBoundX; 
