@@ -44,6 +44,8 @@ public class CameraControl : MonoBehaviour {
 				while(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) {
 					transform.position = Vector3.Lerp(transform.position, active, Time.deltaTime * 4f);
 					
+					//camera shake 
+					/*
 					if(shakeAndBake) {
 						shake = transform.position;
 						shake.z += Random.Range(-.5f, .5f);
@@ -52,7 +54,7 @@ public class CameraControl : MonoBehaviour {
 						transform.position = shake;
 						
 						StartCoroutine( Still() );
-					}
+					} */
 					
 					yield return 0;
 				}

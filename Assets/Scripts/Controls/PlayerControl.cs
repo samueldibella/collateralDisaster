@@ -8,13 +8,23 @@ public class PlayerControl : MonoBehaviour {
 	//Collider collider;
 	
 	float rotSpeed = 10;
-	public float damage = .0000001f;
 	Quaternion rotation;
 	Quaternion start;
 	Vector3 location;
 	Vector3 movement;
 	Color transit;
+	
+	public GameObject laser;
+	public double damage = 5;
+	
+	//lateral movement
 	public float speed = 1500000000;
+	
+	//inair variables
+	bool jumpAir = false;
+	float maxJumpHeight = 6;
+	float jumpSpeed = 100;
+	
 	
 	// Use this for initialization
 	void Start () {
@@ -41,15 +51,19 @@ public class PlayerControl : MonoBehaviour {
 		transform.rotation = Quaternion.Lerp(start, rotation, Time.deltaTime * rotSpeed);
 		transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 	
+		//normal loop (SHOULD BE CHANGED TO CAMERA OR SEPARATE SCRIPT)
 		if(Input.GetMouseButtonDown(0) && Time.timeScale == 1) {
 			GetComponent<AudioSource>().Play();
 		}
-	
+		
+		//damage is handled in BuildingHealth script under particle collison
 		if(Input.GetMouseButton(0)) {
-			transform.GetChild(0).GetComponent<ParticleSystem>().enableEmission = true;
+			//print("hl");
+			laser.GetComponent<ParticleSystem>().enableEmission = true;
 
 		} else if(Input.GetMouseButtonUp(0)) {
-			transform.GetChild(0).GetComponent<ParticleSystem>().enableEmission = false;
+			laser.GetComponent<ParticleSystem>().enableEmission = false;
+			//transform.GetChild(0).GetComponent<ParticleSystem>().Clear();
 		}
 		
 		movement = Vector3.zero;
@@ -58,6 +72,7 @@ public class PlayerControl : MonoBehaviour {
 			movement.x = 0;
 			movement.z = 0;
 		} else {
+		//WASD controls
 			if(Input.GetKey(KeyCode.W)) {
 				movement.z += 40;
 			} 
@@ -73,11 +88,11 @@ public class PlayerControl : MonoBehaviour {
 			if(Input.GetKey(KeyCode.D)) {
 				movement.x += 40;
 			}
-		} 
+		}
 		
-		movement.y -= 10;
-		
-		movement *= (speed * Time.deltaTime);
+		movement.x *= speed * Time.deltaTime;
+		movement.z *= speed * Time.deltaTime;
+		movement.y = body.velocity.y;
 
 		body.velocity = movement;
 		
@@ -85,4 +100,12 @@ public class PlayerControl : MonoBehaviour {
 			Application.LoadLevel("Fall Lose");
 		}
 	}
+	
+	//jump trigger
+	void OnCollisionStay(Collision other) {
+		if(Input.GetKeyDown(KeyCode.Space) && other.collider.tag == "Road") {
+			GetComponent<Rigidbody>().AddForce(transform.up * jumpSpeed);
+		}
+	}
+	
 }

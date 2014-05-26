@@ -17,8 +17,9 @@ public class LoseScreen : MonoBehaviour {
 			StreetGeneration.endedStreetMakers = 0;
 			Spawn.spawnSelected = false; 
 			Infrastructure.totalStructure = 1;  
-			BuildingHealth.fireRate = .5f; 
-			RngBuilding.buildingSpawnRate = 11; 
+			BuildingHealth.fireRate = 2f; 
+			RngBuilding.buildingSpawnRate = 11;
+			RoadDisplay.fireRateRoad = 2f;
 			Application.LoadLevel("FullBuild");
 		}
 	}

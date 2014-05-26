@@ -13,6 +13,7 @@ public class BuildingHealth : MonoBehaviour {
 	public int infrastructureValue; 
 	public float health; 
 	public bool isShielded;
+	bool cutting = false;
 	
 	//fire stuff
 	public bool fireStarted; 
@@ -62,6 +63,7 @@ public class BuildingHealth : MonoBehaviour {
 	void Start () {
 		if(gameObject.tag.Equals("Building") == true) { 
 			buildingKeyFixer();
+			StartCoroutine( CutThrough() );
 		}
 		
 		camera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -81,6 +83,8 @@ public class BuildingHealth : MonoBehaviour {
 			keyBuilding4 = quad4Array[Random.Range(0, quadIterator4+1)].GetComponent<BuildingHealth>().buildingKey; 
 			keyBuilding4Selected = true; 
 		}
+		
+		
 	}
 	
 	// Update is called once per frame
@@ -152,8 +156,23 @@ public class BuildingHealth : MonoBehaviour {
 	
 	//damage
 	void OnParticleCollision(GameObject other) {
+		cutting = true;
+		//health -= (float) player.GetComponent<PlayerControl>().damage;
+	}
+	
+	IEnumerator CutThrough() {
+		yield return 0;
+		
 		player = GameObject.FindGameObjectWithTag("Player");
-		health -= player.GetComponent<PlayerControl>().damage;
+		
+		while(true) {
+			yield return new WaitForSeconds(.1f);
+			
+			if(cutting) {
+				health -= (float) player.GetComponent<PlayerControl>().damage;
+				cutting = false;
+			}
+		}
 	}
 	
 	//This script determines which building tiles make up one building 
