@@ -9,6 +9,9 @@ public class CameraControl : MonoBehaviour {
 	bool songSwitch = true;
 	public GameObject player;
 
+	int startOrthoSize = 80;
+	int activeOrthoSize = 5;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -44,6 +47,8 @@ public class CameraControl : MonoBehaviour {
 				while(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) {
 					transform.position = Vector3.Lerp(transform.position, active, Time.deltaTime * 4f);
 					
+					GetComponent<Camera>().orthographicSize = Mathf.Lerp(GetComponent<Camera>().orthographicSize, activeOrthoSize, Time.deltaTime * 4f);
+					
 					//camera shake 
 					/*
 					if(shakeAndBake) {
@@ -61,6 +66,7 @@ public class CameraControl : MonoBehaviour {
 				
 			} else {
 				transform.position = Vector3.Lerp(transform.position, start, Time.deltaTime * .1f);
+				GetComponent<Camera>().orthographicSize = Mathf.Lerp(GetComponent<Camera>().orthographicSize, startOrthoSize, Time.deltaTime * .1f);
 			}
 			
 			yield return 0;
